@@ -8,41 +8,42 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="121dp"
-        android:layout_height="112dp"
-        android:layout_marginTop="50dp"
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/hnm_logo" />
 
-    <TextView
-        android:id="@+id/txtInicioSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/inter_semibold"
-        android:text="Inicio de sesión"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/txtInicioSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Inicio de sesión"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
         <EditText
-            android:id="@+id/edtNombre"
+            android:id="@+id/edtUsuario"
             android:layout_width="245dp"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
@@ -63,21 +64,19 @@
             android:inputType="textPassword"
             android:padding="10dp"
             android:textSize="16sp" />
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnIniciarSesion"
-        android:layout_width="156dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#B687B8"
-        android:fontFamily="@font/inter_bold"
-        android:text="Iniciar sesión"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        <Button
+            android:id="@+id/btnIniciarSesion"
+            android:layout_width="156dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#B687B8"
+            android:fontFamily="@font/inter_bold"
+            android:text="Iniciar sesión"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
