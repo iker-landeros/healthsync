@@ -8,7 +8,7 @@ const doLogin = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const sql = `SELECT COUNT(*) AS cantidad FROM users WHERE username = ? AND password = SHA2(?, 256)`;
+    const sql = `SELECT COUNT(*) AS cantidad, userType FROM users WHERE username = ? AND password = SHA2(?, 256)`;
     pool.query(sql, [username, password], (err, results, fields) => {
 
         if (err) 
@@ -16,9 +16,10 @@ const doLogin = (req, res) => {
         if (results[0].cantidad == 1) {
             // Si son correctos, devolver el token
             token = jwt.sign({ username: username }, process.env.KEYPHRASE);
-            result = { token: token, mensaje: 'Usuario autenticado correctamente' }
+            // Resultado exitoso
+            result = { token: token, message: 'Usuario autenticado correctamente', userType: results[0].userType }
         } else {
-            result = { mensaje: 'Usuario o contraseña incorrectos' }
+            result = { message: 'Usuario o contraseña incorrectos' }
         }
         res.json(result);
         
