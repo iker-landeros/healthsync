@@ -1,6 +1,12 @@
 const pool = require('../helpers/mysql-config');
 const jwt = require('jsonwebtoken');
 
+
+/*
+    Función que permite autenticar a un usuario con username y password
+    Recibe username y password en el body
+    Retorna un token y el tipo de usuario (userType) si el usuario es correcto
+*/
 const doLogin = (req, res) => {
     let token = '';
     let result = {};
