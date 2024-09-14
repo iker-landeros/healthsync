@@ -49,7 +49,7 @@ CREATE TABLE tickets (
   idArea INT,       
   idExtension INT,    
   description TEXT,   
-  status ENUM('unassigned', 'in progress', 'resolved', 'canceled') DEFAULT 'unassigned',
+  status ENUM('Not started', 'In progress', 'Solved', 'Not solved', 'Eliminated') DEFAULT 'Not started',
   dateOpened DATETIME DEFAULT CURRENT_TIMESTAMP,
   dateClosed DATETIME DEFAULT NULL,         
   idProblemType INT, 
@@ -168,9 +168,9 @@ INSERT INTO components (componentName) VALUES
 
 -- Insert dummy data into Tickets table
 INSERT INTO tickets (senderName, idArea, idExtension, description, idProblemType, idDeviceType, idTechnician, status) VALUES
-('Michael Green', 1, 1, 'X-ray machine is not turning on.', 1, 1, 1, 'unassigned'),
-('Sarah Brown', 2, 2, 'ECG machine screen is cracked.', 3, 3, 1, 'unassigned'),
-('Chris White', 3, 3, 'MRI scanner software keeps crashing.', 2, 2, 2, 'in progress');
+('Michael Green', 1, 1, 'X-ray machine is not turning on.', 1, 1, null, 'Not started'),
+('Sarah Brown', 2, 2, 'ECG machine screen is cracked.', 3, 3, null, 'Not started'),
+('Chris White', 3, 3, 'MRI scanner software keeps crashing.', 2, 2, 2, 'In progress');
 
 -- Insert dummy data into ticket_components table
 INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
