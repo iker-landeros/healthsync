@@ -4,7 +4,7 @@ const multer = require('multer');
 const app = express();
 const login = require('./routes/login')
 const tickets = require('./routes/tickets')
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.use(cors()); // Para que la api pueda ser consumida por cualquier servidor
 app.use(multer().array()); // Para que la api pueda recibir formularios
