@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const FormComponent = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    area: "",
-    extension: "",
-    description: "",
-    category: "",
-    type: "",
+    senderName: "", // Renamed from name
+    idArea: "", // Renamed from area
+    idExtension: "", // Renamed from extension
+    description: "", // Same
+    idProblemType: "", // Renamed from category
+    idDeviceType: "", // Renamed from type
   });
 
   const navigate = useNavigate();
@@ -21,39 +21,56 @@ const FormComponent = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data submitted:", formData);
-    navigate("/success");
+
+    try {
+      const response = await fetch("http://localhost:3001/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Send formData as JSON
+      });
+
+      if (response.ok) {
+        console.log("Form data submitted:", formData);
+        navigate("/success");
+      } else {
+        console.error("Failed to submit the form.");
+      }
+    } catch (error) {
+      console.error("Error occurred during form submission:", error);
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen w-full bg-gray-100 overflow-auto p-4">
       <div className="sm:w-5/6 flex flex-col p-8 bg-white shadow-md rounded-md">
-        <div className="sm:relative mb-6 flex flex-col items-center justify-center">
+        <div className="sm:relative sm:mb-12 mb-8 sm:mt-4 flex flex-col items-center justify-center">
           <img
             src="/src/assets/hnm_logo.png"
             alt="Logo"
-            className="sm:absolute left-0 h-16 w-16 object-contain"
+            className="sm:absolute left-0 h-28 w-28 object-contain"
           />
           <h1 className="text-2xl text-center font-bold">Submit Form</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="flex-grow flex flex-col">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
-            {/* Name Field */}
+            {/* Sender Name Field */}
             <div className="md:col-span-2">
               <label
-                htmlFor="name"
+                htmlFor="senderName"
                 className="text-sm font-medium text-gray-700"
               >
                 Name
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="senderName"
+                name="senderName"
+                value={formData.senderName}
                 onChange={handleChange}
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
@@ -63,46 +80,46 @@ const FormComponent = () => {
             {/* Area Field */}
             <div>
               <label
-                htmlFor="area"
+                htmlFor="idArea"
                 className="block text-sm font-medium text-gray-700"
               >
                 Area
               </label>
               <select
-                id="area"
-                name="area"
-                value={formData.area}
+                id="idArea"
+                name="idArea"
+                value={formData.idArea}
                 onChange={handleChange}
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
                 <option value="">Select Area</option>
-                <option value="Area 1">Area 1</option>
-                <option value="Area 2">Area 2</option>
-                <option value="Area 3">Area 3</option>
+                <option value="1">Area 1</option>
+                <option value="2">Area 2</option>
+                <option value="3">Area 3</option>
               </select>
             </div>
 
             {/* Extension Field */}
             <div>
               <label
-                htmlFor="extension"
+                htmlFor="idExtension"
                 className="block text-sm font-medium text-gray-700"
               >
                 Extension
               </label>
               <select
-                id="extension"
-                name="extension"
-                value={formData.extension}
+                id="idExtension"
+                name="idExtension"
+                value={formData.idExtension}
                 onChange={handleChange}
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
                 <option value="">Select Extension</option>
-                <option value="1001">1001</option>
-                <option value="1002">1002</option>
-                <option value="1003">1003</option>
+                <option value="1">1001</option>
+                <option value="2">1002</option>
+                <option value="3">1003</option>
               </select>
             </div>
 
@@ -124,49 +141,49 @@ const FormComponent = () => {
               />
             </div>
 
-            {/* Category Field */}
+            {/* Category (ProblemType) Field */}
             <div>
               <label
-                htmlFor="category"
+                htmlFor="idProblemType"
                 className="block text-sm font-medium text-gray-700"
               >
-                Category
+                Problem Type
               </label>
               <select
-                id="category"
-                name="category"
-                value={formData.category}
+                id="idProblemType"
+                name="idProblemType"
+                value={formData.idProblemType}
                 onChange={handleChange}
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Select Category</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
+                <option value="">Select Problem Type</option>
+                <option value="1">Problem 1</option>
+                <option value="2">Problem 2</option>
+                <option value="3">Problem 3</option>
               </select>
             </div>
 
-            {/* Type Field */}
+            {/* Device Type Field */}
             <div>
               <label
-                htmlFor="type"
+                htmlFor="idDeviceType"
                 className="block text-sm font-medium text-gray-700"
               >
-                Type
+                Device Type
               </label>
               <select
-                id="type"
-                name="type"
-                value={formData.type}
+                id="idDeviceType"
+                name="idDeviceType"
+                value={formData.idDeviceType}
                 onChange={handleChange}
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Select Type</option>
-                <option value="Type 1">Type 1</option>
-                <option value="Type 2">Type 2</option>
-                <option value="Type 3">Type 3</option>
+                <option value="">Select Device Type</option>
+                <option value="1">Device Type 1</option>
+                <option value="2">Device Type 2</option>
+                <option value="3">Device Type 3</option>
               </select>
             </div>
           </div>
