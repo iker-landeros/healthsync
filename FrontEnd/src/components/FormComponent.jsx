@@ -1,17 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const FormComponent = () => {
   const [formData, setFormData] = useState({
-    senderName: "", // Renamed from name
-    idArea: "", // Renamed from area
-    idExtension: "", // Renamed from extension
-    description: "", // Same
-    idProblemType: "", // Renamed from category
-    idDeviceType: "", // Renamed from type
+    senderName: "",
+    idArea: "",
+    idExtension: "",
+    description: "",
+    idProblemType: "",
+    idDeviceType: "",
   });
 
+  const [areas, setAreas] = useState([]);
+  const [extensions, setExtensions] = useState([]);
+  const [problemTypes, setProblemTypes] = useState([]);
+  const [deviceTypes, setDeviceTypes] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [areasData, extensionsData, problemTypesData, deviceTypesData] =
+          await Promise.all([
+            fetch("http://localhost:3001/tickets/areas").then((res) =>
+              res.json()
+            ),
+            fetch("http://localhost:3001/tickets/extensions").then((res) =>
+              res.json()
+            ),
+            fetch("http://localhost:3001/tickets/problemTypes").then((res) =>
+              res.json()
+            ),
+            fetch("http://localhost:3001/tickets/deviceTypes").then((res) =>
+              res.json()
+            ),
+          ]);
+
+        setAreas(areasData);
+        setExtensions(extensionsData);
+        setProblemTypes(problemTypesData);
+        setDeviceTypes(deviceTypesData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,17 +66,35 @@ const FormComponent = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData), // Send formData as JSON
+        body: JSON.stringify(formData),
       });
 
+      const responseBody = await response.json();
+
       if (response.ok) {
-        console.log("Form data submitted:", formData);
-        navigate("/success");
+        navigate("/submission", {
+          state: {
+            success: true,
+            message:
+              responseBody.message || "¡Formulario enviado exitosamente!",
+          },
+        });
       } else {
-        console.error("Failed to submit the form.");
+        navigate("/submission", {
+          state: {
+            success: false,
+            message: responseBody.message || "No se pudo enviar el formulario.",
+          },
+        });
       }
     } catch (error) {
-      console.error("Error occurred during form submission:", error);
+      navigate("/submission", {
+        state: {
+          success: false,
+          message:
+            "Se produjo un error en el sistema, intentelo mas tarde o contatcte a un tecnico.",
+        },
+      });
     }
   };
 
@@ -53,18 +107,19 @@ const FormComponent = () => {
             alt="Logo"
             className="sm:absolute left-0 h-28 w-28 object-contain"
           />
-          <h1 className="text-2xl text-center font-bold">Submit Form</h1>
+          <h1 className="text-2xl text-center font-bold">
+            Formulario Para Reporte de Fallas
+          </h1>
         </div>
 
         <form onSubmit={handleSubmit} className="flex-grow flex flex-col">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
-            {/* Sender Name Field */}
             <div className="md:col-span-2">
               <label
                 htmlFor="senderName"
                 className="text-sm font-medium text-gray-700"
               >
-                Name
+                Nombre
               </label>
               <input
                 type="text"
@@ -76,8 +131,6 @@ const FormComponent = () => {
                 required
               />
             </div>
-
-            {/* Area Field */}
             <div>
               <label
                 htmlFor="idArea"
@@ -93,20 +146,21 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Select Area</option>
-                <option value="1">Area 1</option>
-                <option value="2">Area 2</option>
-                <option value="3">Area 3</option>
+                <option value="">Seleccionar Area</option>
+                {areas.map((area) => (
+                  <option key={area.idArea} value={area.idArea}>
+                    {area.areaName}
+                  </option>
+                ))}
+                <option value="10000">Esto es un Caso de Fallo</option>
               </select>
             </div>
-
-            {/* Extension Field */}
             <div>
               <label
                 htmlFor="idExtension"
                 className="block text-sm font-medium text-gray-700"
               >
-                Extension
+                Extensión
               </label>
               <select
                 id="idExtension"
@@ -116,20 +170,24 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Select Extension</option>
-                <option value="1">1001</option>
-                <option value="2">1002</option>
-                <option value="3">1003</option>
+                <option value="">Seleccionar Extensión</option>
+                {extensions.map((extension) => (
+                  <option
+                    key={extension.idExtension}
+                    value={extension.idExtension}
+                  >
+                    {extension.extensionNumber}
+                  </option>
+                ))}
               </select>
             </div>
 
-            {/* Description Field */}
             <div className="md:col-span-2 flex-grow">
               <label
                 htmlFor="description"
                 className="block text-sm font-medium text-gray-700"
               >
-                Description
+                Descripción
               </label>
               <textarea
                 id="description"
@@ -141,13 +199,12 @@ const FormComponent = () => {
               />
             </div>
 
-            {/* Category (ProblemType) Field */}
             <div>
               <label
                 htmlFor="idProblemType"
                 className="block text-sm font-medium text-gray-700"
               >
-                Problem Type
+                Tipo de Problema
               </label>
               <select
                 id="idProblemType"
@@ -157,20 +214,24 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Select Problem Type</option>
-                <option value="1">Problem 1</option>
-                <option value="2">Problem 2</option>
-                <option value="3">Problem 3</option>
+                <option value="">Seleccionar Tipo de Problema</option>
+                {problemTypes.map((problemType) => (
+                  <option
+                    key={problemType.idProblemType}
+                    value={problemType.idProblemType}
+                  >
+                    {problemType.problemName}
+                  </option>
+                ))}
               </select>
             </div>
 
-            {/* Device Type Field */}
             <div>
               <label
                 htmlFor="idDeviceType"
                 className="block text-sm font-medium text-gray-700"
               >
-                Device Type
+                Tipo de Dispositivo
               </label>
               <select
                 id="idDeviceType"
@@ -180,21 +241,25 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Select Device Type</option>
-                <option value="1">Device Type 1</option>
-                <option value="2">Device Type 2</option>
-                <option value="3">Device Type 3</option>
+                <option value="">Seleccionar Tipo de Dispositivo</option>
+                {deviceTypes.map((deviceType) => (
+                  <option
+                    key={deviceType.idDeviceType}
+                    value={deviceType.idDeviceType}
+                  >
+                    {deviceType.deviceName}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
-          {/* Submit Button */}
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600"
+              className="w-full py-2 px-4 bg-custom-purple text-white font-semibold rounded-md shadow-md hover:bg-custom-purple-600"
             >
-              Send
+              Enviar
             </button>
           </div>
         </form>

@@ -1,15 +1,15 @@
-import { BrowserRouter, Routes, Route, Form } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FormComponent from "./components/FormComponent";
-import Success from "./components/Success";
+import SubmissionPage from "./components/SubmissionPage";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<FormComponent />} />
-        <Route path="/success" element={<Success />} />
+        <Route path="/submission" element={<SubmissionPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
