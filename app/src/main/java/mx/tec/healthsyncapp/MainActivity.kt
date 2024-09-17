@@ -53,7 +53,12 @@ class MainActivity : AppCompatActivity() {
                     }
                     val tipoUsuario = result.getString("userType")
                     if (tipoUsuario == "technician"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
-                        val intent = Intent(this@MainActivity, Home::class.java)
+                        val intent = Intent(this@MainActivity, TechnicianTicketsSummary::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }
+                    if (tipoUsuario == "admin"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
+                        val intent = Intent(this@MainActivity, AdminOptions::class.java)
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }
