@@ -1,4 +1,69 @@
 const pool = require('../helpers/mysql-config');
+const { get } = require('../routes/tickets');
+
+/*
+    Función que obtiene todos los datos de la tabla "areas" para el menú desplegable
+    Función para usuarios clientes
+*/
+const getAreas = (req, res) => {
+    const sql = `SELECT * FROM areas`;
+    
+    pool.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching areas:", err);
+            return res.status(500).json({ error: "Error fetching areas" });
+        }
+        return res.status(200).json(results);
+    });
+};
+
+/*
+    Función que obtiene todos los datos de la tabla "extensions" para el menú desplegable
+    Función para usuarios clientes
+*/
+const getExtensions = (req, res) => {
+    const sql = `SELECT * FROM extensions`;
+    
+    pool.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching extensions:", err);
+            return res.status(500).json({ error: "Error fetching extensions" });
+        }
+        return res.status(200).json(results);
+    });
+};
+
+/*
+    Función que obtiene todos los datos de la tabla "problemTypes" para el menú desplegable
+    Función para usuarios clientes
+*/
+const getProblemTypes = (req, res) => {
+    const sql = `SELECT * FROM problem_types`;
+    
+    pool.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching problem types:", err);
+            return res.status(500).json({ error: "Error fetching problem types" });
+        }
+        return res.status(200).json(results);
+    });
+};
+
+/*
+    Función que obtiene todos los datos de la tabla "deviceTypes" para el menú desplegable
+    Función para usuarios clientes
+*/
+const getDeviceTypes = (req, res) => {
+    const sql = `SELECT * FROM device_types`;
+    
+    pool.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching device types:", err);
+            return res.status(500).json({ error: "Error fetching device types" });
+        }
+        return res.status(200).json(results);
+    });
+};
 
 /*
     Función que publica un ticket a la base de datos
@@ -59,6 +124,10 @@ const updateTicketStatus = (req, res) => {
 };
 
 module.exports = { 
+    getAreas,
+    getExtensions,
+    getProblemTypes,
+    getDeviceTypes,
     postTicket,
     getAllTickets,
     updateTicketStatus
