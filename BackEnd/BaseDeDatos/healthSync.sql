@@ -56,7 +56,7 @@ CREATE TABLE tickets (
   idDeviceType INT,  
   idTechnician INT DEFAULT NULL,
   revisionProcess TEXT DEFAULT NULL, 
-  diagnosisProcess TEXT DEFAULT NULL, 
+  diagnosis TEXT DEFAULT NULL, 
   solutionProcess TEXT DEFAULT NULL, 
   failedReason TEXT DEFAULT NULL,  
   PRIMARY KEY (idTicket),
