@@ -9,12 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 class TechnicianTicketsSummary : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_technician_tickets_summary)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        // Para el diseño de la lista, sería implementar aquí lo que está en item_ticket.xml, pensaba que
+        // fuera un recycler view (?
     }
 }
