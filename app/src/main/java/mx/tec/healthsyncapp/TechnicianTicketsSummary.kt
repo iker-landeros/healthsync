@@ -77,6 +77,10 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         val recyclerViewAllTickets: RecyclerView = findViewById(R.id.recyclerTodosTickets)
         val allTicketList = mutableListOf<Ticket>()
 
+        //Adaptamos cada ticket
+        val adapter = TicketsAdapter(allTicketList)
+        recyclerViewAllTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
+        recyclerViewAllTickets.adapter = adapter  // Asigna el adaptador al RecyclerView
 
         val listener = Response.Listener<JSONArray> { result ->
             Log.e("Result", result.toString())
@@ -88,7 +92,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
                 val problemType = (result.getJSONObject(i).getString("description"))
                 allTicketList.add(Ticket(status, date, problemType))
             }
-
+            adapter.notifyDataSetChanged()
         }
 
         val error = Response.ErrorListener { error ->
@@ -101,10 +105,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         queue.add(userValidation)
 
-        //Adaptamos cada ticket
-        val adapter = TicketsAdapter(allTicketList)
-        recyclerViewAllTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
-        recyclerViewAllTickets.adapter = adapter  // Asigna el adaptador al RecyclerView
+
 
         // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences
         binding.btnLogout.setOnClickListener{
