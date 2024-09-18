@@ -14,6 +14,8 @@ class AdminOptions : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminOptionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences
         binding.btnLogout.setOnClickListener{
             val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
             val editor = sharedpref.edit()
