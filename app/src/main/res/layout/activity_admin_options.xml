@@ -7,4 +7,105 @@
     android:layout_height="match_parent"
     tools:context=".AdminOptions">
 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="#00FFFFFF"
+            app:srcCompat="@drawable/logout" />
+
+        <TextView
+            android:id="@+id/txtAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:fontFamily="@font/inter_semibold"
+            android:gravity="center"
+            android:text="Administrador"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHistorialTickets"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="1"
+            android:backgroundTint="#F7A800"
+            android:gravity="center"
+            android:icon="@drawable/ic_historial"
+            android:iconSize="48dp"
+            android:iconTint="@android:color/white"
+            android:padding="16dp"
+            android:text="Historial tickets"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="150dp"
+            app:iconGravity="textTop"
+            app:iconSize="30dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEstadisticas"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:layout_weight="1"
+            android:backgroundTint="#E67E3C"
+            android:gravity="center"
+            android:icon="@drawable/grafica"
+            android:iconSize="48dp"
+            android:iconTint="@android:color/white"
+            android:padding="16dp"
+            android:text="Estadísticas"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="100dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdministrar"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:backgroundTint="#AAAD00"
+            android:gravity="center"
+            android:icon="@drawable/cuentas"
+            android:iconSize="48dp"
+            android:iconTint="@android:color/white"
+            android:padding="16dp"
+            android:text="Administrar cuentas"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="100dp" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
