@@ -3,6 +3,7 @@ package mx.tec.healthsyncapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,53 +26,65 @@ class MainActivity : AppCompatActivity() {
         val url = "http://10.0.2.2:3001/login"
 
         val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
-        val usuario = sharedpref.getString("usuario", "#")
+        val user = sharedpref.getString("user", "#")
+        val userType = sharedpref.getString("userType", "#")
 
-        /* Comentamos esto por ahora para poder revisar el inicio de sesion varias veces
-        if (usuario != "#") {
-            val intent = Intent(this@MainActivity, Home::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+
+        if (user != "#") {
+            if (userType == "technician"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
+                val intent = Intent(this@MainActivity, TechnicianTicketsSummary::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            if (userType == "admin"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
+                val intent = Intent(this@MainActivity, AdminOptions::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
         }
-        */
+
         binding.btnIniciarSesion.setOnClickListener {
-            val usuario = binding.edtUsuario.text.toString()
-            val contrasena = binding.edtContrasena.text.toString()
+            val user = binding.edtUsuario.text.toString()
+            val password = binding.edtContrasena.text.toString()
 
             val body = JSONObject() //Creamos y agregamos datos al cuerpo para la petición de validación
-            body.put("username", usuario)
-            body.put("password", contrasena)
+            body.put("username", user)
+            body.put("password", password)
 
             val listener = Response.Listener<JSONObject> { result ->
-                Log.e("Resultado", result.toString())
+                Log.e("Result", result.toString())
 
-                val mensaje = result.getString("message")
-                if (mensaje == "ok"){ //Si existe el usuario guardamos sus datos
+                val message = result.getString("message")
+                if (message == "ok"){ //Si existe el usuario guardamos sus datos
+                    val userType = result.getString("userType")
                     with(sharedpref.edit()){
-                        putString("usuario", usuario)
+                        putString("user", user)
+                        putString("userType", userType)
                         commit()
                     }
-                    val tipoUsuario = result.getString("userType")
-                    if (tipoUsuario == "technician"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
+                    if (userType == "technician"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
                         val intent = Intent(this@MainActivity, TechnicianTicketsSummary::class.java)
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }
-                    if (tipoUsuario == "admin"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
+                    if (userType == "admin"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
                         val intent = Intent(this@MainActivity, AdminOptions::class.java)
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }
+                } else{
+                    Log.e("Result", "incorrecto")
+                    Toast.makeText(this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show()
                 }
             }
             val error = Response.ErrorListener { error ->
                 Log.e("Error", error.message.toString())
             }
 
-            val validacionUsuario = JsonObjectRequest(Request.Method.POST, url,
+            val userValidation = JsonObjectRequest(Request.Method.POST, url,
                 body, listener, error)
 
-            queue.add(validacionUsuario)
+            queue.add(userValidation)
         }
     }
 }
