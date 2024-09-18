@@ -123,6 +123,74 @@ const updateTicketStatus = (req, res) => {
     });
 };
 
+/*
+    Función para dar el resumen de todos los tickets no propios
+    Función para usuarios técnicos
+*/
+const getAllOtherTickets = (req, res) => {
+    const { idTechnician } = req.params;
+
+    const sql = `SELECT * FROM tickets
+                 WHERE (idTechnician != ? OR idTechnician IS NULL) 
+                    AND (status = 'Not started' OR status = 'In progress')
+                 ORDER BY 
+                    CASE
+                        WHEN status = 'Not started' THEN 1 
+                        WHEN status = 'In progress' THEN 2 
+                    END,
+                 dateOpened DESC;`; 
+    
+    pool.query(sql, [idTechnician], (err, results) => {
+        if (err) {
+            console.error("No autorizado:", err);
+            return res.status(401).json({ error: "No autorizado" });
+        }
+
+        res.status(200).json(results);
+    });
+};
+
+/*
+    Función para obtener todos los tickets que tiene asignados un técnico
+    Función para usuarios técnicos
+*/
+const getAllMyTickets = (req, res) => {
+    const { idTechnician } = req.params;
+
+    const sql = `SELECT * FROM tickets
+                 WHERE idTechnician = ? AND status = 'In progress'
+                 ORDER BY dateOpened DESC;`; 
+    
+    pool.query(sql, [idTechnician], (err, results) => {
+        if (err) {
+            console.error("No autorizado:", err);
+            return res.status(401).json({ error: "No autorizado" });
+        }
+
+        res.status(200).json(results);
+    });
+};
+
+/*
+    Función para obtener todos los datos de un ticket en particular
+    Función para usuarios técnicos
+*/
+const getTicketDetails = (req, res) => {
+
+    const { id } = req.params;
+    const sql = `SELECT * FROM tickets WHERE idTicket = ?`;
+    
+    pool.query(sql, [id], (err, results) => {
+        if (err) {
+            console.error("Error fetching ticket:", err);
+            return res.status(500).json({ error: "Error fetching ticket" });
+        }
+        return res.status(200).json(results);
+    });
+}
+
+
+
 module.exports = { 
     getAreas,
     getExtensions,
@@ -130,5 +198,8 @@ module.exports = {
     getDeviceTypes,
     postTicket,
     getAllTickets,
-    updateTicketStatus
+    updateTicketStatus,
+    getAllOtherTickets,
+    getAllMyTickets,
+    getTicketDetails
 };

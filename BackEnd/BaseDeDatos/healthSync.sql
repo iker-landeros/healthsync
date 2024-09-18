@@ -49,7 +49,7 @@ CREATE TABLE tickets (
   idArea INT,       
   idExtension INT,    
   description TEXT,   
-  status ENUM('Not started', 'In progress', 'Solved', 'Not solved', 'Eliminated') DEFAULT 'Not started',
+  status ENUM('Sin empezar', 'En progreso', 'Resuelto', 'No resuelto', 'Eliminado') DEFAULT 'Sin empezar',
   dateOpened DATETIME DEFAULT CURRENT_TIMESTAMP,
   dateClosed DATETIME DEFAULT NULL,         
   idProblemType INT, 
@@ -128,49 +128,87 @@ CREATE TABLE images (
 
 -- Insert dummy data into Users table
 INSERT INTO users (name, username, password, userType) VALUES
-('John Doe', 'jdoe', SHA2('password123', 256), 'technician'),
-('Jane Smith', 'jsmith', SHA2('adminpass', 256), 'admin');
+('Juan Perez', 'jperez', SHA2('passwordJuan', 256), 'technician'),
+('Diego Sahid', 'dsahid', SHA2('passwordSahid', 256), 'technician'),
+('Antonio Marban', 'tmarban', SHA2('passwordTony', 256), 'technician'),
+('Hugo Alejandres', 'halejandres', SHA2('passwordHugo', 256), 'technician'),
+('Beatriz Amado', 'bamado', SHA2('adminpass', 256), 'admin');
 
 -- Insert dummy data into Areas table
 INSERT INTO areas (areaName) VALUES
-('Radiology'),
-('Cardiology'),
-('Emergency Room'),
-('Intensive Care Unit');
+('Enlace Social'),
+('Sindicato'),
+('Fiscalía'),
+('Seguro Popular'),
+('Comisaría'),
+('Voluntariado'),
+('Dirección Operativa'),
+('Hospitalización'),
+('Urgencias'),
+('Cirugía'),
+('Enseñanza'),
+('Imagenología'),
+('Calidad'),
+('Enfermería'),
+('Trabajo Social'),
+('Servicios Jurídicos'),
+('Mantenimiento'),
+('Personal'),
+('Finanzas'),
+('Laboratorio'),
+('Dirección Médica'),
+('Dirección General'),
+('Dirección Administrativa'),
+('Otro');
 
 -- Insert dummy data into Extensions table
 INSERT INTO extensions (extensionNumber) VALUES
 ('1001'),
 ('1002'),
 ('1003'),
-('1004');
+('1004'),
+('1005'),
+('1006'),
+('1007'),
+('1008'),
+('1009'),
+('1010'),
+('Otro');
 
 -- Insert dummy data into Problem Types table
 INSERT INTO problem_types (problemName) VALUES
-('Power failure'),
-('Software crash'),
-('Broken screen'),
-('Printer malfunction');
+('Revisión de equipo'),
+('Alta de correo electrónico'),
+('Solicitud de capacitación'),
+('Bloqueo de página web'),
+('Aplicación no funciona'),
+('Problema de red'),
+('Equipo no prende');
 
 -- Insert dummy data into Device Types table
 INSERT INTO device_types (deviceName) VALUES
-('X-Ray Machine'),
-('MRI Scanner'),
-('ECG Machine'),
-('Ultrasound Machine');
+('PC'),
+('PC / Todo en uno'),
+('Laptop'),
+('Terminal'),
+('Impresora'),
+('Escáner'),
+('Multifuncional'),
+('Otro');
 
 -- Insert dummy data into Components table
 INSERT INTO components (componentName) VALUES
-('Power Cable'),
-('Screen Replacement'),
-('Software Update'),
-('Printer Cartridge');
+('Cable de poder'),
+('Monitor de computadora'),
+('Procesador'),
+('Cartucho de impresora');
 
 -- Insert dummy data into Tickets table
 INSERT INTO tickets (senderName, idArea, idExtension, description, idProblemType, idDeviceType, idTechnician, status) VALUES
-('Michael Green', 1, 1, 'X-ray machine is not turning on.', 1, 1, null, 'Not started'),
-('Sarah Brown', 2, 2, 'ECG machine screen is cracked.', 3, 3, null, 'Not started'),
-('Chris White', 3, 3, 'MRI scanner software keeps crashing.', 2, 2, 2, 'In progress');
+('Leticia Sánchez', 1, 1, 'Mi computadora no prende', 7, 3, null, 'Sin empezar'),
+('Paola Martínez', 7, 2, 'No me abre el programa que necesito', 5, 3, null, 'Sin empezar'),
+('Gerardo Mendoza', 2, 5, 'Mi compu no deja de apagarse', 1, 1, 2, 'En progreso'),
+('José Moya', 10, 1, 'No me deja imprimir la impresora', 1, 5, 1, 'En progreso');
 
 -- Insert dummy data into ticket_components table
 INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
@@ -179,4 +217,12 @@ INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
 (3, 3, 1);
 
 SHOW TABLES;
-
+SELECT * FROM areas;
+SELECT * FROM components;
+SELECT * FROM device_types;
+SELECT * FROM extensions;
+SELECT * FROM images;
+SELECT * FROM problem_types;
+SELECT * FROM ticket_components;
+SELECT * FROM tickets;
+SELECT * FROM users;
