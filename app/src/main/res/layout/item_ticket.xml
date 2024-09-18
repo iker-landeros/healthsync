@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txtEstado"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/estado_en_curso_background"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="Estado"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/inter_light"
+        android:text="03/09/2024"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txtDescripcion"
+        android:layout_width="7dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Falla de red"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <ImageButton
+        android:id="@+id/btnInfo"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_weight="1"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="center"
+        android:src="@drawable/infobtn" />
+
+</LinearLayout>
