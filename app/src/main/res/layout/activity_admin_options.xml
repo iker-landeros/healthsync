@@ -22,7 +22,7 @@
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:backgroundTint="#00FFFFFF"
             app:srcCompat="@drawable/logout" />
 
@@ -57,8 +57,6 @@
             android:layout_weight="1"
             android:backgroundTint="#F7A800"
             android:gravity="center"
-            android:icon="@drawable/ic_historial"
-            android:iconSize="48dp"
             android:iconTint="@android:color/white"
             android:padding="16dp"
             android:text="Historial tickets"
@@ -66,8 +64,7 @@
             android:textColor="@android:color/white"
             android:textSize="16sp"
             app:cornerRadius="150dp"
-            app:iconGravity="textTop"
-            app:iconSize="30dp" />
+            app:iconGravity="textTop" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEstadisticas"
@@ -77,8 +74,6 @@
             android:layout_weight="1"
             android:backgroundTint="#E67E3C"
             android:gravity="center"
-            android:icon="@drawable/grafica"
-            android:iconSize="48dp"
             android:iconTint="@android:color/white"
             android:padding="16dp"
             android:text="Estadísticas"
@@ -96,8 +91,6 @@
             android:layout_weight="1"
             android:backgroundTint="#AAAD00"
             android:gravity="center"
-            android:icon="@drawable/cuentas"
-            android:iconSize="48dp"
             android:iconTint="@android:color/white"
             android:padding="16dp"
             android:text="Administrar cuentas"
