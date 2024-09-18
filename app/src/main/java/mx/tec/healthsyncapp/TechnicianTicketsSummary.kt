@@ -21,47 +21,6 @@ import mx.tec.healthsyncapp.databinding.ActivityTechnicianTicketsSummaryBinding
 import org.json.JSONArray
 
 
-data class Ticket(
-    val status: String,
-    val date: String,
-    val problemType: String
-)
-
-class TicketsAdapter(private val ticketsList: List<Ticket>) : RecyclerView.Adapter<TicketsAdapter.TicketViewHolder>() {
-
-    // Clase interna que define el ViewHolder (representa un ítem de la lista)
-    class TicketViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
-        val ticketStatus: TextView = itemView.findViewById(R.id.txtEstado)
-        val ticketDate: TextView = itemView.findViewById(R.id.txtFecha)
-        val ticketProblemType: TextView = itemView.findViewById(R.id.txtDescripcion)
-
-        // Método para vincular los datos del ticket con las vistas
-        fun bind(ticket: Ticket) {
-            ticketStatus.text = ticket.status
-            ticketDate.text = ticket.date
-            ticketProblemType.text = ticket.problemType
-        }
-    }
-
-    // Infla el layout del ítem para cada fila del RecyclerView
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_ticket, parent, false)  // Aquí inflamos el layout item_ticket.xml
-        return TicketViewHolder(view)
-    }
-
-    // Vincula los datos del ticket con las vistas del ViewHolder
-    override fun onBindViewHolder(holder: TicketViewHolder, position: Int) {
-        val ticket = ticketsList[position]
-        holder.bind(ticket)
-    }
-
-    // Retorna el tamaño de la lista de tickets
-    override fun getItemCount(): Int {
-        return ticketsList.size
-    }
-}
-
 class TechnicianTicketsSummary : AppCompatActivity() {
     private lateinit var binding: ActivityTechnicianTicketsSummaryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +36,10 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         val recyclerViewAllTickets: RecyclerView = findViewById(R.id.recyclerTodosTickets)
         val allTicketList = mutableListOf<Ticket>()
 
+        //Adaptamos cada ticket
+        val adapter = TicketsSummaryAdapter(allTicketList)
+        recyclerViewAllTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
+        recyclerViewAllTickets.adapter = adapter  // Asigna el adaptador al RecyclerView
 
         val listener = Response.Listener<JSONArray> { result ->
             Log.e("Result", result.toString())
@@ -88,7 +51,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
                 val problemType = (result.getJSONObject(i).getString("description"))
                 allTicketList.add(Ticket(status, date, problemType))
             }
-
+            adapter.notifyDataSetChanged()
         }
 
         val error = Response.ErrorListener { error ->
@@ -101,10 +64,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         queue.add(userValidation)
 
-        //Adaptamos cada ticket
-        val adapter = TicketsAdapter(allTicketList)
-        recyclerViewAllTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
-        recyclerViewAllTickets.adapter = adapter  // Asigna el adaptador al RecyclerView
+
 
         // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences
         binding.btnLogout.setOnClickListener{
