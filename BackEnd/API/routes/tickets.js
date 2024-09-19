@@ -9,7 +9,9 @@ const { postTicket,
         getDeviceTypes,
         getAllOtherTickets,
         getAllMyTickets,
-        getTicketDetails
+        getTicketDetails,
+        postMySolvedTicket,
+        postMyNotSolvedTicket
       } = require('../controllers/tickets.controller');
 
 router.post('/tickets', postTicket);
@@ -22,6 +24,8 @@ router.put('/tickets/:id', updateTicketStatus);
 router.get('/tickets/:idTechnician/not-my-tickets/summary', getAllOtherTickets);
 router.get('/tickets/:idTechnician/my-tickets/summary', getAllMyTickets);
 router.get('/tickets/:id', getTicketDetails);
+router.post('/tickets/:id/solved', postMySolvedTicket);
+router.post('/tickets/:id/not-solved', postMyNotSolvedTicket);
 
 
 module.exports = router

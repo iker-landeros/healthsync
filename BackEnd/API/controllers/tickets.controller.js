@@ -189,6 +189,59 @@ const getTicketDetails = (req, res) => {
     });
 }
 
+/*
+    Función para resolver un ticket
+    Función para usuarios técnicos
+*/
+const postMySolvedTicket = (req, res) => {
+    const {id} = req.params;
+    const {revisionProcess, diagnosis, solutionProcess} = req.body; 
+
+    sql = `UPDATE tickets SET status = "Resuelto", dateClosed = CURRENT_TIMESTAMP, revisionProcess = ?, diagnosis = ?, solutionProcess = ? WHERE idTicket = ?;`;
+
+    pool.query(sql, [revisionProcess, diagnosis, solutionProcess, id], (err, results) => {
+        if (err) {
+            console.error("Error updating ticket:", err);
+            return res.status(500).json({ error: 'Error al actualizar el ticket' });
+        }
+
+        if (results.affectedRows > 0) {
+            return res.status(200).json({ message: 'Ticket resuelto', idTicket: id });
+        } else {
+            return res.status(404).json({ message: 'No se encontraron tickets' });
+        }
+    });
+}
+
+/*
+    Función para publicar un ticket no resuelto
+    Función para usuarios técnicos
+*/
+const postMyNotSolvedTicket = (req, res) => {
+    const {id} = req.params;
+    const {failedReason} = req.body; 
+
+    sql = `UPDATE tickets SET status = "No resuelto", dateClosed = CURRENT_TIMESTAMP, failedReason = ? WHERE idTicket = ?;`;
+
+    pool.query(sql, [failedReason, id], (err, results) => {
+        if (err) {
+            console.error("Error updating ticket:", err);
+            return res.status(500).json({ error: 'Error al actualizar el ticket' });
+        }
+
+        if (results.affectedRows > 0) {
+            return res.status(200).json({ message: 'Ticket no resuelto', idTicket: id });
+        } else {
+            return res.status(404).json({ message: 'No se encontraron tickets' });
+        }
+    });
+}
+
+/*
+    Función para obtener las estadísticas de los tickets
+*/
+const getTicketsStats = (req, res) => {
+}
 
 
 module.exports = { 
@@ -201,5 +254,7 @@ module.exports = {
     updateTicketStatus,
     getAllOtherTickets,
     getAllMyTickets,
-    getTicketDetails
+    getTicketDetails,
+    postMySolvedTicket,
+    postMyNotSolvedTicket
 };
