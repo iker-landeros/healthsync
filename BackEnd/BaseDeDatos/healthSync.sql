@@ -8,7 +8,7 @@ SHOW DATABASES;
 CREATE TABLE users (
   idUser INT AUTO_INCREMENT,
   name VARCHAR(100),
-  username VARCHAR(45),
+  username VARCHAR(45) UNIQUE,
   password VARCHAR(64),
   userType ENUM('technician', 'admin') NOT NULL,
   PRIMARY KEY (idUser)
