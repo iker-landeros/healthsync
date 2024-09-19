@@ -241,7 +241,22 @@ const postMyNotSolvedTicket = (req, res) => {
     Función para obtener las estadísticas de los tickets
 */
 const getTicketsStats = (req, res) => {
-}
+    const sql = `SELECT 
+                    COUNT(idTicket) AS totalTickets,
+                    COUNT(CASE WHEN status = 'En progreso' THEN 1 END) AS ticketsInProgress,
+                    COUNT(CASE WHEN status = 'No resuelto' THEN 1 END) AS notSolvedTickets,
+                    COUNT(CASE WHEN status = 'Resuelto' THEN 1 END) AS solvedTickets
+                FROM tickets;`;
+    
+    pool.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching statistics:", err);
+            return res.status(500).json({ error: "Error fetching statistics" });
+        }
+        return res.status(200).json(results);
+    });
+};
+
 
 
 module.exports = { 
@@ -256,5 +271,6 @@ module.exports = {
     getAllMyTickets,
     getTicketDetails,
     postMySolvedTicket,
-    postMyNotSolvedTicket
+    postMyNotSolvedTicket,
+    getTicketsStats
 };
