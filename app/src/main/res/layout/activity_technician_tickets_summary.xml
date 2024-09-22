@@ -184,7 +184,7 @@
             android:padding="8dp"
             android:text="Mis tickets"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerMisTickets"
@@ -200,7 +200,7 @@
             android:padding="8dp"
             android:text="Todos los tickets"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerTodosTickets"

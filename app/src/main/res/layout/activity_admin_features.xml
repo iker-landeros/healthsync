@@ -179,31 +179,15 @@
         app:layout_constraintVertical_bias="0.45">
 
         <TextView
-            android:id="@+id/txtMisTickets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#D3E3F2"
-            android:fontFamily="@font/inter"
-            android:padding="8dp"
-            android:text="Mis tickets"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerMisTickets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
             android:id="@+id/txtTodosTickets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#D3E3F2"
             android:fontFamily="@font/inter"
             android:padding="8dp"
-            android:text="Todos los tickets"
+            android:text="Histórico de tickets"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerTodosTickets"
