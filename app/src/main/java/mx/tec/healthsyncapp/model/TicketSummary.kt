@@ -1,4 +1,6 @@
 package mx.tec.healthsyncapp.model
 
-class TicketSummary {
+data class TicketSummary (val status: String,
+                          val date: String,
+                          val problemType: String){
 }
