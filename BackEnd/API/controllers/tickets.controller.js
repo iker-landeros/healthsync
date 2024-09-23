@@ -132,7 +132,7 @@ const getAllOtherTickets = (req, res) => {
 
     const sql = `SELECT * FROM tickets
                  WHERE (idTechnician != ? OR idTechnician IS NULL) 
-                    AND (status = 'Not started' OR status = 'In progress')
+                    AND (status = 'Sin empezar' OR status = 'En progreso')
                  ORDER BY 
                     CASE
                         WHEN status = 'Not started' THEN 1 
@@ -158,7 +158,7 @@ const getAllMyTickets = (req, res) => {
     const { idTechnician } = req.params;
 
     const sql = `SELECT * FROM tickets
-                 WHERE idTechnician = ? AND status = 'In progress'
+                 WHERE idTechnician = ? AND status = 'En progreso'
                  ORDER BY dateOpened DESC;`; 
     
     pool.query(sql, [idTechnician], (err, results) => {
@@ -166,7 +166,7 @@ const getAllMyTickets = (req, res) => {
             console.error("No autorizado:", err);
             return res.status(401).json({ error: "No autorizado" });
         }
-
+        console.log(idTechnician);
         res.status(200).json(results);
     });
 };
