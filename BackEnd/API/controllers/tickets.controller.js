@@ -166,7 +166,6 @@ const getAllMyTickets = (req, res) => {
             console.error("No autorizado:", err);
             return res.status(401).json({ error: "No autorizado" });
         }
-        console.log(idTechnician);
         res.status(200).json(results);
     });
 };
