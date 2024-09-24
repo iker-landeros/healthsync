@@ -51,7 +51,7 @@ CREATE TABLE device_types (
 CREATE TABLE tickets (
   idTicket INT AUTO_INCREMENT,
   senderName VARCHAR(100),
-  idArea INT,
+  idExtension INT,
   description TEXT,   
   status ENUM('Sin empezar', 'En progreso', 'Resuelto', 'No resuelto', 'Eliminado') DEFAULT 'Sin empezar',
   dateOpened DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -65,9 +65,9 @@ CREATE TABLE tickets (
   failedReason TEXT DEFAULT NULL,  
   PRIMARY KEY (idTicket),
 
-  CONSTRAINT fk_ticket_area
-    FOREIGN KEY (idArea)
-    REFERENCES areas (idArea)
+  CONSTRAINT fk_ticket_extension
+    FOREIGN KEY (idExtension)
+    REFERENCES extensions (idExtension)
     ON DELETE SET NULL,
 
   CONSTRAINT fk_ticket_problem_type
@@ -215,7 +215,7 @@ INSERT INTO components (componentName) VALUES
 ('Otro');
 
 -- Insert dummy data into Tickets table
-INSERT INTO tickets (senderName, idArea, description, idProblemType, idDeviceType, idTechnician, status, dateOpened) VALUES
+INSERT INTO tickets (senderName, idExtension, description, idProblemType, idDeviceType, idTechnician, status, dateOpened) VALUES
 ('Leticia Sánchez', 1, 'Mi computadora no prende', 7, 3, null, 'Sin empezar', '2024-09-18 17:42:43'),
 ('Paola Martínez', 7, 'No me abre el programa que necesito', 5, 3, null, 'Sin empezar', '2024-09-18 17:44:43'),
 ('Gerardo Mendoza', 2, 'Mi compu no deja de apagarse', 1, 1, 2, 'En progreso', '2024-09-18 17:50:43'),
@@ -223,7 +223,7 @@ INSERT INTO tickets (senderName, idArea, description, idProblemType, idDeviceTyp
 ('José Moya', 5, 'No me deja imprimir la impresora', 1, 1, null, 'Eliminado', '2024-09-19 13:42:43');
 
 SELECT * FROM tickets;
-INSERT INTO tickets (senderName, idArea, description, status, dateOpened, dateClosed, idProblemType, idDeviceType, idTechnician, revisionProcess, diagnosis, solutionProcess, failedReason) VALUES
+INSERT INTO tickets (senderName, idExtension, description, status, dateOpened, dateClosed, idProblemType, idDeviceType, idTechnician, revisionProcess, diagnosis, solutionProcess, failedReason) VALUES
 ('Mariana De La Rosa', 2, 'Mi compu no deja de apagarse', 'Resuelto', '2024-09-19 14:00:08', '2024-09-19 17:00:08', 7, 5, 1, 'Se revisó la fuente de poder', 'La fuente de poder estaba quemada', 'Se cambió la fuente de poder', null),
 ('Kirill Makienko', 2, 'La compu saca chispas', 'No resuelto', '2024-09-19 14:20:58', '2024-09-19 14:55:58', 3, 2, 1, null, null, null, 'El usuario mojó la computadora hace una semana. Todo se averió'),
 ('Carolina Figueroa', 2, 'Nuestra impresora no se conecta con nuestra compu para imprimir', 'Resuelto', '2024-09-19 14:25:10', '2024-09-20 11:40:08', 2, 5, 2, 'Se revisó la conexión alámbrica', 'El cable de conexión estaba mal', 'Se cambió el cable y ya quedó', null),
