@@ -25,7 +25,12 @@ CREATE TABLE areas (
 CREATE TABLE extensions (
   idExtension INT AUTO_INCREMENT,
   extensionNumber VARCHAR(10),
-  PRIMARY KEY (idExtension)
+  idArea INT,
+  PRIMARY KEY (idExtension),
+  
+  CONSTRAINT fk_extension_area
+    FOREIGN KEY (idArea)
+    REFERENCES areas (idArea)
 );
 
 -- Table for Problem Types (independent table for types of problems)
@@ -46,8 +51,7 @@ CREATE TABLE device_types (
 CREATE TABLE tickets (
   idTicket INT AUTO_INCREMENT,
   senderName VARCHAR(100),
-  idArea INT,       
-  idExtension INT,    
+  idArea INT,
   description TEXT,   
   status ENUM('Sin empezar', 'En progreso', 'Resuelto', 'No resuelto', 'Eliminado') DEFAULT 'Sin empezar',
   dateOpened DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -64,11 +68,6 @@ CREATE TABLE tickets (
   CONSTRAINT fk_ticket_area
     FOREIGN KEY (idArea)
     REFERENCES areas (idArea)
-    ON DELETE SET NULL,
-
-  CONSTRAINT fk_ticket_extension
-    FOREIGN KEY (idExtension)
-    REFERENCES extensions (idExtension)
     ON DELETE SET NULL,
 
   CONSTRAINT fk_ticket_problem_type
@@ -136,44 +135,43 @@ INSERT INTO users (name, username, password, userType) VALUES
 
 -- Insert dummy data into Areas table
 INSERT INTO areas (areaName) VALUES
-('Enlace Social'),
-('Sindicato'),
-('Fiscalía'),
-('Seguro Popular'),
-('Comisaría'),
-('Voluntariado'),
 ('Dirección Operativa'),
+('Administración de Personal'),
 ('Hospitalización'),
-('Urgencias'),
-('Cirugía'),
-('Enseñanza'),
-('Imagenología'),
-('Calidad'),
-('Enfermería'),
 ('Trabajo Social'),
-('Servicios Jurídicos'),
-('Mantenimiento'),
-('Personal'),
-('Finanzas'),
-('Laboratorio'),
-('Dirección Médica'),
-('Dirección General'),
-('Dirección Administrativa'),
+('Finanzas y Contabilidad'),
+('Tecnologías de la Información'),
+('Recursos Materiales y Control Patrimonial'),
+('Servicios Auxiliares y de Diagnóstico'),
 ('Otro');
 
 -- Insert dummy data into Extensions table
-INSERT INTO extensions (extensionNumber) VALUES
-('1001'),
-('1002'),
-('1003'),
-('1004'),
-('1005'),
-('1006'),
-('1007'),
-('1008'),
-('1009'),
-('1010'),
-('Otro');
+INSERT INTO extensions (extensionNumber, idArea) VALUES
+('1200', 1),
+('1290', 2),
+('2060', 3),
+('2180', 4),
+('2190', 4),
+('2240', 4),
+('3290', 4),
+('3310', 4),
+('5040', 4),
+('6140', 4),
+('8020', 4),
+('4010', 5),
+('2160', 6),
+('2680', 6),
+('4030', 6),
+('4060', 6),
+('4280', 6),
+('4520', 6),
+('4530', 6),
+('4540', 6),
+('4560', 6),
+('4620', 7),
+('7210', 8),
+('8050', 8),
+('Otro', 9);
 
 -- Insert dummy data into Problem Types table
 INSERT INTO problem_types (problemName) VALUES
@@ -183,7 +181,8 @@ INSERT INTO problem_types (problemName) VALUES
 ('Bloqueo de página web'),
 ('Aplicación no funciona'),
 ('Problema de red'),
-('Equipo no prende');
+('Equipo no prende'),
+('Otro');
 
 -- Insert dummy data into Device Types table
 INSERT INTO device_types (deviceName) VALUES
@@ -198,17 +197,46 @@ INSERT INTO device_types (deviceName) VALUES
 
 -- Insert dummy data into Components table
 INSERT INTO components (componentName) VALUES
-('Cable de poder'),
+('Batería'),
 ('Monitor de computadora'),
 ('Procesador'),
-('Cartucho de impresora');
+('Cartucho de impresora'),
+('Memoria RAM'),
+('Disco duro'),
+('Teclado'),
+('Mouse'),
+('Cable de red'),
+('Batería de reloj BIOS'),
+('Cable de corriente'),
+('Cable de video HD (HDMI)'),
+('Cable de video (VGA)'),
+('Cable de corriente (teléfono)'),
+('Batería de no breaks'),
+('Otro');
 
 -- Insert dummy data into Tickets table
-INSERT INTO tickets (senderName, idArea, idExtension, description, idProblemType, idDeviceType, idTechnician, status) VALUES
-('Leticia Sánchez', 1, 1, 'Mi computadora no prende', 7, 3, null, 'Sin empezar'),
-('Paola Martínez', 7, 2, 'No me abre el programa que necesito', 5, 3, null, 'Sin empezar'),
-('Gerardo Mendoza', 2, 5, 'Mi compu no deja de apagarse', 1, 1, 2, 'En progreso'),
-('José Moya', 10, 1, 'No me deja imprimir la impresora', 1, 5, 1, 'En progreso');
+INSERT INTO tickets (senderName, idArea, description, idProblemType, idDeviceType, idTechnician, status, dateOpened) VALUES
+('Leticia Sánchez', 1, 'Mi computadora no prende', 7, 3, null, 'Sin empezar', '2024-09-18 17:42:43'),
+('Paola Martínez', 7, 'No me abre el programa que necesito', 5, 3, null, 'Sin empezar', '2024-09-18 17:44:43'),
+('Gerardo Mendoza', 2, 'Mi compu no deja de apagarse', 1, 1, 2, 'En progreso', '2024-09-18 17:50:43'),
+('José Moya', 5, 'No me deja imprimir la impresora', 1, 5, 1, 'En progreso', '2024-09-19 10:42:43'),
+('José Moya', 5, 'No me deja imprimir la impresora', 1, 1, null, 'Eliminado', '2024-09-19 13:42:43');
+
+SELECT * FROM tickets;
+INSERT INTO tickets (senderName, idArea, description, status, dateOpened, dateClosed, idProblemType, idDeviceType, idTechnician, revisionProcess, diagnosis, solutionProcess, failedReason) VALUES
+('Mariana De La Rosa', 2, 'Mi compu no deja de apagarse', 'Resuelto', '2024-09-19 14:00:08', '2024-09-19 17:00:08', 7, 5, 1, 'Se revisó la fuente de poder', 'La fuente de poder estaba quemada', 'Se cambió la fuente de poder', null),
+('Kirill Makienko', 2, 'La compu saca chispas', 'No resuelto', '2024-09-19 14:20:58', '2024-09-19 14:55:58', 3, 2, 1, null, null, null, 'El usuario mojó la computadora hace una semana. Todo se averió'),
+('Carolina Figueroa', 2, 'Nuestra impresora no se conecta con nuestra compu para imprimir', 'Resuelto', '2024-09-19 14:25:10', '2024-09-20 11:40:08', 2, 5, 2, 'Se revisó la conexión alámbrica', 'El cable de conexión estaba mal', 'Se cambió el cable y ya quedó', null),
+('Juan Pablo Bustos', 3, 'No funciona nuestro escáner', 'Resuelto', '2024-09-19 14:35:10', '2024-09-19 15:40:08', 7, 6, 2, 'Se revisó si tenía actualizado su SO', 'No estaba actualizado el SO', 'Se actualizó el SO', null),
+('Miguel Ángel Ávila', 2, 'La computadora dejó de mostrar nada en la pantalla', 'Resuelto', '2024-09-19 14:55:10', '2024-09-19 18:10:08', 7, 1, 2, 'Se revisó si el monitor estaba encendido', 'El monitor estaba apagado', 'Se prendió el monitor', null);
+
+-- Insert dummy data into Users table
+INSERT INTO images (imageData, idTicket) VALUES
+    (0x89504E470D0A1A0A0000000D4948445200000001000000010806000000FF0000FF, 6),
+    (0x89504E470D0A1A0A0000000D4948445200000002000000020806000000FF0000FF, 7),
+    (0x89504E470D0A1A0A0000000D4948445200000003000000030806000000FF0000FF, 8),
+    (0x89504E470D0A1A0A0000000D4948445200000004000000040806000000FF0000FF, 9),
+    (0x89504E470D0A1A0A0000000D4948445200000005000000050806000000FF0000FF, 10);
 
 -- Insert dummy data into ticket_components table
 INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
