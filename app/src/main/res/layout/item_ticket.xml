@@ -22,7 +22,7 @@
             android:layout_width="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/estado_en_curso_background"
+            android:background="@drawable/estado_se_background"
             android:gravity="center"
             android:padding="2dp"
             android:text="Estado"
