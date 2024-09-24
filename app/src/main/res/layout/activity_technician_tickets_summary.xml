@@ -171,7 +171,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="468dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,37 +179,50 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/txtMisTickets"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#D3E3F2"
-            android:fontFamily="@font/inter"
-            android:padding="8dp"
-            android:text="Mis tickets"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerMisTickets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtMisTickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D3E3F2"
+                android:fontFamily="@font/inter"
+                android:padding="8dp"
+                android:text="Mis tickets"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txtTodosTickets"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMisTickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#D3E3F2"
-            android:fontFamily="@font/inter"
-            android:padding="8dp"
-            android:text="Todos los tickets"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerTodosTickets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtTodosTickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D3E3F2"
+                android:fontFamily="@font/inter"
+                android:padding="8dp"
+                android:text="Todos los tickets"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTodosTickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@ class AdminFeatures : AppCompatActivity() {
 
         val queue = Volley.newRequestQueue(this)
 
-        val recyclerViewAllTickets: RecyclerView = binding.recyclerTodosTickets
+        val recyclerViewAllTickets: RecyclerView = binding.rvTodosTickets
 
         val allTicketList = mutableListOf<TicketSummary>()
 

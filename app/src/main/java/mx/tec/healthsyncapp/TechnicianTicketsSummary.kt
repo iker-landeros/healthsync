@@ -42,11 +42,11 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
 
         //Variables para contenedores de tickets PROPIOS
-        val recyclerViewMyTickets: RecyclerView = binding.recyclerMisTickets
+        val recyclerViewMyTickets: RecyclerView = binding.rvMisTickets
         val myTicketList = mutableListOf<TicketSummary>()
 
         //Variables para contenedores de tickets AJENOS
-        val recyclerViewOtherTickets: RecyclerView = binding.recyclerTodosTickets
+        val recyclerViewOtherTickets: RecyclerView = binding.rvTodosTickets
         val otherTicketList = mutableListOf<TicketSummary>()
 
         //Adaptamos cada uno de los tickets PROPIOS
