@@ -71,10 +71,10 @@ const getDeviceTypes = (req, res) => {
     Recibe el nombre del usuario, la extensión de su área, el nombre de su departamento, el tipo de equipo de cómputo, el tipo de problema que presenta y la descripción del problema
 */
 const postTicket = (req, res) => {
-    const { senderName, idExtension, idArea, idDeviceType, idProblemType, description } = req.body;
-    const sql = `INSERT INTO tickets (senderName, idExtension, idArea, idDeviceType, idProblemType, description) VALUES (?,?,?,?,?,?)`;
+    const { senderName, idExtension, idDeviceType, idProblemType, description } = req.body;
+    const sql = `INSERT INTO tickets (senderName, idExtension, idDeviceType, idProblemType, description) VALUES (?,?,?,?,?)`;
     
-    pool.query(sql, [senderName, idExtension, idArea, idDeviceType, idProblemType, description], (err, results) => {
+    pool.query(sql, [senderName, idExtension, idDeviceType, idProblemType, description], (err, results) => {
         if (err) {
             console.error("Error inserting ticket:", err);
             return res.status(500).json({ error: "Error creating the ticket" });  // Ensure the response is returned
