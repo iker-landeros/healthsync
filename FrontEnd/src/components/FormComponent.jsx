@@ -92,7 +92,7 @@ const FormComponent = () => {
         state: {
           success: false,
           message:
-            "Se produjo un error en el sistema, intentelo mas tarde o contatcte a un tecnico.",
+            "Se produjo un error en el sistema, intentelo mas tarde o contacte a un técnico.",
         },
       });
     }
@@ -152,7 +152,6 @@ const FormComponent = () => {
                     {area.areaName}
                   </option>
                 ))}
-                <option value="10000">Esto es un Caso de Fallo</option>
               </select>
             </div>
             <div>
