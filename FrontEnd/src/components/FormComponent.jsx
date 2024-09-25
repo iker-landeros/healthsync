@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const FormComponent = () => {
   const [formData, setFormData] = useState({
     senderName: "",
-    idArea: "",
     idExtension: "",
     description: "",
     idProblemType: "",
@@ -15,6 +14,8 @@ const FormComponent = () => {
   const [extensions, setExtensions] = useState([]);
   const [problemTypes, setProblemTypes] = useState([]);
   const [deviceTypes, setDeviceTypes] = useState([]);
+  const [filteredExtensions, setFilteredExtensions] = useState([]);
+  const [selectedArea, setSelectedArea] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,12 +43,30 @@ const FormComponent = () => {
         setProblemTypes(problemTypesData);
         setDeviceTypes(deviceTypesData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        navigate("/submission", {
+          state: {
+            success: false,
+            message:
+              "Error de conexión con la API, no se pudieron obtener los datos",
+          },
+        });
       }
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (selectedArea != "") {
+      setFilteredExtensions(
+        extensions.filter(
+          (extension) =>
+            extension.idArea === parseInt(selectedArea) ||
+            extension.extensionNumber == "Otro"
+        )
+      );
+    }
+  }, [selectedArea]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -141,8 +160,8 @@ const FormComponent = () => {
               <select
                 id="idArea"
                 name="idArea"
-                value={formData.idArea}
-                onChange={handleChange}
+                value={selectedArea}
+                onChange={(e) => setSelectedArea(e.target.value)} // Handle change correctly
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
@@ -167,10 +186,11 @@ const FormComponent = () => {
                 value={formData.idExtension}
                 onChange={handleChange}
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
+                disabled={!selectedArea}
                 required
               >
                 <option value="">Seleccionar Extensión</option>
-                {extensions.map((extension) => (
+                {filteredExtensions.map((extension) => (
                   <option
                     key={extension.idExtension}
                     value={extension.idExtension}

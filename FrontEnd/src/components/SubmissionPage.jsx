@@ -14,20 +14,14 @@ const SubmissionPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="text-4xl mb-4">
+      <div className="text-4xl mb-5">
         {success ? (
           <BiCheck className="size-20 text-custom-green" />
         ) : (
           <BiX className="size-20 text-custom-orange" />
         )}
       </div>
-      <h1 className="text-2xl font-bold mb-4">
-        {success
-          ? "Formulario Enviado Exitosamente"
-          : "Error al Enviar el Formulario"}
-      </h1>
-
-      <p className="text-gray-600 mb-4 text-center">{message}</p>
+      <h1 className="text-2xl text-center font-bold mb-5">{message}</h1>
       <Link
         to="/"
         className="py-2 px-4 bg-custom-blue text-white font-semibold rounded-md shadow-sm hover:bg-custom-blue-600"
