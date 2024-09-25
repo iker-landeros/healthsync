@@ -7,37 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".AdminOptions">
 
-    <LinearLayout
-    android:id="@+id/linearLayout3"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
     <ImageButton
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logout" />
 
     <TextView
         android:id="@+id/txtNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
+        android:layout_gravity="center"
         android:fontFamily="@font/inter_semibold"
         android:gravity="center"
         android:text="Administrador"
         android:textColor="#000000"
-        android:textSize="18sp" />
-
-    </LinearLayout>
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnLogout" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -46,13 +40,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnHistorialTickets"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="160dp"
-            android:layout_height="170dp"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:backgroundTint="#F7A800"
@@ -64,13 +58,14 @@
             android:textColor="@android:color/white"
             android:textSize="16sp"
             app:cornerRadius="150dp"
+            app:icon="@drawable/historial"
             app:iconGravity="textTop" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEstadisticas"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="160dp"
-            android:layout_height="170dp"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
             android:layout_weight="1"
             android:backgroundTint="#E67E3C"
             android:gravity="center"
@@ -80,13 +75,17 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            app:cornerRadius="100dp" />
+            app:cornerRadius="100dp"
+            app:icon="@drawable/estadisticas"
+            app:iconGravity="textTop"
+            app:iconPadding="12dp"
+            app:iconSize="38dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdministrar"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="160dp"
-            android:layout_height="170dp"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:backgroundTint="#AAAD00"
@@ -97,7 +96,9 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            app:cornerRadius="100dp" />
+            app:cornerRadius="100dp"
+            app:icon="@drawable/cuentas"
+            app:iconGravity="textTop" />
     </LinearLayout>
 
 

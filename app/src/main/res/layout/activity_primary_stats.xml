@@ -11,10 +11,12 @@
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@drawable/logout"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout" />
 
     <TextView
         android:id="@+id/txtNombre"
@@ -57,10 +59,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout6"
+        android:layout_width="310dp"
+        android:layout_height="300dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnHistorialTickets"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
@@ -187,7 +190,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="65"
+                        android:text="38"
                         android:textColor="#FFFFFF"
                         android:textSize="36sp" />
 
@@ -210,7 +213,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/txtTktsRes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
@@ -220,7 +223,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/txtNumTktsRes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -234,6 +237,28 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnMasStats"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="24dp"
+        android:layout_weight="1"
+        android:backgroundTint="#7DAED3"
+        android:gravity="center"
+        android:iconTint="@android:color/white"
+        android:text="Ver Más"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:cornerRadius="150dp"
+        app:icon="@drawable/grafica"
+        app:iconGravity="textTop"
+        app:iconPadding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
