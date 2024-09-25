@@ -88,7 +88,9 @@ const postTicket = (req, res) => {
     Función para usuarios administradores
 */
 const getAllTickets = (req, res) => {
-    const sql = `SELECT * FROM tickets ORDER BY dateOpened DESC`;  // Fixed WHERE clause (it was incomplete)
+    const sql = `SELECT * FROM tickets t 
+	                JOIN problem_types p ON t.idProblemType = p.idProblemType
+                ORDER BY dateOpened DESC`;  // Fixed WHERE clause (it was incomplete)
     
     pool.query(sql, (err, results) => {
         if (err) {
@@ -130,15 +132,16 @@ const updateTicketStatus = (req, res) => {
 const getAllOtherTickets = (req, res) => {
     const { idTechnician } = req.params;
 
-    const sql = `SELECT * FROM tickets
-                 WHERE (idTechnician != ? OR idTechnician IS NULL) 
-                    AND (status = 'Sin empezar' OR status = 'En progreso')
-                 ORDER BY 
-                    CASE
-                        WHEN status = 'Not started' THEN 1 
-                        WHEN status = 'In progress' THEN 2 
-                    END,
-                 dateOpened ASC;`; 
+    const sql = `SELECT t.idTicket, t.status, t.dateOpened, p.problemName FROM tickets t
+	JOIN problem_types p ON t.idProblemType = p.idProblemType
+WHERE (t.idTechnician != ? OR t.idTechnician IS NULL) 
+	AND (t.status = 'Sin empezar' OR t.status = 'En progreso')
+ORDER BY 
+	CASE
+		WHEN t.status = 'Not started' THEN 1 
+		WHEN t.status = 'In progress' THEN 2 
+	END,
+t.dateOpened ASC`; 
     
     pool.query(sql, [idTechnician], (err, results) => {
         if (err) {
@@ -157,9 +160,10 @@ const getAllOtherTickets = (req, res) => {
 const getAllMyTickets = (req, res) => {
     const { idTechnician } = req.params;
 
-    const sql = `SELECT * FROM tickets
-                 WHERE idTechnician = ? AND status = 'En progreso'
-                 ORDER BY dateOpened ASC;`; 
+    const sql = `SELECT t.idTicket, t.status, t.dateOpened, p.problemName FROM tickets t
+	                JOIN problem_types p ON t.idProblemType = p.idProblemType
+                WHERE t.idTechnician = ? AND t.status = 'En progreso'
+                ORDER BY t.dateOpened ASC`; 
     
     pool.query(sql, [idTechnician], (err, results) => {
         if (err) {
