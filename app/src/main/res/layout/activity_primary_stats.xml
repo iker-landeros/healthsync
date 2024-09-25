@@ -63,7 +63,7 @@
         android:layout_width="310dp"
         android:layout_height="300dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/btnHistorialTickets"
+        app:layout_constraintBottom_toTopOf="@+id/btnMasStats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
