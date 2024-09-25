@@ -14,7 +14,7 @@ const doLogin = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const sql = `SELECT COUNT(*) AS cantidad, idUser, userType FROM users WHERE username = ? AND password = SHA2(?, 256)`;
+    const sql = `SELECT COUNT(*) AS cantidad, name, idUser, userType FROM users WHERE username = ? AND password = SHA2(?, 256)`;
     pool.query(sql, [username, password], (err, results, fields) => {
 
         if (err) 
@@ -26,6 +26,7 @@ const doLogin = (req, res) => {
             result = { token: token, message: 'ok',
                        idUser: results[0].idUser,
                        username: username,
+                       name: results[0].name,
                        userType: results[0].userType }
 
             res.status(200).json(result);
