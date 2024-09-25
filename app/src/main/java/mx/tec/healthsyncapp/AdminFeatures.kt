@@ -38,7 +38,7 @@ class AdminFeatures : AppCompatActivity() {
 
         val allTicketList = mutableListOf<TicketSummary>()
 
-        val adapterAllTickets= TicketSummaryAdapter(allTicketList)
+        val adapterAllTickets= TicketSummaryAdapter(allTicketList) {ticket -> }
         recyclerViewAllTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
         recyclerViewAllTickets.adapter = adapterAllTickets  // Asigna el adaptador al RecyclerView
 
@@ -48,10 +48,11 @@ class AdminFeatures : AppCompatActivity() {
 
             //Recorremos cada objeto y obtenemos la información para construir cada resumen de ticket
             for(i in 0 until result.length()){
+                val idTicket = (result.getJSONObject(i).getString("idTicket"))
                 val status = (result.getJSONObject(i).getString("status"))
                 val date = (result.getJSONObject(i).getString("dateOpened"))
                 val problemType = (result.getJSONObject(i).getString("description"))
-                allTicketList.add(TicketSummary(status, date, problemType))
+                allTicketList.add(TicketSummary(idTicket, status, date, problemType))
             }
             adapterAllTickets.notifyDataSetChanged()
         }

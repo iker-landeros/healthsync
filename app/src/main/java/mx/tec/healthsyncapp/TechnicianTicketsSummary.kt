@@ -33,10 +33,13 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         //Obtenemos la id del usuario que ha iniciado sesion
         val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
         val idUser = sharedpref.getString("idUser", "#")
+        val username = sharedpref.getString("user", "#")
+
+        binding.txtNombre.text = username
 
         //Variables para la petición al endpoint del servidor de acuerdo a la id del usuario
-        val urlOtherTickets = "http://10.0.2.2:3001/tickets/$idUser/not-my-tickets/summary"
         val urlMyTickets  = "http://10.0.2.2:3001/tickets/$idUser/my-tickets/summary"
+        val urlOtherTickets = "http://10.0.2.2:3001/tickets/$idUser/not-my-tickets/summary"
 
         val queue = Volley.newRequestQueue(this)
 
@@ -50,28 +53,37 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         val otherTicketList = mutableListOf<TicketSummary>()
 
         //Adaptamos cada uno de los tickets PROPIOS
-        val adapterMyTickets= TicketSummaryAdapter(myTicketList)
+        val adapterMyTickets= TicketSummaryAdapter(myTicketList) { ticket -> }
         recyclerViewMyTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
         recyclerViewMyTickets.adapter = adapterMyTickets  // Asigna el adaptador al RecyclerView
 
 
         //Adaptamos cada uno de los tickets AJENOS
-        val adapterOtherTickets= TicketSummaryAdapter(otherTicketList)
+
+        val adapterOtherTickets= TicketSummaryAdapter(otherTicketList) { ticket ->
+            val intent = Intent(this, UnclaimedTicket::class.java)
+            intent.putExtra("ticketId", ticket.id)
+            startActivity(intent)
+        }
         recyclerViewOtherTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
         recyclerViewOtherTickets.adapter = adapterOtherTickets  // Asigna el adaptador al RecyclerView
 
 
 
+
+
+
         // Petición para tickets PROPIOS
         val listenerMyTickets = Response.Listener<JSONArray> { result ->
-            Log.e("Result", result.toString())
+            Log.e("Result my tickets", result.toString())
 
             //Recorremos cada objeto y obtenemos la información para construir cada resumen de ticket
             for(i in 0 until result.length()){
+                val idTicket = (result.getJSONObject(i).getString("idTicket"))
                 val status = (result.getJSONObject(i).getString("status"))
                 val date = (result.getJSONObject(i).getString("dateOpened"))
                 val problemType = (result.getJSONObject(i).getString("description"))
-                myTicketList.add(TicketSummary(status, date, problemType))
+                myTicketList.add(TicketSummary(idTicket, status, date, problemType))
             }
             adapterMyTickets.notifyDataSetChanged()
         }
@@ -88,20 +100,21 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         // Petición para tickets AJENOS
         val listenerOtherTickets = Response.Listener<JSONArray> { result ->
-            Log.e("Result", result.toString())
+            Log.e("Result other tickets", result.toString())
 
             //Recorremos cada objeto y obtenemos la información para construir cada resumen de ticket
             for(i in 0 until result.length()){
+                val idTicket = (result.getJSONObject(i).getString("idTicket"))
                 val status = (result.getJSONObject(i).getString("status"))
                 val date = (result.getJSONObject(i).getString("dateOpened"))
                 val problemType = (result.getJSONObject(i).getString("description"))
-                otherTicketList.add(TicketSummary(status, date, problemType))
+                otherTicketList.add(TicketSummary(idTicket, status, date, problemType))
             }
             adapterOtherTickets.notifyDataSetChanged()
         }
 
         val errorOtherTickets = Response.ErrorListener { error ->
-            Log.e("Error from My Tickets", error.message.toString())
+            Log.e("Error from Other Tickets", error.message.toString())
         }
 
         val userValidationOtherTickets = JsonArrayRequest(
@@ -109,6 +122,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
             null, listenerOtherTickets, errorOtherTickets)
 
         queue.add(userValidationOtherTickets)
+
 
 
         // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences

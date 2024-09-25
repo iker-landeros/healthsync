@@ -1,4 +1,5 @@
 package mx.tec.healthsyncapp.model
 
-class TechnicianStats {
-}
+data class TechnicianStats( val name: String,
+                            val resolvedTicketsCount: String,
+                            val avgResolutionTimeHours: String) {}

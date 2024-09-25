@@ -56,10 +56,12 @@ class MainActivity : AppCompatActivity() {
 
                 val message = result.getString("message")
                 if (message == "ok"){ //Si existe el usuario guardamos sus datos
+                    val idUser = result.getString("idUser")
                     val userType = result.getString("userType")
                     with(sharedpref.edit()){
                         putString("user", user)
                         putString("userType", userType)
+                        putString("idUser", idUser)
                         commit()
                     }
                     if (userType == "technician"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación

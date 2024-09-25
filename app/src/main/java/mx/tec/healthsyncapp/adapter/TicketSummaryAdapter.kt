@@ -9,7 +9,7 @@ import mx.tec.healthsyncapp.R
 import mx.tec.healthsyncapp.databinding.ItemTicketBinding
 import mx.tec.healthsyncapp.model.TicketSummary
 
-class TicketSummaryAdapter(val data: List<TicketSummary>) :
+class TicketSummaryAdapter(val data: List<TicketSummary>, private val onItemClicked: (TicketSummary) -> Unit ):
 
     RecyclerView.Adapter<TicketSummaryAdapter.ViewHolder>() {
     class ViewHolder(val binding: ItemTicketBinding) :
@@ -31,7 +31,14 @@ class TicketSummaryAdapter(val data: List<TicketSummary>) :
             txtEstado.text = element.status
             txtFecha.text = element.date
             txtDescripcion.text = element.problemType
+
+            btnInfo.setOnClickListener{
+                onItemClicked(element)
+            }
+
         }
+
+
     }
 }
 
