@@ -138,7 +138,7 @@ const getAllOtherTickets = (req, res) => {
                         WHEN status = 'Not started' THEN 1 
                         WHEN status = 'In progress' THEN 2 
                     END,
-                 dateOpened DESC;`; 
+                 dateOpened ASC;`; 
     
     pool.query(sql, [idTechnician], (err, results) => {
         if (err) {
@@ -159,7 +159,7 @@ const getAllMyTickets = (req, res) => {
 
     const sql = `SELECT * FROM tickets
                  WHERE idTechnician = ? AND status = 'En progreso'
-                 ORDER BY dateOpened DESC;`; 
+                 ORDER BY dateOpened ASC;`; 
     
     pool.query(sql, [idTechnician], (err, results) => {
         if (err) {
@@ -241,10 +241,12 @@ const postMyNotSolvedTicket = (req, res) => {
 */
 const getTicketsStats = (req, res) => {
     const sql = `SELECT 
-                    COUNT(idTicket) AS totalTickets,
-                    COUNT(CASE WHEN status = 'En progreso' THEN 1 END) AS ticketsInProgress,
-                    COUNT(CASE WHEN status = 'No resuelto' THEN 1 END) AS notSolvedTickets,
-                    COUNT(CASE WHEN status = 'Resuelto' THEN 1 END) AS solvedTickets
+	                COUNT(idTicket) AS totalTickets,
+	                COUNT(CASE WHEN status = 'Sin empezar' THEN 1 END) AS unstartedTickets,
+                    COUNT(CASE WHEN status = 'En progreso' THEN 1 END) AS progressingTickets,
+	                COUNT(CASE WHEN status = 'No resuelto' THEN 1 END) AS notSolvedTickets,
+	                COUNT(CASE WHEN status = 'Resuelto' THEN 1 END) AS solvedTickets,
+                    COUNT(CASE WHEN status = 'Eliminado' THEN 1 END) AS eliminatedTickets
                 FROM tickets;`;
     
     pool.query(sql, (err, results) => {
