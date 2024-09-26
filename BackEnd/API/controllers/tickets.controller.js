@@ -181,7 +181,29 @@ const getAllMyTickets = (req, res) => {
 const getTicketDetails = (req, res) => {
 
     const { id } = req.params;
-    const sql = `SELECT * FROM tickets WHERE idTicket = ?`;
+    const sql = `SELECT t.idTicket,
+	                    t.status,
+                        t.senderName,
+                        t.dateOpened,
+                        AVG(TIMESTAMPDIFF(MINUTE, t.dateOpened, COALESCE(t.dateClosed, CURRENT_TIMESTAMP)))/60 AS resolutionTimeHours,
+                        a.areaName,
+                        e.extensionNumber,
+                        dt.deviceName,
+                        p.problemName,
+                        u.name as technicianName,
+                        t.revisionProcess,
+                        t.diagnosis,
+                        t.solutionProcess,
+                        t.failedReason,
+                        i.imageData as ticketImage
+	                FROM tickets t
+                        LEFT JOIN problem_types p ON t.idProblemType = p.idProblemType
+                        LEFT JOIN extensions e ON t.idExtension = e.idExtension
+                        LEFT JOIN areas a ON e.idArea = a.idArea
+                        LEFT JOIN device_types dt ON t.idDeviceType = dt.idDeviceType
+                        LEFT JOIN users u ON t.idTechnician = u.idUser
+                        LEFT JOIN images i ON t.idTicket = i.idTicket
+	                WHERE t.idTicket = ?`;
     
     pool.query(sql, [id], (err, results) => {
         if (err) {

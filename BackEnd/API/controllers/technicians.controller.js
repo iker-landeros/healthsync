@@ -65,7 +65,7 @@ const getTechniciansStats = (req, res) => {
                 u.idUser, 
                 u.name, 
                 COUNT(t.idTicket) AS resolvedTicketsCount,
-                AVG(TIMESTAMPDIFF(HOUR, t.dateOpened, t.dateClosed)) AS avgResolutionTimeHours
+                AVG(TIMESTAMPDIFF(HOUR, t.dateOpened, t.dateClosed))/60 AS avgResolutionTimeHours
             FROM users u
             LEFT JOIN tickets t ON u.idUser = t.idTechnician
             WHERE u.userType = 'technician' 
