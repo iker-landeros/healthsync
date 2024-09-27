@@ -240,9 +240,9 @@ INSERT INTO images (imageData, idTicket) VALUES
 
 -- Insert dummy data into ticket_components table
 INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
-(1, 1, 2),
-(2, 2, 1),
-(3, 3, 1);
+(6, 1, 2),
+(8, 2, 1),
+(10, 3, 1);
 
 SHOW TABLES;
 SELECT * FROM areas;
