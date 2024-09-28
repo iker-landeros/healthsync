@@ -133,6 +133,8 @@ INSERT INTO users (name, username, password, userType) VALUES
 ('Hugo Alejandres', 'halejandres', SHA2('passwordHugo', 256), 'technician'),
 ('Beatriz Amado', 'bamado', SHA2('adminpass', 256), 'admin');
 
+
+
 -- Insert dummy data into Areas table
 INSERT INTO areas (areaName) VALUES
 ('Dirección Operativa'),

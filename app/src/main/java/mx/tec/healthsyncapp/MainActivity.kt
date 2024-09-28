@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val queue = Volley.newRequestQueue(this)
         val url = "http://10.0.2.2:3001/login"
+        val queue = Volley.newRequestQueue(this)
+
 
         val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
         val user = sharedpref.getString("user", "#")
@@ -44,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnIniciarSesion.setOnClickListener {
-            val user = binding.edtUsuario.text.toString()
-            val password = binding.edtContrasena.text.toString()
+            val userInput = binding.edtUsuario.text.toString()
+            val passwordInput = binding.edtContrasena.text.toString()
 
             val body = JSONObject() //Creamos y agregamos datos al cuerpo para la petición de validación
-            body.put("username", user)
-            body.put("password", password)
+            body.put("username", userInput)
+            body.put("password", passwordInput)
 
             val listener = Response.Listener<JSONObject> { result ->
                 Log.e("Result", result.toString())
@@ -58,8 +59,10 @@ class MainActivity : AppCompatActivity() {
                 if (message == "ok"){ //Si existe el usuario guardamos sus datos
                     val idUser = result.getString("idUser")
                     val userType = result.getString("userType")
+                    val name = result.getString("name")
                     with(sharedpref.edit()){
                         putString("user", user)
+                        putString("name", name)
                         putString("userType", userType)
                         putString("idUser", idUser)
                         commit()
