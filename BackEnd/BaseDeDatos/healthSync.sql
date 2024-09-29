@@ -133,8 +133,6 @@ INSERT INTO users (name, username, password, userType) VALUES
 ('Hugo Alejandres', 'halejandres', SHA2('passwordHugo', 256), 'technician'),
 ('Beatriz Amado', 'bamado', SHA2('adminpass', 256), 'admin');
 
-
-
 -- Insert dummy data into Areas table
 INSERT INTO areas (areaName) VALUES
 ('Dirección Operativa'),
@@ -245,6 +243,31 @@ INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
 (6, 1, 2),
 (8, 2, 1),
 (10, 3, 1);
+
+-- Stored procedure to mark ticket as not solved
+DELIMITER $$
+CREATE PROCEDURE markTicketAsNotSolved(
+    IN ticketId INT,
+    IN failReason VARCHAR(255),
+    IN image LONGBLOB
+)
+BEGIN
+    START TRANSACTION;
+
+    UPDATE tickets
+    SET status = 'No resuelto', dateClosed = CURRENT_TIMESTAMP, failedReason = failReason
+    WHERE idTicket = ticketId;
+
+    INSERT INTO images (imageData, idTicket)
+    VALUES (image, ticketId);
+
+    COMMIT;
+END$$
+DELIMITER ;
+-- Use case:
+-- CALL markTicketAsNotSolved(3,"La fuente de poder había explotado",0x89504E470D0A1A0A0000000D4948445200000001000000010806000000FF0000FF);
+
+
 
 SHOW TABLES;
 SELECT * FROM areas;

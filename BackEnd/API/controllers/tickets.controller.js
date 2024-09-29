@@ -247,24 +247,20 @@ const postMySolvedTicket = (req, res) => {
     Función para usuarios técnicos
 */
 const postMyNotSolvedTicket = (req, res) => {
-    const {id} = req.params;
-    const {failedReason} = req.body; 
+    const { id } = req.params;
+    const { failedReason, imageData } = req.body;
 
-    sql = `UPDATE tickets SET status = "No resuelto", dateClosed = CURRENT_TIMESTAMP, failedReason = ? WHERE idTicket = ?;`;
+    const sql = `CALL markTicketAsNotSolved(?, ?, ?);`;
 
-    pool.query(sql, [failedReason, id], (err, results) => {
+    pool.query(sql, [id, failedReason, imageData], (err, results) => {
         if (err) {
-            console.error("Error updating ticket:", err);
-            return res.status(500).json({ error: 'Error al actualizar el ticket' });
+            console.error("Error executing stored procedure:", err);
+            return res.status(500).json({ error: 'Error al ejecutar el procedimiento almacenado' });
         }
 
-        if (results.affectedRows > 0) {
-            return res.status(200).json({ message: 'Ticket no resuelto', idTicket: id });
-        } else {
-            return res.status(404).json({ message: 'No se encontraron tickets' });
-        }
+        return res.status(200).json({ message: 'Ticket no resuelto y evidencia guardada', idTicket: id });
     });
-}
+};
 
 /*
     Función para obtener las estadísticas de los tickets
