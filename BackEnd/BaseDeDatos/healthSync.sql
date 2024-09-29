@@ -115,7 +115,7 @@ CREATE TABLE ticket_components (
 -- Table for Images (images related to the tickets)
 CREATE TABLE images (
   idImage INT AUTO_INCREMENT,
-  imageData BLOB,
+  imageData LONGBLOB,
   idTicket INT,
   PRIMARY KEY (idImage),
 
@@ -228,21 +228,21 @@ INSERT INTO tickets (senderName, idExtension, description, status, dateOpened, d
 ('Kirill Makienko', 2, 'La compu saca chispas', 'No resuelto', '2024-09-19 14:20:58', '2024-09-19 14:55:58', 3, 2, 1, null, null, null, 'El usuario mojó la computadora hace una semana. Todo se averió'),
 ('Carolina Figueroa', 2, 'Nuestra impresora no se conecta con nuestra compu para imprimir', 'Resuelto', '2024-09-19 14:25:10', '2024-09-20 11:40:08', 2, 5, 2, 'Se revisó la conexión alámbrica', 'El cable de conexión estaba mal', 'Se cambió el cable y ya quedó', null),
 ('Juan Pablo Bustos', 3, 'No funciona nuestro escáner', 'Resuelto', '2024-09-19 14:35:10', '2024-09-19 15:40:08', 7, 6, 2, 'Se revisó si tenía actualizado su SO', 'No estaba actualizado el SO', 'Se actualizó el SO', null),
-('Miguel Ángel Ávila', 2, 'La computadora dejó de mostrar nada en la pantalla', 'Resuelto', '2024-09-19 14:55:10', '2024-09-19 18:10:08', 7, 1, 2, 'Se revisó si el monitor estaba encendido', 'El monitor estaba apagado', 'Se prendió el monitor', null);
+('Miguel Ángel Ávila', 2, 'La computadora dejó de mostrar nada en la pantalla', 'Resuelto', '2024-09-19 14:55:10', '2024-09-19 18:10:08', 7, 1, 2, 'Se revisó si el monitor estaba encendido', 'El monitor estaba roto', 'Se cambió el monitor', null);
 
 -- Insert dummy data into Users table
 INSERT INTO images (imageData, idTicket) VALUES
-    (0x89504E470D0A1A0A0000000D4948445200000001000000010806000000FF0000FF, 6),
-    (0x89504E470D0A1A0A0000000D4948445200000002000000020806000000FF0000FF, 7),
-    (0x89504E470D0A1A0A0000000D4948445200000003000000030806000000FF0000FF, 8),
-    (0x89504E470D0A1A0A0000000D4948445200000004000000040806000000FF0000FF, 9),
-    (0x89504E470D0A1A0A0000000D4948445200000005000000050806000000FF0000FF, 10);
+    (LOAD_FILE('D:/SeguridadInformatica/healthsync/BackEnd/BaseDeDatos/image1.jpg'), 6),
+    (LOAD_FILE('D:/SeguridadInformatica/healthsync/BackEnd/BaseDeDatos/image2.jpg'), 7),
+    (LOAD_FILE('D:/SeguridadInformatica/healthsync/BackEnd/BaseDeDatos/image3.jpg'), 8),
+    (LOAD_FILE('D:/SeguridadInformatica/healthsync/BackEnd/BaseDeDatos/image4.jpg'), 9),
+    (LOAD_FILE('D:/SeguridadInformatica/healthsync/BackEnd/BaseDeDatos/image5.jpg'), 10);
 
 -- Insert dummy data into ticket_components table
 INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
-(6, 1, 2),
-(8, 2, 1),
-(10, 3, 1);
+(6, 1, 1),
+(8, 9, 1),
+(10, 2, 1);
 
 -- Stored procedure to mark ticket as not solved
 DELIMITER $$
@@ -265,7 +265,7 @@ BEGIN
 END$$
 DELIMITER ;
 -- Use case:
--- CALL markTicketAsNotSolved(3,"La fuente de poder había explotado",0x89504E470D0A1A0A0000000D4948445200000001000000010806000000FF0000FF);
+-- CALL markTicketAsNotSolved(3,"La fuente de poder había explotado",archivo_en_base64);
 
 
 

@@ -248,11 +248,13 @@ const postMySolvedTicket = (req, res) => {
 */
 const postMyNotSolvedTicket = (req, res) => {
     const { id } = req.params;
-    const { failedReason, imageData } = req.body;
+    const { failedReason, imageData } = req.body; // imageData viene en base64
+
+    const decodedImageData = Buffer.from(imageData, 'base64');
 
     const sql = `CALL markTicketAsNotSolved(?, ?, ?);`;
 
-    pool.query(sql, [id, failedReason, imageData], (err, results) => {
+    pool.query(sql, [id, failedReason, decodedImageData], (err, results) => {
         if (err) {
             console.error("Error executing stored procedure:", err);
             return res.status(500).json({ error: 'Error al ejecutar el procedimiento almacenado' });
