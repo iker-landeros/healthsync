@@ -1,13 +1,12 @@
 package mx.tec.healthsyncapp.adapter
 
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import mx.tec.healthsyncapp.R
 import mx.tec.healthsyncapp.databinding.ItemTicketBinding
 import mx.tec.healthsyncapp.model.TicketSummary
+import mx.tec.healthsyncapp.utils.StatusColorUtil
 
 class TicketSummaryAdapter(val data: List<TicketSummary>, private val onItemClicked: (TicketSummary) -> Unit ):
 
@@ -32,6 +31,9 @@ class TicketSummaryAdapter(val data: List<TicketSummary>, private val onItemClic
             txtFecha.text = element.date
             txtDescripcion.text = element.problemType
 
+            val color = StatusColorUtil.getColorForStatus(holder.binding.root.context, element.status)
+            val drawable = txtEstado.background as GradientDrawable
+            drawable.setColor(color)
             btnInfo.setOnClickListener{
                 onItemClicked(element)
             }

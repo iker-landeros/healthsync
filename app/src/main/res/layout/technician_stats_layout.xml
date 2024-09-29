@@ -51,13 +51,5 @@
             android:textColor="@android:color/black"
             android:textSize="12sp"/>
 
-        <ImageButton
-            android:id="@+id/btnInfo"
-            android:layout_width="0dp"
-            android:layout_height="23dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="center"
-            android:src="@drawable/infobtn" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,12 +30,13 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         binding = ActivityTechnicianTicketsSummaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Obtenemos la id del usuario que ha iniciado sesion
+        //Obtenemos la id y nombre del usuario que ha iniciado sesion
         val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
         val idUser = sharedpref.getString("idUser", "#")
-        val username = sharedpref.getString("user", "#")
+        val name = sharedpref.getString("name", "#")
 
-        binding.txtNombre.text = username
+        //Mostramos su nombre en pantalla
+        binding.txtNombre.text = name
 
         //Variables para la petición al endpoint del servidor de acuerdo a la id del usuario
         val urlMyTickets  = "http://10.0.2.2:3001/tickets/$idUser/my-tickets/summary"
@@ -59,7 +60,6 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
 
         //Adaptamos cada uno de los tickets AJENOS
-
         val adapterOtherTickets= TicketSummaryAdapter(otherTicketList) { ticket ->
             val intent = Intent(this, UnclaimedTicket::class.java)
             intent.putExtra("ticketId", ticket.id)
@@ -67,9 +67,6 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         }
         recyclerViewOtherTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
         recyclerViewOtherTickets.adapter = adapterOtherTickets  // Asigna el adaptador al RecyclerView
-
-
-
 
 
 
@@ -81,9 +78,9 @@ class TechnicianTicketsSummary : AppCompatActivity() {
             for(i in 0 until result.length()){
                 val idTicket = (result.getJSONObject(i).getString("idTicket"))
                 val status = (result.getJSONObject(i).getString("status"))
-                val date = (result.getJSONObject(i).getString("dateOpened"))
-                val problemType = (result.getJSONObject(i).getString("description"))
-                myTicketList.add(TicketSummary(idTicket, status, date, problemType))
+                val dateOpened = (result.getJSONObject(i).getString("dateOpened"))
+                val problemName = (result.getJSONObject(i).getString("problemName"))
+                myTicketList.add(TicketSummary(idTicket, status, dateOpened, problemName))
             }
             adapterMyTickets.notifyDataSetChanged()
         }
@@ -106,9 +103,9 @@ class TechnicianTicketsSummary : AppCompatActivity() {
             for(i in 0 until result.length()){
                 val idTicket = (result.getJSONObject(i).getString("idTicket"))
                 val status = (result.getJSONObject(i).getString("status"))
-                val date = (result.getJSONObject(i).getString("dateOpened"))
-                val problemType = (result.getJSONObject(i).getString("description"))
-                otherTicketList.add(TicketSummary(idTicket, status, date, problemType))
+                val dateOpened = (result.getJSONObject(i).getString("dateOpened"))
+                val problemName = (result.getJSONObject(i).getString("problemName"))
+                otherTicketList.add(TicketSummary(idTicket, status, dateOpened, problemName))
             }
             adapterOtherTickets.notifyDataSetChanged()
         }
