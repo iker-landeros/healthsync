@@ -196,8 +196,8 @@ const getTicketDetails = (req, res) => {
                     t.solutionProcess,
                     t.failedReason,
                     i.imageData as ticketImage,
-                    c.componentName,
-                    tc.quantity as componentQuantity
+                    GROUP_CONCAT(c.componentName) AS componentNames,
+                    GROUP_CONCAT(tc.quantity) AS componentQuantities
 	            FROM tickets t
                     LEFT JOIN problem_types p ON t.idProblemType = p.idProblemType
                     LEFT JOIN extensions e ON t.idExtension = e.idExtension
@@ -214,6 +214,23 @@ const getTicketDetails = (req, res) => {
             console.error("Error fetching ticket:", err);
             return res.status(500).json({ error: "Error fetching ticket" });
         }
+
+        const componentNames = results[0].componentNames ? results[0].componentNames.split(',') : [];
+        const componentQuantities = results[0].componentQuantities ? results[0].componentQuantities.split(',') : [];
+
+        // Crear un array de objetos para los componentes
+        const components = componentNames.map((name, index) => ({
+            name: name,
+            quantity: componentQuantities[index]
+        }));
+
+        // Eliminar las propiedades concatenadas
+        delete results[0].componentNames;
+        delete results[0].componentQuantities;
+
+        // Agregar los componentes en forma de array
+        results[0].components = components;
+        
         return res.status(200).json(results);
     });
 }
@@ -223,24 +240,23 @@ const getTicketDetails = (req, res) => {
     Función para usuarios técnicos
 */
 const postMySolvedTicket = (req, res) => {
-    const {id} = req.params;
-    const {revisionProcess, diagnosis, solutionProcess} = req.body; 
+    const { id } = req.params;
+    const { revisionProcess, diagnosis, solutionProcess, imageData, components } = req.body; // imageData viene en base64 y components es un arreglo de objetos
 
-    sql = `UPDATE tickets SET status = "Resuelto", dateClosed = CURRENT_TIMESTAMP, revisionProcess = ?, diagnosis = ?, solutionProcess = ? WHERE idTicket = ?;`;
+    const decodedImageData = Buffer.from(imageData, 'base64');
+    const componentsJSON = JSON.stringify(components);
 
-    pool.query(sql, [revisionProcess, diagnosis, solutionProcess, id], (err, results) => {
+    const sql = `CALL markTicketAsSolved(?, ?, ?, ?, ?, ?);`;
+
+    pool.query(sql, [id, revisionProcess, diagnosis, solutionProcess, decodedImageData, componentsJSON], (err, results) => {
         if (err) {
-            console.error("Error updating ticket:", err);
-            return res.status(500).json({ error: 'Error al actualizar el ticket' });
+            console.error("Error executing stored procedure:", err);
+            return res.status(500).json({ error: 'Error al ejecutar el procedimiento almacenado' });
         }
 
-        if (results.affectedRows > 0) {
-            return res.status(200).json({ message: 'Ticket resuelto', idTicket: id });
-        } else {
-            return res.status(404).json({ message: 'No se encontraron tickets' });
-        }
+        return res.status(200).json({ message: 'Ticket no resuelto y evidencia guardada', idTicket: id });
     });
-}
+};
 
 /*
     Función para publicar un ticket no resuelto

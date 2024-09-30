@@ -248,7 +248,7 @@ INSERT INTO ticket_components (idTicket, idComponent, quantity) VALUES
 DELIMITER $$
 CREATE PROCEDURE markTicketAsNotSolved(
     IN ticketId INT,
-    IN failReason VARCHAR(255),
+    IN failReason TEXT,
     IN image LONGBLOB
 )
 BEGIN
@@ -266,6 +266,63 @@ END$$
 DELIMITER ;
 -- Use case:
 -- CALL markTicketAsNotSolved(3,"La fuente de poder había explotado",archivo_en_base64);
+
+
+-- Stored procedure to mark ticket as solved with multiple or no components
+DELIMITER $$
+CREATE PROCEDURE markTicketAsSolved(
+    IN ticketId INT,
+    IN revProcess TEXT,
+    IN diagno TEXT,
+    IN solProcess TEXT,
+    IN image LONGBLOB,
+    IN components JSON -- JSON array containing components and quantities
+)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE totalComponents INT;
+
+    START TRANSACTION;
+
+    UPDATE tickets
+    SET status = 'Resuelto', 
+        dateClosed = CURRENT_TIMESTAMP, 
+        revisionProcess = revProcess, 
+        diagnosis = diagno, 
+        solutionProcess = solProcess
+    WHERE idTicket = ticketId;
+
+    INSERT INTO images (imageData, idTicket)
+    VALUES (image, ticketId);
+
+    -- Get the total number of components in the JSON array
+    SET totalComponents = JSON_LENGTH(components);
+
+    -- Loop through the JSON array to insert each component
+    WHILE i < totalComponents DO
+        -- Insert each component from the JSON
+        INSERT INTO ticket_components (idTicket, idComponent, quantity)
+        VALUES (
+            ticketId,
+            JSON_UNQUOTE(JSON_EXTRACT(components, CONCAT('$[', i, '].idComponent'))),
+            JSON_UNQUOTE(JSON_EXTRACT(components, CONCAT('$[', i, '].quantity')))
+        );
+        
+        SET i = i + 1;
+    END WHILE;
+
+    COMMIT;
+END$$
+DELIMITER ;
+-- Use case:
+-- CALL markTicketAsSolved(
+--    3, -- ID del ticket
+--    "Se revisó si se había prendido la compu", 
+--    "No estaba prendida", 
+--    "Se cambió botón de prendida", 
+--    LOAD_FILE('D:/SeguridadInformatica/healthsync/BackEnd/BaseDeDatos/image1.jpg'), 
+--    '[{"idComponent": 1, "quantity": 2}, {"idComponent": 2, "quantity": 1}]'
+-- );
 
 
 
