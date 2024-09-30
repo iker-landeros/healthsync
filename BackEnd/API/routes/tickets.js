@@ -7,6 +7,7 @@ const { postTicket,
         getExtensions,
         getProblemTypes,
         getDeviceTypes,
+        getComponents,
         getAllOtherTickets,
         getAllMyTickets,
         getTicketDetails,
@@ -20,6 +21,7 @@ router.get('/tickets/areas', getAreas);
 router.get('/tickets/extensions', getExtensions);
 router.get('/tickets/problemTypes', getProblemTypes);
 router.get('/tickets/deviceTypes', getDeviceTypes);
+router.get('/tickets/components', getComponents);
 router.get('/tickets/statistics', getTicketsStats);
 router.get('/tickets', getAllTickets);
 router.put('/tickets/:id', updateTicketStatus);

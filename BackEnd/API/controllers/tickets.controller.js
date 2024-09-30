@@ -66,6 +66,22 @@ const getDeviceTypes = (req, res) => {
 };
 
 /*
+    Función que obtiene todos los componentes
+    Función para usuarios técnicos
+*/
+const getComponents = (req, res) => {
+    const sql = `SELECT * FROM components`;
+    
+    pool.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching components:", err);
+            return res.status(500).json({ error: "Error fetching components" });
+        }
+        return res.status(200).json(results);
+    });
+};
+
+/*
     Función que publica un ticket a la base de datos
     Función para usuarios clientes
     Recibe el nombre del usuario, la extensión de su área, el nombre de su departamento, el tipo de equipo de cómputo, el tipo de problema que presenta y la descripción del problema
@@ -230,7 +246,7 @@ const getTicketDetails = (req, res) => {
 
         // Agregar los componentes en forma de array
         results[0].components = components;
-        
+
         return res.status(200).json(results);
     });
 }
@@ -309,6 +325,7 @@ module.exports = {
     getExtensions,
     getProblemTypes,
     getDeviceTypes,
+    getComponents,
     postTicket,
     getAllTickets,
     updateTicketStatus,
