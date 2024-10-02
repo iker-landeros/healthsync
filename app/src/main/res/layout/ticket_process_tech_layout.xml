@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/linear_layout_borde"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linear_layout_borde"
+                android:elevation="10dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/txtEstado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/estado_se_background"
+                    android:fontFamily="@font/inter_semibold"
+                    android:gravity="center"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="2dp"
+                    android:text="Estado"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtProcesoRevision"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="PROCESO DE REVISIÓN"
+                            android:textColor="#000000"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/edtProcesoRevision"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:width="270dp"
+                            android:height="45dp"
+                            android:background="@drawable/edittext_background"
+                            android:ems="10"
+                            android:fontFamily="@font/inter"
+                            android:gravity="top|center_vertical"
+                            android:hint="Descripción del proceso de revisión de la falla técnica"
+                            android:inputType="text"
+                            android:maxWidth="270dp"
+                            android:maxHeight="45dp"
+                            android:minWidth="270dp"
+                            android:minHeight="45dp"
+                            android:padding="8dp"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtDiagnostico"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="DIAGNÓSTICO"
+                            android:textColor="#000000"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/edtDiagnostico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:width="270dp"
+                            android:height="45dp"
+                            android:background="@drawable/edittext_background"
+                            android:ems="10"
+                            android:fontFamily="@font/inter"
+                            android:gravity="top|center_vertical"
+                            android:hint="Descripción del diagnóstico tras la revisión de la falla técnica"
+                            android:inputType="text"
+                            android:maxWidth="270dp"
+                            android:maxHeight="45dp"
+                            android:minWidth="270dp"
+                            android:minHeight="45dp"
+                            android:padding="8dp"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtProcesoResolucion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="PROCESO DE RESOLUCIÓN"
+                            android:textColor="#000000"
+                            android:textSize="10sp" />
+
+                        <EditText
+                            android:id="@+id/edtProcesoResolucion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:width="270dp"
+                            android:height="45dp"
+                            android:background="@drawable/edittext_background"
+                            android:ems="10"
+                            android:fontFamily="@font/inter"
+                            android:gravity="top|center_vertical"
+                            android:hint="Descripción del proceso de solución de la falla técnica"
+                            android:inputType="text"
+                            android:maxWidth="270dp"
+                            android:maxHeight="45dp"
+                            android:minWidth="270dp"
+                            android:minHeight="45dp"
+                            android:padding="8dp"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtComponentes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="COMPONENTES UTILIZADOS"
+                            android:textColor="#000000"
+                            android:textSize="10sp" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp">
+
+                            <Spinner
+                                android:id="@+id/Spinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/spinner_background"
+                                android:minWidth="270dp"
+                                android:padding="2dp"
+                                android:spinnerMode="dropdown" />
+
+                            <ImageView
+                                android:id="@+id/spinnerIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignEnd="@id/Spinner"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="12dp"
+                                android:src="@drawable/arrow_down" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtAdjuntar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="ADJUNTAR EVIDENCIA DE RESOLUCIÓN"
+                            android:textColor="#000000"
+                            android:textSize="10sp" />
+
+                        <include
+                            layout="@layout/upload_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="3dp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

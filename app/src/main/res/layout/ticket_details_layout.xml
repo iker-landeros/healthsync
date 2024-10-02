@@ -1,73 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UnclaimedTicket">
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnHome"
-            android:layout_width="0dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            app:srcCompat="@drawable/home" />
-
-        <TextView
-            android:id="@+id/txtNombre"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="120dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/inter_semibold"
-            android:gravity="center"
-            android:text="Nombre completo"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:background="#7DAED3"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-        <TextView
-            android:id="@+id/txtDetalles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_vertical"
-            android:layout_weight="1"
-            android:fontFamily="@font/inter_semibold"
-            android:gravity="center"
-            android:text="Detalles del Reporte Técnico"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -80,8 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.15">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txtEstado"
@@ -110,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
-                android:paddingStart="5dp"
                 android:text="NOMBRE DE QUIEN REPORTA"
                 android:textColor="#000000"
                 android:textSize="10sp" />
@@ -128,7 +61,6 @@
                 android:maxHeight="40dp"
                 android:minWidth="270dp"
                 android:minHeight="40dp"
-                android:paddingStart="6dp"
                 android:text="Eduardo Dario Morales Zamora"
                 android:textColor="#000000"
                 android:textSize="10sp" />
@@ -353,65 +285,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEliminarTicket"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="70dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:backgroundTint="#FFFFFF"
-        android:gravity="center"
-        android:iconTint="@android:color/white"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="Eliminar"
-        android:textAllCaps="false"
-        android:textColor="#E97D3C"
-        android:textSize="10sp"
-        app:cornerRadius="150dp"
-        app:icon="@drawable/eliminartkt"
-        app:iconGravity="textTop"
-        app:iconSize="25dp"
-        app:iconTint="#E97D3C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnReclamarTicket"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="70dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:backgroundTint="#FFFFFF"
-        android:gravity="center"
-        android:iconTint="@android:color/white"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="Reclamar"
-        android:textAllCaps="false"
-        android:textColor="#B487B8"
-        android:textSize="10sp"
-        app:cornerRadius="150dp"
-        app:icon="@drawable/reclamartkt"
-        app:iconGravity="textTop"
-        app:iconSize="25dp"
-        app:iconTint="#B487B8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
