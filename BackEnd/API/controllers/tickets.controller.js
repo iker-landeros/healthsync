@@ -201,6 +201,7 @@ const getTicketDetails = (req, res) => {
 	                t.status,
                     t.senderName,
                     t.dateOpened,
+                    t.description,
                     AVG(TIMESTAMPDIFF(MINUTE, t.dateOpened, COALESCE(t.dateClosed, CURRENT_TIMESTAMP)))/60 AS resolutionTimeHours,
                     a.areaName,
                     e.extensionNumber,
