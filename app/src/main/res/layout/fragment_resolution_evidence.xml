@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.UploadBtnLayout">
+    tools:context=".fragment.ResolutionEvidence">
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnReclamarTicket"
@@ -34,5 +35,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="#DCDCDC"
         app:strokeWidth="2dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

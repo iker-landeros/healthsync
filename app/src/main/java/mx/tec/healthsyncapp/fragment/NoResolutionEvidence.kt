@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import mx.tec.healthsyncapp.R
-import mx.tec.healthsyncapp.databinding.FragmentTicketProcessAdminBinding
-import mx.tec.healthsyncapp.databinding.FragmentTicketProcessTechBinding
+import mx.tec.healthsyncapp.databinding.FragmentNoResolutionEvidenceBinding
+import mx.tec.healthsyncapp.databinding.FragmentResolutionEvidenceBinding
 
-class TicketProcessTech : Fragment() {
-    private lateinit var binding: FragmentTicketProcessTechBinding
+class NoResolutionEvidence : Fragment() {
+    private lateinit var binding: FragmentNoResolutionEvidenceBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTicketProcessTechBinding.inflate(inflater, container, false)
+        binding = FragmentNoResolutionEvidenceBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

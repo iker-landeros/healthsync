@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ActiveTime"
+    android:id="@+id/frameLayout6">
+
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/linear_layout_borde"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="731dp"
+        tools:layout_conversion_absoluteWidth="411dp">
+
+        <TextView
+            android:id="@+id/txtPeriodoSubtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="Periodo activo"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txtPeriodo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:text="2.0h"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import mx.tec.healthsyncapp.R
-import mx.tec.healthsyncapp.databinding.FragmentTicketDetailsBinding
+import mx.tec.healthsyncapp.databinding.FragmentTechnicianInChargeBinding
 
-class TicketDetails : Fragment() {
-    private lateinit var binding: FragmentTicketDetailsBinding
+class TechnicianInCharge : Fragment() {
+    private lateinit var binding: FragmentTechnicianInChargeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentTicketDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentTechnicianInChargeBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

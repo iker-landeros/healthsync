@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import mx.tec.healthsyncapp.R
-import mx.tec.healthsyncapp.databinding.FragmentTicketProcessAdminBinding
-import mx.tec.healthsyncapp.databinding.FragmentTicketProcessTechBinding
+import mx.tec.healthsyncapp.databinding.FragmentActiveTimeBinding
+import mx.tec.healthsyncapp.databinding.FragmentTechnitianInChargeBinding
 
-class TicketProcessTech : Fragment() {
-    private lateinit var binding: FragmentTicketProcessTechBinding
+class ActiveTime : Fragment() {
+    private lateinit var binding: FragmentActiveTimeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTicketProcessTechBinding.inflate(inflater, container, false)
+        binding = FragmentActiveTimeBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
