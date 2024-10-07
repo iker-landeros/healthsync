@@ -10,8 +10,12 @@
 
     <LinearLayout
         android:id="@+id/linearLayout10"
-        android:layout_width="270dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/linear_layout_borde"
         android:elevation="10dp"
         android:orientation="vertical"
@@ -36,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semibold"
-            android:text="Diego Sahid"
+            android:text="Ejemplo"
             android:textColor="#000000"
             android:textSize="10sp" />
     </LinearLayout>

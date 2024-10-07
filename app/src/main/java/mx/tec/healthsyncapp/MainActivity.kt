@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val userType = sharedpref.getString("userType", "#")
 
 
-        if (user != "#") {
+        if (userType != "#") {
             if (userType == "technician"){ //Verificamos el tipo de usuario y le damos acceso a su vista de aplicación
                 val intent = Intent(this@MainActivity, TechnicianTicketsSummary::class.java)
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

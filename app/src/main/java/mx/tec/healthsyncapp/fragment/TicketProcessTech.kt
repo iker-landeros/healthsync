@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import mx.tec.healthsyncapp.R
-import mx.tec.healthsyncapp.databinding.FragmentTicketProcessAdminBinding
 import mx.tec.healthsyncapp.databinding.FragmentTicketProcessTechBinding
 
 class TicketProcessTech : Fragment() {

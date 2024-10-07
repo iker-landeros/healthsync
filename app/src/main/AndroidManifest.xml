@@ -16,6 +16,9 @@
         android:theme="@style/Theme.HealthSyncApp"
         tools:targetApi="31">
         <activity
+            android:name=".TechnicianTicketDetails"
+            android:exported="false" />
+        <activity
             android:name=".utils.TicketProcessEvidence"
             android:exported="false" />
         <activity

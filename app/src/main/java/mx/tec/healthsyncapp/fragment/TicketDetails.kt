@@ -5,17 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import mx.tec.healthsyncapp.R
 import mx.tec.healthsyncapp.databinding.FragmentTicketDetailsBinding
+import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 
 class TicketDetails : Fragment() {
     private lateinit var binding: FragmentTicketDetailsBinding
+    private lateinit var ticketViewModel: TicketViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentTicketDetailsBinding.inflate(inflater, container, false)
+        ticketViewModel = ViewModelProvider(requireActivity()).get(TicketViewModel::class.java)
+        ticketViewModel.ticket.observe(viewLifecycleOwner) { ticket ->
+            ticket?.let {
+                binding.txtEstado.text = ticket.status
+                binding.textNombreCliente.text = ticket.senderName
+                //binding.txtDateOpened.text = ticket.dateOpened
+                binding.textMotivoCliente.text = ticket.description
+                binding.textAreaCliente.text = ticket.areaName
+                binding.textExtensionCliente.text = ticket.extensionNumber
+                binding.textTipoCliente.text = ticket.deviceName
+                binding.textCategoriaCliente.text = ticket.problemName
+            }
+        }
         return binding.root
     }
 }

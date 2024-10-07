@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import mx.tec.healthsyncapp.R
 import mx.tec.healthsyncapp.databinding.FragmentActiveTimeBinding
-import mx.tec.healthsyncapp.databinding.FragmentTechnitianInChargeBinding
+
 
 class ActiveTime : Fragment() {
     private lateinit var binding: FragmentActiveTimeBinding

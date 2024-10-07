@@ -54,14 +54,18 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         val otherTicketList = mutableListOf<TicketSummary>()
 
         //Adaptamos cada uno de los tickets PROPIOS
-        val adapterMyTickets= TicketSummaryAdapter(myTicketList) { ticket -> }
+        val adapterMyTickets= TicketSummaryAdapter(myTicketList) { ticket ->
+            val intent = Intent(this, TechnicianTicketDetails::class.java)
+            intent.putExtra("ticketId", ticket.id)
+            startActivity(intent)
+        }
         recyclerViewMyTickets.layoutManager = LinearLayoutManager(this) // Establece el layout manager
         recyclerViewMyTickets.adapter = adapterMyTickets  // Asigna el adaptador al RecyclerView
 
 
         //Adaptamos cada uno de los tickets AJENOS
         val adapterOtherTickets= TicketSummaryAdapter(otherTicketList) { ticket ->
-            val intent = Intent(this, UnclaimedTicket::class.java)
+            val intent = Intent(this, TechnicianTicketDetails::class.java)
             intent.putExtra("ticketId", ticket.id)
             startActivity(intent)
         }
