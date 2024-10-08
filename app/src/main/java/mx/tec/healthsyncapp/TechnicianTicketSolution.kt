@@ -50,17 +50,29 @@ class TechnicianTicketSolution : AppCompatActivity() {
         ticketViewModel = TicketViewModel()
 
         val btnFinish = findViewById<Button>(R.id.btnFinalizarTicket)
-        btnFinish.setOnClickListener{
-            val revisionProcess = findViewById<EditText>(R.id.edtProcesoRevision).toString()
-            val diagnosis = findViewById<EditText>(R.id.edtDiagnostico).toString()
-            val solutionProcess = findViewById<EditText>(R.id.edtProcesoResolucion).toString()
+        btnFinish.setOnClickListener {
+            // Obtén el texto de los EditText correctamente
+            val revisionProcess = findViewById<EditText>(R.id.edtProcesoRevision).text.toString().trim()
+            val diagnosis = findViewById<EditText>(R.id.edtDiagnostico).text.toString().trim()
+            val solutionProcess = findViewById<EditText>(R.id.edtProcesoResolucion).text.toString().trim()
+
+            // Si ya tienes el dato de la imagen codificada
             val imageData = encodedImageData.toString()
+
+            // Valor de componentes (puedes ajustarlo según tus necesidades)
             val components = ""
-            ticketViewModel.submitEvidenceSolution(ticketId, revisionProcess, diagnosis, solutionProcess,imageData, components, subdomain, ticketRepository)
+
+            // Llama al método del ViewModel para enviar los datos
+            ticketViewModel.submitEvidenceSolution(
+                ticketId, revisionProcess, diagnosis, solutionProcess, imageData, components, subdomain, ticketRepository
+            )
+
+            // Navega a la siguiente actividad
             val intent = Intent(this@TechnicianTicketSolution, TechnicianTicketsSummary::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
+
 
         val btnGoBack = findViewById<ImageButton>(R.id.btnLogout)
         btnGoBack.setOnClickListener{

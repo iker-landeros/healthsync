@@ -78,7 +78,22 @@ class AdminTicketDetails : AppCompatActivity() {
                 fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
                 fragmentTransaction.replace(binding.fragContainerSolution.id, ResolutionEvidence())
 
-
+            } else if (ticket.status == "Eliminado") {
+                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
+                val technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id)
+                if (technicianFragment != null) {
+                    fragmentTransaction.hide(technicianFragment)
+                }
+                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
+                if (resolutionEvidence != null) {
+                    fragmentTransaction.hide(resolutionEvidence)
+                }
+            } else if (ticket.status == "No resuelto") {
+                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
+                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
+                if (resolutionEvidence != null) {
+                    fragmentTransaction.hide(resolutionEvidence)
+                }
             } else {
                 Log.e("Resultado", "No cumple con las condiciones")
             }
