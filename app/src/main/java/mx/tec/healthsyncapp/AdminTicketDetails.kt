@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.databinding.ActivityAdminTicketDetailsBinding
+import mx.tec.healthsyncapp.fragment.ResolutionEvidence
 import mx.tec.healthsyncapp.fragment.TechnicianInCharge
 import mx.tec.healthsyncapp.fragment.TicketDetails
 import mx.tec.healthsyncapp.fragment.TicketProcessTech
@@ -29,9 +30,6 @@ class AdminTicketDetails : AppCompatActivity() {
         binding = ActivityAdminTicketDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Obtenemos los datos de la sesion
-        val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
-        val name = sharedpref.getString("name", "#")
 
         //Variables para petición al servidor
         val ticketId = intent.getStringExtra("ticketId") ?: return
@@ -56,19 +54,45 @@ class AdminTicketDetails : AppCompatActivity() {
 
         //Observamos los cambios y modificamos los elementos de acuerdo al estado del ticket
         ticketViewModel.ticket.observe(this) { ticket ->
-            if (ticket.status == "Resuelto") {
+            if (ticket.status == "Sin empezar") {
+                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
+                val technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id)
+                if (technicianFragment != null) {
+                    fragmentTransaction.hide(technicianFragment)
+                }
+                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
+                if (resolutionEvidence != null) {
+                    fragmentTransaction.hide(resolutionEvidence)
+                }
+
+            } else if (ticket.status == "En progreso") {
                 fragmentTransaction.replace(binding.fragContainerTC.id, TechnicianInCharge())
                 fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                fragmentTransaction.replace(binding.fragContainerSolution.id, TicketProcessTech())
+                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
+                if (resolutionEvidence != null) {
+                    fragmentTransaction.hide(resolutionEvidence)
+                }
+
+            } else if (ticket.status == "Resuelto") {
+                fragmentTransaction.replace(binding.fragContainerTC.id, TechnicianInCharge())
+                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
+                fragmentTransaction.replace(binding.fragContainerSolution.id, ResolutionEvidence())
 
 
             } else {
                 Log.e("Resultado", "No cumple con las condiciones")
             }
 
-            //fragmentTransaction.commit()
+            fragmentTransaction.commit()
         }
 
+
+        val btnReturn = findViewById<ImageButton>(R.id.btnHome)
+        btnReturn.setOnClickListener{
+            val intent = Intent(this@AdminTicketDetails, AdminFeatures::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
 
 
 

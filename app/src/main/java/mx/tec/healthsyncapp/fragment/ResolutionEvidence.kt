@@ -35,7 +35,7 @@ class ResolutionEvidence : Fragment() {
                 binding.txtDiagnosticoCliente.text = ticket.diagnosis
                 binding.txtProcesoResolucionCliente.text = ticket.solutionProcess
                 ticket.ticketImage?.let { base64Image ->
-                    ticketViewModel.loadImage(base64Image.data, ticketRepository)
+                    ticketViewModel.loadImage(base64Image, ticketRepository)
                 }
             }
         }

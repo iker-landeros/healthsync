@@ -112,15 +112,17 @@ class TicketRepository(private val queue: RequestQueue) {
         queue.add(jsonObjectRequest)
     }
 
-    fun decodeBase64Image(data: List<Int>): Bitmap? {
-        // Convierte el array de bytes (List<Int>) en un ByteArray
-        val byteArray = ByteArray(data.size)
-        for (i in data.indices) {
-            byteArray[i] = data[i].toByte()
+    fun decodeBase64Image(base64Image: String): Bitmap? {
+        return try {
+            // Decodifica la imagen en Base64 a un array de bytes
+            val decodedString = Base64.decode(base64Image, Base64.DEFAULT)
+            // Convierte el array de bytes a un Bitmap
+            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
-
 
 
 }

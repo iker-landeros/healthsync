@@ -111,10 +111,11 @@ class TicketViewModel: ViewModel() {
         )
     }
 
-    // En TicketViewModel
-    fun loadImage(data: List<Int>, ticketRepository: TicketRepository) {
-        val bitmap = ticketRepository.decodeBase64Image(data)
+    fun loadImage(
+        base64Image: String,
+        ticketRepository: TicketRepository
+    ) {
+        val bitmap = ticketRepository.decodeBase64Image(base64Image)
         _imageBitmap.value = bitmap
     }
-
 }
