@@ -1,5 +1,6 @@
 package mx.tec.healthsyncapp.viewmodel
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +26,9 @@ class TicketViewModel: ViewModel() {
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
+
+    private val _imageBitmap = MutableLiveData<Bitmap>()
+    val imageBitmap: LiveData<Bitmap> get() = _imageBitmap
 
     fun fetchTicket(ticketId: String, urlTicket: String, queue: RequestQueue) {
         val listenerTicket = Response.Listener<JSONArray> { result ->
@@ -105,5 +109,10 @@ class TicketViewModel: ViewModel() {
                 _error.postValue(error.message)
             }
         )
+    }
+
+    fun loadImageFromBase64(base64Image: String, ticketRepository: TicketRepository) {
+        val bitmap = ticketRepository.decodeBase64Image(base64Image)
+        _imageBitmap.postValue(bitmap)
     }
 }

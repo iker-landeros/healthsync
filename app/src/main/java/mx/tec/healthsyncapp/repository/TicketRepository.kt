@@ -1,5 +1,8 @@
 package mx.tec.healthsyncapp.repository
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -106,5 +109,10 @@ class TicketRepository(private val queue: RequestQueue) {
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, urlEvidenceSolution, null, listener, errorListener)
         queue.add(jsonObjectRequest)
+    }
+
+    fun decodeBase64Image(base64Image: String): Bitmap {
+        val decodedString = Base64.decode(base64Image, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
     }
 }

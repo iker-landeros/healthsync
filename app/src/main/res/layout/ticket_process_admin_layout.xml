@@ -524,7 +524,7 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/imgEvidencia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             tools:srcCompat="@tools:sample/avatars" />
