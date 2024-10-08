@@ -19,7 +19,7 @@
         android:text="Finalizar"
         android:textAllCaps="false"
         android:textColor="#A5B02B"
-        android:textSize="10sp"
+        android:textSize="11sp"
         app:cornerRadius="150dp"
         app:icon="@drawable/finalizartkt"
         app:iconGravity="textTop"

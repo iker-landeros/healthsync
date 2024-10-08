@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnReclamarTicket"
+        android:id="@+id/btnNoResuelto"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="70dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:backgroundTint="#FFFFFF"
         android:gravity="center"
@@ -17,17 +17,16 @@
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
-        android:text="Reclamar"
-        android:textAlignment="center"
+        android:text="N/R"
         android:textAllCaps="false"
-        android:textColor="#B487B8"
-        android:textSize="11sp"
+        android:textColor="#B586BA"
+        android:textSize="12sp"
         app:cornerRadius="150dp"
-        app:icon="@drawable/reclamartkt"
+        app:icon="@drawable/nores"
         app:iconGravity="textTop"
-        app:iconSize="25dp"
-        app:iconTint="#B487B8"
-        tools:layout_editor_absoluteX="309dp"
-        tools:layout_editor_absoluteY="642dp" />
+        app:iconTint="#B586BA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
