@@ -12,14 +12,16 @@ import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.model.Ticket
 import mx.tec.healthsyncapp.repository.TicketRepository
 import org.json.JSONArray
+import org.json.JSONObject
 
 
 class TicketViewModel: ViewModel() {
-    private val _updateResult = MutableLiveData<Boolean>()
-    val updateResult: LiveData<Boolean> get() = _updateResult
 
     private val _ticket = MutableLiveData<Ticket>()
     val ticket: LiveData<Ticket> get() = _ticket
+
+    private val _response = MutableLiveData<JSONObject?>()
+    val response: LiveData<JSONObject?> = _response
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
@@ -65,13 +67,43 @@ class TicketViewModel: ViewModel() {
         queue.add(ticketsDetails)
     }
 
-    fun updateTicket(ticketId: String, idTechnician: String, status: String, subdomain: String, ticketRepository: TicketRepository) {
+    fun updateTicket(
+        ticketId: String,
+        idTechnician: String,
+        status: String, subdomain: String,
+        ticketRepository: TicketRepository
+    ) {
         ticketRepository.update(ticketId, idTechnician, status, subdomain, { response ->
-            Log.e("Update Success", response.toString())
-            _updateResult.value = true
+            _response.postValue(response)
         }, { error ->
-            Log.e("Update Error", error.message.toString())
-            _updateResult.value = false
+            _error.postValue(error.message)
         })
+    }
+
+    fun submitEvidenceSolution(
+        ticketId: String,
+        revisionProcess: String,
+        diagnosis: String,
+        solutionProcess: String,
+        imageData: String,
+        components: String,
+        subdomain: String,
+        ticketRepository: TicketRepository
+    ) {
+        ticketRepository.postEvidenceSolution(
+            ticketId,
+            revisionProcess,
+            diagnosis,
+            solutionProcess,
+            imageData,
+            components,
+            subdomain,
+            { response ->
+                _response.postValue(response)
+            },
+            { error ->
+                _error.postValue(error.message)
+            }
+        )
     }
 }

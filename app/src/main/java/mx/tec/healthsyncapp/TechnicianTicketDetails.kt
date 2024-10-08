@@ -75,11 +75,17 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 val btnRemove = findViewById<View>(R.id.btnRemove)
                 btnRemove.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain2, ticketRepository)
+                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
 
                 val btnClaim = findViewById<View>(R.id.btnClaim)
                 btnClaim.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain2, ticketRepository)
+                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
 
             } else if (ticket.status == "En progreso" && ticket.technicianName == name) {
@@ -91,6 +97,17 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 val btnRemove = findViewById<View>(R.id.btnRemove)
                 btnRemove.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain2, ticketRepository)
+                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+
+                val btnFinish = findViewById<View>(R.id.btnFinish)
+                btnFinish.setOnClickListener{
+                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
+                    intent.putExtra("ticketId", ticketId)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
 
             } else if (ticket.status == "En progreso" && ticket.technicianName != name) {
@@ -103,6 +120,9 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 val btnClaim = findViewById<View>(R.id.btnClaim)
                 btnClaim.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain2, ticketRepository)
+                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
 
             } else {

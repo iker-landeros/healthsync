@@ -23,7 +23,14 @@ class TicketRepository(private val queue: RequestQueue) {
 
     }
 
-    fun update(ticketId: String, idTechnician: String, status: String, subdomain: String, callback: (JSONObject?) -> Unit, errorCallback: (VolleyError) -> Unit) {
+    fun update(
+        ticketId: String,
+        idTechnician: String,
+        status: String,
+        subdomain: String,
+        callback: (JSONObject?) -> Unit,
+        errorCallback: (VolleyError) -> Unit
+    ) {
         val urlUpdate = "$subdomain/tickets/$ticketId"
         val body = JSONObject().apply {
             put("idTechnician", idTechnician)
@@ -43,8 +50,28 @@ class TicketRepository(private val queue: RequestQueue) {
     }
 
 
-    fun postEvidenceSolution(ticketId: String, idTechnician: String, status: String, subdomain: String, callback: (JSONObject?) -> Unit, errorCallback: (VolleyError) -> Unit) {
+    fun postEvidenceSolution(
+        ticketId: String,
+        revisionProcess: String,
+        diagnosis: String,
+        solutionProcess: String,
+        imageData: String,
+        components: String,
+        subdomain: String,
+        callback: (JSONObject?) -> Unit,
+        errorCallback: (VolleyError) -> Unit
+    ) {
+
         val urlEvidenceSolution = "$subdomain/tickets/$ticketId/solved"
+
+        val requestBody = JSONObject().apply {
+            put("ticketId", ticketId)
+            put("revisionProcess", revisionProcess)
+            put("diagnosis", diagnosis)
+            put("solutionProcess", solutionProcess)
+            put("imageData", imageData)
+            put("components", components)
+        }
 
         val listener = Response.Listener<JSONObject> { response ->
             callback(response)
@@ -54,9 +81,17 @@ class TicketRepository(private val queue: RequestQueue) {
             errorCallback(error)
         }
 
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, urlEvidenceSolution, null, listener, errorListener)
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.POST,
+            urlEvidenceSolution,
+            requestBody,
+            listener,
+            errorListener
+        )
+
         queue.add(jsonObjectRequest)
     }
+
 
     fun postEvidenceNoSolution(ticketId: String, idTechnician: String, status: String, subdomain: String, callback: (JSONObject?) -> Unit, errorCallback: (VolleyError) -> Unit) {
         val urlEvidenceSolution = "$subdomain/tickets/$ticketId/solved"
