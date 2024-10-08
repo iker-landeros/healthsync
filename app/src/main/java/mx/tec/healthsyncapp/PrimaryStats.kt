@@ -32,7 +32,7 @@ class PrimaryStats : AppCompatActivity() {
 
                 with(binding) {
                     txtNumTktsTotales.text = statistics.getString("totalTickets")
-                    txtNumTktsEmpezados.text = statistics.getString("progressingTickets")
+                    //txtNumTktsEmpezados.text = statistics.getString("progressingTickets")
                     txtNumTktsNoRes.text = statistics.getString("notSolvedTickets")
                     txtNumTktsRes.text = statistics.getString("solvedTickets")
                 }

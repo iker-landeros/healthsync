@@ -25,7 +25,8 @@ class UnclaimedTicket : AppCompatActivity() {
 
         val ticketId = intent.getStringExtra("ticketId")
 
-        val urlTicketDetails = "http://10.0.2.2:3001/tickets/$ticketId"
+        val subdomain = getString(R.string.subdomain)
+        val urlTicketDetails = "http://$subdomain/tickets/$ticketId"
         val queue = Volley.newRequestQueue(this)
 
         val listener = Response.Listener<JSONArray> { result ->

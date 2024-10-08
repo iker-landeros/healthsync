@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFinalizarTicket"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#FFFFFF"
+        android:gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="Finalizar"
+        android:textAllCaps="false"
+        android:textColor="#A5B02B"
+        android:textSize="10sp"
+        app:cornerRadius="150dp"
+        app:icon="@drawable/finalizartkt"
+        app:iconGravity="textTop"
+        app:iconSize="25dp"
+        app:iconTint="#A5B02B"
+        tools:layout_editor_absoluteX="309dp"
+        tools:layout_editor_absoluteY="642dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

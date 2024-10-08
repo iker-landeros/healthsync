@@ -24,17 +24,17 @@ const FormComponent = () => {
       try {
         const [areasData, extensionsData, problemTypesData, deviceTypesData] =
           await Promise.all([
-            fetch("http://localhost:3001/tickets/areas").then((res) =>
+            fetch(`${import.meta.env.VITE_API_URL}/tickets/areas`).then((res) =>
               res.json()
             ),
-            fetch("http://localhost:3001/tickets/extensions").then((res) =>
-              res.json()
+            fetch(`${import.meta.env.VITE_API_URL}/tickets/extensions`).then(
+              (res) => res.json()
             ),
-            fetch("http://localhost:3001/tickets/problemTypes").then((res) =>
-              res.json()
+            fetch(`${import.meta.env.VITE_API_URL}/tickets/problemTypes`).then(
+              (res) => res.json()
             ),
-            fetch("http://localhost:3001/tickets/deviceTypes").then((res) =>
-              res.json()
+            fetch(`${import.meta.env.VITE_API_URL}/tickets/deviceTypes`).then(
+              (res) => res.json()
             ),
           ]);
 
@@ -80,7 +80,7 @@ const FormComponent = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/tickets", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/tickets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Seleccionar Area</option>
+                <option value="">Seleccionar Área</option>
                 {areas.map((area) => (
                   <option key={area.idArea} value={area.idArea}>
                     {area.areaName}
