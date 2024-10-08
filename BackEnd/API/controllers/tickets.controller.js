@@ -232,6 +232,10 @@ const getTicketDetails = (req, res) => {
             return res.status(500).json({ error: "Error fetching ticket" });
         }
 
+        if (results[0].ticketImage) {
+            results[0].ticketImage = Buffer.from(results[0].ticketImage).toString('base64');
+        }
+
         const componentNames = results[0].componentNames ? results[0].componentNames.split(',') : [];
         const componentQuantities = results[0].componentQuantities ? results[0].componentQuantities.split(',') : [];
 
