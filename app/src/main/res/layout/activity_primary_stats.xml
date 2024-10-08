@@ -37,6 +37,7 @@
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="55dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:background="#7DAED3"
         android:orientation="vertical"
@@ -61,7 +62,9 @@
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="310dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btnMasStats"
         app:layout_constraintEnd_toEndOf="parent"
