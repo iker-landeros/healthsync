@@ -72,6 +72,11 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 val btnFinish = findViewById<View>(R.id.btnFinish)
                 btnFinish.visibility = View.GONE
 
+                val btnRemove = findViewById<View>(R.id.btnRemove)
+                btnRemove.setOnClickListener{
+                    ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain2, ticketRepository)
+                }
+
                 val btnClaim = findViewById<View>(R.id.btnClaim)
                 btnClaim.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain2, ticketRepository)
@@ -93,6 +98,8 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
                 val btnFinish = findViewById<View>(R.id.btnFinish)
                 btnFinish.visibility = View.GONE
+                val btnRemove = findViewById<View>(R.id.btnRemove)
+                btnRemove.visibility = View.GONE
                 val btnClaim = findViewById<View>(R.id.btnClaim)
                 btnClaim.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain2, ticketRepository)
