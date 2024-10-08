@@ -27,8 +27,8 @@ class TicketViewModel: ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    private val _imageBitmap = MutableLiveData<Bitmap>()
-    val imageBitmap: LiveData<Bitmap> get() = _imageBitmap
+    private val _imageBitmap = MutableLiveData<Bitmap?>()
+    val imageBitmap: LiveData<Bitmap?> get() = _imageBitmap
 
     fun fetchTicket(ticketId: String, urlTicket: String, queue: RequestQueue) {
         val listenerTicket = Response.Listener<JSONArray> { result ->
@@ -111,8 +111,10 @@ class TicketViewModel: ViewModel() {
         )
     }
 
-    fun loadImageFromBase64(base64Image: String, ticketRepository: TicketRepository) {
-        val bitmap = ticketRepository.decodeBase64Image(base64Image)
-        _imageBitmap.postValue(bitmap)
+    // En TicketViewModel
+    fun loadImage(data: List<Int>, ticketRepository: TicketRepository) {
+        val bitmap = ticketRepository.decodeBase64Image(data)
+        _imageBitmap.value = bitmap
     }
+
 }

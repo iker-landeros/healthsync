@@ -241,6 +241,7 @@ const getTicketDetails = (req, res) => {
             quantity: componentQuantities[index]
         }));
 
+
         // Eliminar las propiedades concatenadas
         delete results[0].componentNames;
         delete results[0].componentQuantities;
