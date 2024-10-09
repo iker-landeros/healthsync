@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
-                android:text="Nombre completo"
+                android:text="@string/nombre_completo"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -50,7 +50,8 @@
                 android:background="@drawable/edittext_background"
                 android:ems="10"
                 android:fontFamily="@font/inter"
-                android:hint="Nombre del técnico"
+                android:hint="@string/nombre_del_tecnico"
+                android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxHeight="35dp"
                 android:minHeight="48dp"
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Nombre de usuario"
+                android:text="@string/nombre_de_usuario"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -76,7 +77,8 @@
                 android:background="@drawable/edittext_background"
                 android:ems="10"
                 android:fontFamily="@font/inter"
-                android:hint="Usuario del técnico"
+                android:hint="@string/usuario_del_tecnico"
+                android:importantForAutofill="no"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:padding="5dp"
@@ -88,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Contraseña"
+                android:text="@string/contrasena"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -98,9 +100,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="25dp"
+                android:autofillHints="Password"
                 android:background="@drawable/edittext_background"
                 android:ems="10"
-                android:hint="Contraseña del técnico"
+                android:hint="@string/contrasena_del_tecnico"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:padding="5dp"

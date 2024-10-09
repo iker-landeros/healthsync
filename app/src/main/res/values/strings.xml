@@ -4,4 +4,15 @@
     <string name="subdomain2">http://10.0.2.2:3001</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="deseas_marcar_este_ticket_como_no_resuelto">¿Deseas marcar este ticket como &quot;No resuelto&quot;? </string>
+    <string name="motivo_de_no_resolucion">MOTIVO DE NO RESOLUCIÓN</string>
+    <string name="descripcion_de_la_causa_de_la_no_resolucion">Descripción de la causa de la no resolución</string>
+    <string name="adjuntar_evidencia_de_no_resolucion">ADJUNTAR EVIDENCIA DE NO RESOLUCIÓN</string>
+    <string name="nombre_del_tecnico">Nombre del técnico</string>
+    <string name="nombre_completo">Nombre completo</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="usuario_del_tecnico">Usuario del técnico</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="contrasena_del_tecnico">Contraseña del técnico</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
 </resources>
