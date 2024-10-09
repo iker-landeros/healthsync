@@ -14,5 +14,4 @@
     <string name="usuario_del_tecnico">Usuario del técnico</string>
     <string name="contrasena">Contraseña</string>
     <string name="contrasena_del_tecnico">Contraseña del técnico</string>
-    <string name="nombre_de_usuario">Nombre de usuario</string>
 </resources>

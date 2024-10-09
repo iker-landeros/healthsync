@@ -60,12 +60,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <Button
-                        android:id="@+id/btnNoSolution"
-                        android:layout_width="40dp"
+                    <include
+                        android:id="@+id/bntNoSolution"
+                        layout="@layout/unresolved_btn_layout"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="N/R" />
+                        android:layout_weight="1" />
 
                     <include
                         android:id="@+id/btnClaim"

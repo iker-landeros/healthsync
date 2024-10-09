@@ -32,9 +32,11 @@ class PrimaryStats : AppCompatActivity() {
 
                 with(binding) {
                     txtNumTktsTotales.text = statistics.getString("totalTickets")
-                    //txtNumTktsEmpezados.text = statistics.getString("progressingTickets")
+                    txtNumTktsNoEmpezados.text = statistics.getString("unstartedTickets")
+                    txtNumTktsEnProgreso.text = statistics.getString("progressingTickets")
                     txtNumTktsNoRes.text = statistics.getString("notSolvedTickets")
                     txtNumTktsRes.text = statistics.getString("solvedTickets")
+                    txtNumTktsEliminados.text = statistics.getString("eliminatedTickets")
                 }
             }
         }

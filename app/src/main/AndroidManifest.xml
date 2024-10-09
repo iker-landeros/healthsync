@@ -19,7 +19,12 @@
             android:name=".TechnicianTicketNoSolution"
             android:exported="false" />
         <activity
+            android:name=".TechnicianTicketSolution"
+            android:exported="false" />
+        <activity
             android:name=".AdminTicketDetails"
+            android:exported="false" />
+        <activity
             android:name=".AdminAddTechnician"
             android:exported="false" />
         <activity

@@ -48,7 +48,7 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
         ticketRepository = TicketRepository(queue)
         ticketViewModel = TicketViewModel()
 
-        val btnFinish = findViewById<Button>(R.id.btnFinalizarTicket)
+        val btnFinish = findViewById<Button>(R.id.btnNoResuelto)
         btnFinish.setOnClickListener {
 
             // Obtén el texto de los EditText correctamente
