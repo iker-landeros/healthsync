@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import mx.tec.healthsyncapp.R
-import mx.tec.healthsyncapp.databinding.FragmentNoResolutionEvidenceBinding
-import mx.tec.healthsyncapp.databinding.FragmentResolutionEvidenceBinding
+import mx.tec.healthsyncapp.databinding.FragmentNoResolutionEvidenceAdminBinding
+
 
 class NoResolutionEvidence : Fragment() {
-    private lateinit var binding: FragmentNoResolutionEvidenceBinding
+    private lateinit var binding: FragmentNoResolutionEvidenceAdminBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNoResolutionEvidenceBinding.inflate(inflater, container, false)
+        binding = FragmentNoResolutionEvidenceAdminBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

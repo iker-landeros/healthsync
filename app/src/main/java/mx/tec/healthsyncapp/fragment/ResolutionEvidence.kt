@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.R
 import mx.tec.healthsyncapp.databinding.FragmentActiveTimeBinding
-import mx.tec.healthsyncapp.databinding.FragmentResolutionEvidenceBinding
+import mx.tec.healthsyncapp.databinding.FragmentResolutionEvidenceAdminBinding
 import mx.tec.healthsyncapp.databinding.FragmentTicketDetailsBinding
 import mx.tec.healthsyncapp.repository.TicketRepository
 import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 
 class ResolutionEvidence : Fragment() {
-    private lateinit var binding: FragmentResolutionEvidenceBinding
+    private lateinit var binding: FragmentResolutionEvidenceAdminBinding
     private lateinit var ticketViewModel: TicketViewModel
     private lateinit var ticketRepository: TicketRepository
 
@@ -23,7 +23,7 @@ class ResolutionEvidence : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentResolutionEvidenceBinding.inflate(inflater, container, false)
+        binding = FragmentResolutionEvidenceAdminBinding.inflate(inflater, container, false)
 
         ticketViewModel = ViewModelProvider(requireActivity()).get(TicketViewModel::class.java)
         val queue = Volley.newRequestQueue(requireContext())
