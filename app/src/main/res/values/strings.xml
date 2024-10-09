@@ -13,5 +13,20 @@
     <string name="nombre_de_usuario">Nombre de usuario</string>
     <string name="usuario_del_tecnico">Usuario del técnico</string>
     <string name="contrasena">Contraseña</string>
+    <string name="ejemplo_de_nombre">Ejemplo de nombre</string>
     <string name="contrasena_del_tecnico">Contraseña del técnico</string>
+    <string name="nueva_contrasena">Nueva contraseña</string>
+    <string name="estado">Estado</string>
+    <string name="proceso_de_revision">PROCESO DE REVISIÓN</string>
+    <string name="descripcion_del_proceso_de_revision">Descripción del proceso de revisión</string>
+    <string name="descripcion_del_diagnostico_tras_la_revision">Descripción del diagnóstico tras la revisión</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="diagnostico">DIAGNÓSTICO</string>
 </resources>

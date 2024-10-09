@@ -56,7 +56,7 @@
                     android:maxHeight="40dp"
                     android:minWidth="270dp"
                     android:minHeight="40dp"
-                    android:text="Descripción del proceso de revisión de la falla técnica"
+                    android:text="Descripción del proceso de revisión"
                     android:textColor="#000000"
                     android:textSize="10sp" />
             </LinearLayout>
