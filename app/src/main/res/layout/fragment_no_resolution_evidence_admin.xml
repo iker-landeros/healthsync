@@ -48,7 +48,7 @@
                 android:textSize="12sp" />
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/edtMotivoNoResolucion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"

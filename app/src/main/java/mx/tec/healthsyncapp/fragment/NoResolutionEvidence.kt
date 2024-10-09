@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import mx.tec.healthsyncapp.R
 import mx.tec.healthsyncapp.databinding.FragmentNoResolutionEvidenceAdminBinding
 
+/*
+ Fragmento dedicado a visualizar la información de la evidencia cargada de la solución de los
+ tickets sobre las fallas técnicas, esto desde la pantalla de administrador en los detalles de técnico
+ */
 
 class NoResolutionEvidence : Fragment() {
     private lateinit var binding: FragmentNoResolutionEvidenceAdminBinding

@@ -37,11 +37,11 @@ class TechnicianTicketSolution : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTechnicianTicketSolutionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val uploadButton = findViewById<MaterialButton>(R.id.btnSubirFoto)
         uploadButton.setOnClickListener{
             galleryLauncher.launch("image/*")
         }
-        Log.e("ahh", "aaa")
 
         val ticketId = intent.getStringExtra("ticketId") ?: return
         val subdomain = getString(R.string.subdomain2)

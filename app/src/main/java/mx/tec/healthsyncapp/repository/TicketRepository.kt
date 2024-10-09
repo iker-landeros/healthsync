@@ -97,8 +97,21 @@ class TicketRepository(private val queue: RequestQueue) {
     }
 
 
-    fun postEvidenceNoSolution(ticketId: String, idTechnician: String, status: String, subdomain: String, callback: (JSONObject?) -> Unit, errorCallback: (VolleyError) -> Unit) {
-        val urlEvidenceSolution = "$subdomain/tickets/$ticketId/solved"
+    fun postEvidenceNoSolution(
+        ticketId: String,
+        failedReason: String,
+        imageData: String,
+        subdomain: String,
+        callback: (JSONObject?) -> Unit,
+        errorCallback: (VolleyError) -> Unit
+    ) {
+
+        val urlEvidenceNoSolution = "$subdomain/tickets/$ticketId/not-solved"
+
+        val requestBody = JSONObject().apply {
+            put("failedReason", failedReason)
+            put("imageData", imageData)
+        }
 
         val listener = Response.Listener<JSONObject> { response ->
             callback(response)
@@ -108,7 +121,14 @@ class TicketRepository(private val queue: RequestQueue) {
             errorCallback(error)
         }
 
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, urlEvidenceSolution, null, listener, errorListener)
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.POST,
+            urlEvidenceNoSolution,
+            requestBody,
+            listener,
+            errorListener
+        )
+
         queue.add(jsonObjectRequest)
     }
 

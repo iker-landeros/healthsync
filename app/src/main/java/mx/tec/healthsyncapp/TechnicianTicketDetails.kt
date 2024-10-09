@@ -71,7 +71,7 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 }
                 val btnFinish = findViewById<View>(R.id.btnFinish)
                 btnFinish.visibility = View.GONE
-
+                binding.btnNoSolution.visibility = View.GONE
                 val btnRemove = findViewById<View>(R.id.btnRemove)
                 btnRemove.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain2, ticketRepository)
@@ -102,6 +102,13 @@ class TechnicianTicketDetails : AppCompatActivity() {
                     startActivity(intent)
                 }
 
+                binding.btnNoSolution.setOnClickListener{
+                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketNoSolution::class.java)
+                    intent.putExtra("ticketId", ticketId)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+
                 val btnFinish = findViewById<View>(R.id.btnFinish)
                 btnFinish.setOnClickListener{
                     val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
@@ -117,6 +124,7 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 btnFinish.visibility = View.GONE
                 val btnRemove = findViewById<View>(R.id.btnRemove)
                 btnRemove.visibility = View.GONE
+                binding.btnNoSolution.visibility = View.GONE
                 val btnClaim = findViewById<View>(R.id.btnClaim)
                 btnClaim.setOnClickListener{
                     ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain2, ticketRepository)

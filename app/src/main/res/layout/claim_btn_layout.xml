@@ -10,6 +10,7 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="70dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:backgroundTint="#FFFFFF"
         android:gravity="center"
@@ -26,7 +27,9 @@
         app:iconGravity="textTop"
         app:iconSize="25dp"
         app:iconTint="#B487B8"
-        tools:layout_editor_absoluteX="309dp"
-        tools:layout_editor_absoluteY="642dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

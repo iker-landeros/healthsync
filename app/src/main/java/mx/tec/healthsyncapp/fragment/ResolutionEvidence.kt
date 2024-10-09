@@ -14,6 +14,10 @@ import mx.tec.healthsyncapp.databinding.FragmentTicketDetailsBinding
 import mx.tec.healthsyncapp.repository.TicketRepository
 import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 
+/*
+ Fragmento dedicado a visualizar la información de la evidencia cargada de la solución de los
+ tickets sobre las fallas técnicas, esto desde la pantalla de administrador en los detalles de técnico
+ */
 class ResolutionEvidence : Fragment() {
     private lateinit var binding: FragmentResolutionEvidenceAdminBinding
     private lateinit var ticketViewModel: TicketViewModel

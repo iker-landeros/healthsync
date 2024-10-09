@@ -111,6 +111,27 @@ class TicketViewModel: ViewModel() {
         )
     }
 
+    fun submitEvidenceNoSolution(
+        ticketId: String,
+        failedReason: String,
+        imageData: String,
+        subdomain: String,
+        ticketRepository: TicketRepository
+    ) {
+        ticketRepository.postEvidenceNoSolution(
+            ticketId,
+            failedReason,
+            imageData,
+            subdomain,
+            { response ->
+                _response.postValue(response)
+            },
+            { error ->
+                _error.postValue(error.message)
+            }
+        )
+    }
+
     fun loadImage(
         base64Image: String,
         ticketRepository: TicketRepository
