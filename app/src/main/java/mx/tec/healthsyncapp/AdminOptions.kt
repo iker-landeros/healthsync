@@ -37,5 +37,10 @@ class AdminOptions : AppCompatActivity() {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
+        binding.btnAdministrar.setOnClickListener{
+            val intent = Intent(this@AdminOptions, AdminManageAccounts::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".AdminAddTechnician">
 
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/inter_semibold"
+            android:gravity="center"
+            android:text="Administrador"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_weight="1"
+        android:background="#7DAED3"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/inter_semibold"
+            android:gravity="center"
+            android:text="Creación de perfil de técnico"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="340dp"
         android:layout_height="wrap_content"
@@ -24,18 +74,6 @@
             android:minWidth="50dp"
             android:minHeight="50dp"
             app:srcCompat="@drawable/perfil" />
-
-        <TextView
-            android:id="@+id/txtTecnicoPerfil"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter_bold"
-            android:text="Eduardo Dario Morales Zamora"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,12 +138,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Nueva contraseña"
+                android:text="Contraseña"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/edtNuevoPwdTecnico"
+                android:id="@+id/edtNewPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -119,4 +157,54 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReturn"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#FFFFFF"
+        android:gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="Regresar"
+        android:textAllCaps="false"
+        android:textColor="#E97D3C"
+        android:textSize="10sp"
+        app:cornerRadius="150dp"
+        app:icon="@drawable/regresar"
+        app:iconGravity="textTop"
+        app:iconSize="25dp"
+        app:iconTint="#E97D3C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUpdate"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#FFFFFF"
+        android:gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="Finalizar"
+        android:textAllCaps="false"
+        android:textColor="#A5B02B"
+        android:textSize="10sp"
+        app:cornerRadius="150dp"
+        app:icon="@drawable/finalizartkt"
+        app:iconGravity="textTop"
+        app:iconSize="25dp"
+        app:iconTint="#A5B02B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
