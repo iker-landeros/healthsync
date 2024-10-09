@@ -38,7 +38,7 @@ class TechnicianTicketSolution : AppCompatActivity() {
         binding = ActivityTechnicianTicketSolutionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val uploadButton = findViewById<MaterialButton>(R.id.btnSubirFoto)
+        val uploadButton = findViewById<Button>(R.id.btnSubirFoto)
         uploadButton.setOnClickListener{
             galleryLauncher.launch("image/*")
         }
