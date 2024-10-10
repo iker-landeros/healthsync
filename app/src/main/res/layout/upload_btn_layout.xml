@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#E67E3C"
             android:fontFamily="@font/inter_bold"
-            android:text="Subir Imagen" />
+            android:text="@string/subir_imagen" />
 
         <ImageView
             android:id="@+id/imgUploaded"

@@ -9,13 +9,13 @@
     <string name="descripcion_de_la_causa_de_la_no_resolucion">Descripción de la causa de la no resolución</string>
     <string name="adjuntar_evidencia_de_no_resolucion">ADJUNTAR EVIDENCIA DE NO RESOLUCIÓN</string>
     <string name="nombre_del_tecnico">Nombre del técnico</string>
-    <string name="nombre_completo">Nombre completo</string>
-    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="nombre_completo">NOMBRE COMPLETO</string>
+    <string name="nombre_de_usuario">NOMBRE DE USUARIO</string>
     <string name="usuario_del_tecnico">Usuario del técnico</string>
-    <string name="contrasena">Contraseña</string>
+    <string name="contrasena">CONTRASEÑA</string>
     <string name="ejemplo_de_nombre">Ejemplo de nombre</string>
     <string name="contrasena_del_tecnico">Contraseña del técnico</string>
-    <string name="nueva_contrasena">Nueva contraseña</string>
+    <string name="nueva_contrasena">NUEVA CONTRASEÑA</string>
     <string name="estado">Estado</string>
     <string name="proceso_de_revision">PROCESO DE REVISIÓN</string>
     <string name="descripcion_del_proceso_de_revision">Descripción del proceso de revisión</string>
@@ -33,4 +33,8 @@
     <string name="descripcion_del_proceso_de_solucion">Descripción del proceso de solución</string>
     <string name="componentes_utilizados">COMPONENTES UTILIZADOS</string>
     <string name="adjuntar_evidencia_de_resolucion">ADJUNTAR EVIDENCIA DE RESOLUCIÓN</string>
+    <string name="subir_imagen">Subir Imagen</string>
+    <string name="componente3">Componente3</string>
+    <string name="evidencia_de_resolucion">EVIDENCIA DE RESOLUCIÓN</string>
+    <string name="evidencia_de_no_resolucion">EVIDENCIA DE NO RESOLUCIÓN</string>
 </resources>
