@@ -31,17 +31,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_bold"
-            android:text="Periodo activo"
+            android:text="@string/periodo_activo"
             android:textColor="#000000"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/txtPeriodo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semibold"
-            android:text="2.0h"
+            android:text="@string/ejemplo_tiempo"
             android:textColor="#000000"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

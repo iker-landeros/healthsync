@@ -21,4 +21,16 @@
     <string name="descripcion_del_proceso_de_revision">Descripción del proceso de revisión</string>
     <string name="descripcion_del_diagnostico_tras_la_revision">Descripción del diagnóstico tras la revisión</string>
     <string name="diagnostico">DIAGNÓSTICO</string>
+    <string name="periodo_activo">PERIODO ACTIVO</string>
+    <string name="ejemplo_tiempo">Ejemplo tiempo</string>
+    <string name="editar">Editar</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="reclamar">Reclamar</string>
+    <string name="administrador">Administrador</string>
+    <string name="mis_tickets">Mis tickets</string>
+    <string name="todos_los_tickets">Todos los tickets</string>
+    <string name="proceso_de_resolucion">PROCESO DE RESOLUCIÓN</string>
+    <string name="descripcion_del_proceso_de_solucion">Descripción del proceso de solución</string>
+    <string name="componentes_utilizados">COMPONENTES UTILIZADOS</string>
+    <string name="adjuntar_evidencia_de_resolucion">ADJUNTAR EVIDENCIA DE RESOLUCIÓN</string>
 </resources>
