@@ -47,7 +47,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="2dp"
-                    android:text="Estado"
+                    android:text="@string/estado"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp" />
 
@@ -67,9 +67,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
-                            android:text="PROCESO DE REVISIÓN"
+                            android:text="@string/proceso_de_revision"
                             android:textColor="#000000"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <EditText
                             android:id="@+id/edtProcesoRevision"
@@ -82,7 +82,8 @@
                             android:ems="10"
                             android:fontFamily="@font/inter"
                             android:gravity="top|center_vertical"
-                            android:hint="Descripción del proceso de revisión de la falla técnica"
+                            android:hint="@string/descripcion_del_proceso_de_revision"
+                            android:importantForAutofill="no"
                             android:inputType="text"
                             android:maxWidth="270dp"
                             android:maxHeight="45dp"
@@ -90,7 +91,7 @@
                             android:minHeight="48dp"
                             android:padding="8dp"
                             android:textColor="#000000"
-                            android:textSize="10sp" />
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -104,9 +105,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
-                            android:text="DIAGNÓSTICO"
+                            android:text="@string/diagnostico"
                             android:textColor="#000000"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <EditText
                             android:id="@+id/edtDiagnostico"
@@ -119,7 +120,8 @@
                             android:ems="10"
                             android:fontFamily="@font/inter"
                             android:gravity="top|center_vertical"
-                            android:hint="Descripción del diagnóstico tras la revisión de la falla técnica"
+                            android:hint="@string/descripcion_del_diagnostico_tras_la_revision"
+                            android:importantForAutofill="no"
                             android:inputType="text"
                             android:maxWidth="270dp"
                             android:maxHeight="45dp"
@@ -127,7 +129,7 @@
                             android:minHeight="48dp"
                             android:padding="8dp"
                             android:textColor="#000000"
-                            android:textSize="10sp" />
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <LinearLayout

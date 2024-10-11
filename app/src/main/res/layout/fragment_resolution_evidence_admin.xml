@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
-                    android:text="PROCESO DE REVISIÓN"
+                    android:text="@string/proceso_de_revision"
                     android:textColor="#000000"
                     android:textSize="12sp" />
 
@@ -56,9 +56,9 @@
                     android:maxHeight="40dp"
                     android:minWidth="270dp"
                     android:minHeight="40dp"
-                    android:text="Descripción del proceso de revisión de la falla técnica"
+                    android:text="@string/descripcion_del_proceso_de_revision"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
-                    android:text="DIAGNÓSTICO"
+                    android:text="@string/diagnostico"
                     android:textColor="#000000"
                     android:textSize="12sp" />
 
@@ -89,9 +89,9 @@
                     android:maxHeight="40dp"
                     android:minWidth="270dp"
                     android:minHeight="40dp"
-                    android:text="Descripción del diagnóstico tras la revisión de la falla técnica"
+                    android:text="@string/descripcion_del_diagnostico_tras_la_revision"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
-                    android:text="PROCESO DE RESOLUCIÓN"
+                    android:text="@string/proceso_de_resolucion"
                     android:textColor="#000000"
                     android:textSize="12sp" />
 
@@ -122,9 +122,9 @@
                     android:maxHeight="40dp"
                     android:minWidth="270dp"
                     android:minHeight="40dp"
-                    android:text="Descripción del proceso de solución de la falla técnica"
+                    android:text="@string/descripcion_del_proceso_de_solucion"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -138,7 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
-                    android:text="COMPONENTES UTILIZADOS"
+                    android:text="@string/componentes_utilizados"
                     android:textColor="#000000"
                     android:textSize="12sp" />
 
@@ -155,23 +155,24 @@
                     android:maxHeight="40dp"
                     android:minWidth="270dp"
                     android:minHeight="40dp"
-                    android:text="Componente3"
+                    android:text="@string/componente3"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtEvidenciaSubtitulo"
+                    android:id="@+id/txtEvidenciaResolucionSubtitulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_bold"
-                    android:text="EVIDENCIA DE RESOLUCIÓN"
+                    android:text="@string/evidencia_de_resolucion"
                     android:textColor="#000000"
                     android:textSize="12sp" />
 

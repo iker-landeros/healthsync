@@ -26,9 +26,15 @@ const updateTechnician = (req, res) => {
     const { id } = req.params;
     const { name, username, password } = req.body;
 
-    sql = `UPDATE users SET name = ?, username = ?, password = SHA2(?, 256) WHERE idUser = ?`;
+    let sql = `UPDATE users SET name = ?, username = ? WHERE idUser = ?`;
+    let values = [name, username, id];
 
-    pool.query(sql, [name, username, password, id], (err, results) => {
+    if (password) {
+        sql = `UPDATE users SET name = ?, username = ?, password = SHA2(?, 256) WHERE idUser = ?`;
+        values = [name, username, password, id];
+    }
+
+    pool.query(sql, values, (err, results) => {
         if (err) {
             console.error("Error updating technician:", err);
             return res.status(500).json({ error: "Error updating technician" });
@@ -36,6 +42,7 @@ const updateTechnician = (req, res) => {
         return res.status(200).json(results);
     });
 };
+
 
 /*
     Función para crear un usuario técnico
