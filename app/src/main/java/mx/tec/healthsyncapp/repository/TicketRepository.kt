@@ -1,9 +1,12 @@
 package mx.tec.healthsyncapp.repository
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -11,13 +14,13 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.JsonArrayRequest
 import mx.tec.healthsyncapp.R
+import mx.tec.healthsyncapp.model.Component
 import org.json.JSONArray
 import org.json.JSONObject
 
 
 class TicketRepository(private val queue: RequestQueue) {
 
-    private val baseUrl = "http://example.com/api/tickets"  // URL base genérica
 
     fun getDetails() {
 
@@ -60,7 +63,7 @@ class TicketRepository(private val queue: RequestQueue) {
         diagnosis: String,
         solutionProcess: String,
         imageData: String,
-        components: String,
+        components: List<Component>, // Aquí ya tienes una lista de objetos Component
         subdomain: String,
         callback: (JSONObject?) -> Unit,
         errorCallback: (VolleyError) -> Unit
@@ -68,23 +71,38 @@ class TicketRepository(private val queue: RequestQueue) {
 
         val urlEvidenceSolution = "$subdomain/tickets/$ticketId/solved"
 
+        // Construir un JSONArray con los componentes seleccionados
+        val componentsArray = JSONArray()
+        for (component in components) {
+            // Cada componente es un objeto JSON con idComponent y quantity
+            val componentJson = JSONObject().apply {
+                put("idComponent", component.idComponent) // Usar el id del componente
+                put("quantity", 1) // O la cantidad que tú quieras; aquí es 1 por defecto
+            }
+            componentsArray.put(componentJson) // Añadir el JSON del componente al array
+        }
+
+        // Construir el cuerpo de la solicitud con todos los datos
         val requestBody = JSONObject().apply {
             put("ticketId", ticketId)
             put("revisionProcess", revisionProcess)
             put("diagnosis", diagnosis)
             put("solutionProcess", solutionProcess)
             put("imageData", imageData)
-            put("components", components)
+            put("components", componentsArray) // Añadir el array de componentes
         }
 
+        // Listener para manejar la respuesta exitosa
         val listener = Response.Listener<JSONObject> { response ->
             callback(response)
         }
 
+        // Listener para manejar los errores
         val errorListener = Response.ErrorListener { error ->
             errorCallback(error)
         }
 
+        // Crear la solicitud JSON
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.POST,
             urlEvidenceSolution,
@@ -93,6 +111,7 @@ class TicketRepository(private val queue: RequestQueue) {
             errorListener
         )
 
+        // Añadir la solicitud a la cola de peticiones
         queue.add(jsonObjectRequest)
     }
 
@@ -144,5 +163,50 @@ class TicketRepository(private val queue: RequestQueue) {
         }
     }
 
+    fun getComponents(
+        context: Context,
+        spinner: Spinner,
+        subdomain: String,
+        successCallback: (JSONArray?) -> Unit,
+        errorCallback: (VolleyError) -> Unit
+    ) {
+        val url = "$subdomain/tickets/components"
+
+        val responseListener = Response.Listener<JSONArray> { response ->
+            val dataList = ArrayList<Component>()
+
+            for (i in 0 until response.length()) {
+                val jsonObject: JSONObject = response.getJSONObject(i)
+                val componentId = jsonObject.getInt("idComponent")
+                val componentName = jsonObject.getString("componentName")
+                dataList.add(Component(componentId, componentName))
+            }
+
+            val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, dataList)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+
+            // Llamar al callback de éxito con la respuesta
+            successCallback(response)
+        }
+
+        // Listener para manejar errores
+        val errorListener = Response.ErrorListener { error ->
+            error.printStackTrace() // Manejar el error de la solicitud
+            errorCallback(error) // Invocar el callback de error
+        }
+
+        // Crear la petición de datos usando JsonArrayRequest
+        val componentsRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            responseListener,
+            errorListener
+        )
+
+        // Añadir la solicitud a la cola
+        queue.add(componentsRequest)
+    }
 
 }

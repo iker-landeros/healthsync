@@ -1,7 +1,9 @@
 package mx.tec.healthsyncapp.viewmodel
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import android.widget.Spinner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import mx.tec.healthsyncapp.model.Component
 import mx.tec.healthsyncapp.model.Ticket
 import mx.tec.healthsyncapp.repository.TicketRepository
 import org.json.JSONArray
@@ -24,11 +27,22 @@ class TicketViewModel: ViewModel() {
     private val _response = MutableLiveData<JSONObject?>()
     val response: LiveData<JSONObject?> = _response
 
+    private val _responseArray = MutableLiveData<JSONArray?>()
+    val responseArray: LiveData<JSONArray?> = _responseArray
+
+
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
     private val _imageBitmap = MutableLiveData<Bitmap?>()
     val imageBitmap: LiveData<Bitmap?> get() = _imageBitmap
+
+
+    // LiveData para los componentes
+    private val _componentsLiveData = MutableLiveData<JSONObject?>()
+    val componentsLiveData: LiveData<JSONObject?> = _componentsLiveData
+
+
 
     fun fetchTicket(ticketId: String, urlTicket: String, queue: RequestQueue) {
         val listenerTicket = Response.Listener<JSONArray> { result ->
@@ -90,7 +104,7 @@ class TicketViewModel: ViewModel() {
         diagnosis: String,
         solutionProcess: String,
         imageData: String,
-        components: String,
+        components: List<Component>,
         subdomain: String,
         ticketRepository: TicketRepository
     ) {
@@ -139,4 +153,27 @@ class TicketViewModel: ViewModel() {
         val bitmap = ticketRepository.decodeBase64Image(base64Image)
         _imageBitmap.value = bitmap
     }
+
+
+    fun getComponents(
+        context: Context,
+        spinner: Spinner,
+        subdomain: String,
+        ticketRepository: TicketRepository
+    ) {
+        ticketRepository.getComponents(
+            context,
+            spinner,
+            subdomain,
+            { response ->
+                // Actualizar el LiveData con la respuesta obtenida
+                _responseArray.postValue(response)
+            },
+            { error ->
+                // Actualizar el LiveData con el error obtenido
+                _error.postValue(error.message)
+            }
+        )
+    }
+
 }

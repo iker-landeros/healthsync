@@ -10,8 +10,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -20,6 +23,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.button.MaterialButton
+import mx.tec.healthsyncapp.model.Component
 import mx.tec.healthsyncapp.repository.TicketRepository
 import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 
@@ -49,6 +53,11 @@ class TechnicianTicketSolution : AppCompatActivity() {
         ticketRepository = TicketRepository(queue)
         ticketViewModel = TicketViewModel()
 
+        val spinner: Spinner = findViewById(R.id.spComponentes)
+
+        // Llamar al método para obtener los componentes
+        ticketViewModel.getComponents(this, spinner, subdomain, ticketRepository)
+
         val btnFinish = findViewById<Button>(R.id.btnFinalizarTicket)
         btnFinish.setOnClickListener {
             // Obtén el texto de los EditText correctamente
@@ -59,8 +68,8 @@ class TechnicianTicketSolution : AppCompatActivity() {
             // Si ya tienes el dato de la imagen codificada
             val imageData = encodedImageData.toString()
 
-            // Valor de componentes (puedes ajustarlo según tus necesidades)
-            val components = ""
+            val selectedComponent = spinner.selectedItem as Component
+            val components = listOf(selectedComponent) // Crear una lista con el componente seleccionado
 
             // Llama al método del ViewModel para enviar los datos
             ticketViewModel.submitEvidenceSolution(
@@ -132,6 +141,5 @@ class TechnicianTicketSolution : AppCompatActivity() {
         // Devuelve el array de bytes codificado en Base64
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
-
 
 }

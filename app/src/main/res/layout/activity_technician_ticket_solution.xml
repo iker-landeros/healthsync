@@ -194,7 +194,7 @@
                             android:layout_marginTop="3dp">
 
                             <Spinner
-                                android:id="@+id/Spinner"
+                                android:id="@+id/spComponentes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/spinner_background"
@@ -206,11 +206,12 @@
                                 android:id="@+id/spinnerIcon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignEnd="@id/Spinner"
+                                android:layout_alignEnd="@id/spComponentes"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="12dp"
                                 android:src="@drawable/arrow_down" />
                         </RelativeLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
