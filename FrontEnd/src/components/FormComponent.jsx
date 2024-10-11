@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { GoQuestion } from "react-icons/go";
+
+const Tooltip = ({ message }) => (
+  <div className="absolute bottom-full left-1/2 transform -translate-x-3/4 mb-2 w-28 p-2 text-sm text-white bg-custom-blue rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-center">
+    {message}
+  </div>
+);
 
 const FormComponent = () => {
   const [formData, setFormData] = useState({
@@ -133,13 +140,22 @@ const FormComponent = () => {
 
         <form onSubmit={handleSubmit} className="flex-grow flex flex-col">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+            <div className="md:col-span-2 text-center">
+              Llene el formulario con sus datos para abrir el ticket. Recuerde
+              que es necesario completar todos los campos.
+            </div>
             <div className="md:col-span-2">
               <label
                 htmlFor="senderName"
-                className="text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                Nombre
+                <span>Nombre</span>
+                <div className="relative inline-block group">
+                  <GoQuestion className="text-custom-green size-5" />
+                  <Tooltip message="Ingrese su nombre." />
+                </div>
               </label>
+
               <input
                 type="text"
                 id="senderName"
@@ -153,7 +169,7 @@ const FormComponent = () => {
             <div>
               <label
                 htmlFor="idArea"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
                 Area
               </label>
@@ -176,9 +192,12 @@ const FormComponent = () => {
             <div>
               <label
                 htmlFor="idExtension"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
                 Extensión
+                {selectedArea
+                  ? ""
+                  : " (Es necesario seleccionar un área primero)"}
               </label>
               <select
                 id="idExtension"
@@ -204,9 +223,13 @@ const FormComponent = () => {
             <div className="md:col-span-2 flex-grow">
               <label
                 htmlFor="description"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
                 Descripción
+                <div className="relative inline-block group">
+                  <GoQuestion className="text-custom-green size-5" />
+                  <Tooltip message="Explique la razón del ticket." />
+                </div>
               </label>
               <textarea
                 id="description"
@@ -221,7 +244,7 @@ const FormComponent = () => {
             <div>
               <label
                 htmlFor="idProblemType"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
                 Tipo de Problema
               </label>
@@ -248,7 +271,7 @@ const FormComponent = () => {
             <div>
               <label
                 htmlFor="idDeviceType"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
                 Tipo de Dispositivo
               </label>
