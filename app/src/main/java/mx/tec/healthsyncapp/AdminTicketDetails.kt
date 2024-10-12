@@ -3,20 +3,13 @@ package mx.tec.healthsyncapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageButton
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.databinding.ActivityAdminTicketDetailsBinding
-import mx.tec.healthsyncapp.fragment.ResolutionEvidence
-import mx.tec.healthsyncapp.fragment.TechnicianInCharge
-import mx.tec.healthsyncapp.fragment.TicketDetails
-import mx.tec.healthsyncapp.fragment.TicketProcessTech
 import mx.tec.healthsyncapp.repository.TicketRepository
 import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 
@@ -47,59 +40,20 @@ class AdminTicketDetails : AppCompatActivity() {
             ticketViewModel.fetchTicket(ticketId, urlTicket, queue)
         }
 
-        //Instanciamos el manejador de fragmentos
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-
-        //Observamos los cambios y modificamos los elementos de acuerdo al estado del ticket
         ticketViewModel.ticket.observe(this) { ticket ->
-            if (ticket.status == "Sin empezar") {
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id)
-                if (technicianFragment != null) {
-                    fragmentTransaction.hide(technicianFragment)
-                }
-                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
-                if (resolutionEvidence != null) {
-                    fragmentTransaction.hide(resolutionEvidence)
-                }
-
-            } else if (ticket.status == "En progreso") {
-                fragmentTransaction.replace(binding.fragContainerTC.id, TechnicianInCharge())
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
-                if (resolutionEvidence != null) {
-                    fragmentTransaction.hide(resolutionEvidence)
-                }
-
-            } else if (ticket.status == "Resuelto") {
-                fragmentTransaction.replace(binding.fragContainerTC.id, TechnicianInCharge())
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                fragmentTransaction.replace(binding.fragContainerSolution.id, ResolutionEvidence())
-
-            } else if (ticket.status == "Eliminado") {
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id)
-                if (technicianFragment != null) {
-                    fragmentTransaction.hide(technicianFragment)
-                }
-                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
-                if (resolutionEvidence != null) {
-                    fragmentTransaction.hide(resolutionEvidence)
-                }
-            } else if (ticket.status == "No resuelto") {
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val resolutionEvidence = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id)
-                if (resolutionEvidence != null) {
-                    fragmentTransaction.hide(resolutionEvidence)
-                }
-            } else {
-                Log.e("Resultado", "No cumple con las condiciones")
-            }
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            manageFragments(
+                status = ticket.status,
+                fragmentTransaction = fragmentTransaction,
+                technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id),
+                resolutionFragment = supportFragmentManager.findFragmentById(binding.fragContainerSolution.id),
+                noResolutionFragment = supportFragmentManager.findFragmentById(binding.fragContainerNoSolution.id)
+            )
 
             fragmentTransaction.commit()
         }
+
 
 
         val btnReturn = findViewById<ImageButton>(R.id.btnHome)
@@ -111,6 +65,41 @@ class AdminTicketDetails : AppCompatActivity() {
 
 
 
+    }
+
+    private fun manageFragments(
+        status: String,
+        fragmentTransaction: FragmentTransaction,
+        technicianFragment: Fragment?,
+        resolutionFragment: Fragment?,
+        noResolutionFragment: Fragment?
+    ) {
+        when (status) {
+            "Sin empezar" -> {
+                technicianFragment?.let { fragmentTransaction.hide(it) }
+                resolutionFragment?.let { fragmentTransaction.hide(it) }
+                noResolutionFragment?.let { fragmentTransaction.hide(it) }
+            }
+            "En progreso" -> {
+                resolutionFragment?.let { fragmentTransaction.hide(it) }
+                noResolutionFragment?.let { fragmentTransaction.hide(it) }
+            }
+            "Resuelto" -> {
+
+                noResolutionFragment?.let { fragmentTransaction.hide(it) }
+            }
+            "Eliminado" -> {
+                technicianFragment?.let { fragmentTransaction.hide(it) }
+                resolutionFragment?.let { fragmentTransaction.hide(it) }
+                noResolutionFragment?.let { fragmentTransaction.hide(it) }
+            }
+            "No resuelto" -> {
+                resolutionFragment?.let { fragmentTransaction.hide(it) }
+            }
+            else -> {
+                Log.e("Resultado", "No cumple con las condiciones")
+            }
+        }
     }
 
 

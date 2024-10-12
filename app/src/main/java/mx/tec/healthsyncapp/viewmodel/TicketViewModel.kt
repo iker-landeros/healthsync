@@ -53,12 +53,14 @@ class TicketViewModel: ViewModel() {
                 val componentsArray = ticketJson.optJSONArray("components")
                 val componentsList = mutableListOf<String>()
 
-                if (componentsArray != null) {
+                if (componentsArray != null && componentsArray.length() > 0) {
                     for (i in 0 until componentsArray.length()) {
                         val component = componentsArray.getJSONObject(i)
                         val componentName = component.getString("name") // Obtener el nombre de cada componente
                         componentsList.add(componentName)
                     }
+                } else {
+                    componentsList.add("Sin componentes") // Añade un valor predeterminado si no hay componentes
                 }
 
                 val ticket = Ticket(
