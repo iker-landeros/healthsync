@@ -49,6 +49,18 @@ class TicketViewModel: ViewModel() {
             Log.e("Result my tickets", result.toString())
             if (result.length() > 0) {
                 val ticketJson = result.getJSONObject(0)
+
+                val componentsArray = ticketJson.optJSONArray("components")
+                val componentsList = mutableListOf<String>()
+
+                if (componentsArray != null) {
+                    for (i in 0 until componentsArray.length()) {
+                        val component = componentsArray.getJSONObject(i)
+                        val componentName = component.getString("name") // Obtener el nombre de cada componente
+                        componentsList.add(componentName)
+                    }
+                }
+
                 val ticket = Ticket(
                     idTicket = ticketJson.getInt("idTicket"),
                     status = ticketJson.getString("status"),
@@ -66,7 +78,7 @@ class TicketViewModel: ViewModel() {
                     solutionProcess = ticketJson.optString("solutionProcess", null),
                     failedReason = ticketJson.optString("failedReason", null),
                     ticketImage = ticketJson.optString("ticketImage", null),
-                    //components = ticketJson.optString("components", null)
+                    components = componentsList
                 )
                 _ticket.value = ticket // Actualiza el LiveData con el objeto Ticket
             }

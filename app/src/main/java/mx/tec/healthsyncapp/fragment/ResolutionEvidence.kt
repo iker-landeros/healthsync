@@ -8,18 +8,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.R
-import mx.tec.healthsyncapp.databinding.FragmentActiveTimeBinding
 import mx.tec.healthsyncapp.databinding.FragmentResolutionEvidenceAdminBinding
-import mx.tec.healthsyncapp.databinding.FragmentTicketDetailsBinding
 import mx.tec.healthsyncapp.repository.TicketRepository
 import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 
 /*
- Fragmento dedicado a visualizar la información de la evidencia cargada de la solución de los
+ Fragmento dedicado a visualizar la información de la evidencia cargada de la SOLUCIÓN de los
  tickets sobre las fallas técnicas, esto desde la pantalla de administrador en los detalles de técnico
  */
 class ResolutionEvidence : Fragment() {
     private lateinit var binding: FragmentResolutionEvidenceAdminBinding
+
     private lateinit var ticketViewModel: TicketViewModel
     private lateinit var ticketRepository: TicketRepository
 
@@ -38,6 +37,7 @@ class ResolutionEvidence : Fragment() {
                 binding.textProcesoRevisionCliente.text = ticket.revisionProcess
                 binding.txtDiagnosticoCliente.text = ticket.diagnosis
                 binding.txtProcesoResolucionCliente.text = ticket.solutionProcess
+                binding.txtComponentesCliente.text = ticket.components?.get(0) ?: "Sin componentes"
                 ticket.ticketImage?.let { base64Image ->
                     ticketViewModel.loadImage(base64Image, ticketRepository)
                 }

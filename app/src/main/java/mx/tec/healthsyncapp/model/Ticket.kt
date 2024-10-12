@@ -17,5 +17,5 @@ data class Ticket(
     val solutionProcess: String?,
     val failedReason: String?,
     val ticketImage: String?,
-    //val components: String?
+    val components: List<String>?
 )
