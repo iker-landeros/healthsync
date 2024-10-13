@@ -3,20 +3,16 @@ const express = require('express');
 const middleware = express.Router();
 
 const verifyJWT = (req, res, next) => {
-let token = req.headers['authorization'];
+    let token = req.headers['authorization'];
 
-    //Verificar si el token es válido
-    // si el token es válido, se ejecuta next()
-    // si el token no es válido, se responde con un mensaje de error
-    
     if (token) {
         token = token.split(' ')[1];
-        jwt.verify(token,process.env.KEYPHRASE, (err, decoded) => {
+        jwt.verify(token, process.env.KEYPHRASE, (err, decoded) => {
             if (err) {
-                //Si el token no es válido, se responde con un mensaje de error
                 res.status(403).json({ mensaje: 'Token inválido' });
             } else {
-                //Si el token es válido, se ejecuta next()
+                // Guardar el token decodificado (información del usuario) en req.user
+                req.user = decoded;
                 next();
             }
         });
@@ -25,6 +21,17 @@ let token = req.headers['authorization'];
     }
 };
 
-middleware.use(verifyJWT);
+// Middleware para verificar el rol del usuario
+const authorizeRole = (roles) => {
+    return (req, res, next) => {
+        // Verificar que el userType del token esté en la lista de roles permitidos
+        if (!roles.includes(req.user.userType)) {
+            return res.status(403).json({ mensaje: 'No tienes permiso para realizar esta acción' });
+        }
+        next();
+    };
+};
 
-module.exports = middleware;
+middleware.use(verifyJWT);  // Verifica el token para todas las rutas
+
+module.exports = { middleware, authorizeRole };

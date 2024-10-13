@@ -20,9 +20,10 @@ const doLogin = (req, res) => {
         if (err) 
             res.json(err);
         if (results[0].cantidad == 1) {
-            // Si son correctos, devolver el token
-            token = jwt.sign({ username: username }, process.env.KEYPHRASE);
-            // Resultado exitoso
+
+            // Token almacena la información del usuario y su tipo para permitir que solo ciertas funciones sean accesibles a ciertos tipos de usuario
+            token = jwt.sign({ username: username, userType: results[0].userType }, process.env.KEYPHRASE);
+            
             result = { token: token, message: 'ok',
                        idUser: results[0].idUser,
                        username: username,
