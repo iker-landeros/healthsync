@@ -5,9 +5,13 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +41,10 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
         binding = ActivityTechnicianTicketNoSolutionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
+        val name = sharedpref.getString("name", "#")
+        findViewById<TextView>(R.id.txtNombre).text = name
+
         val uploadButton = findViewById<Button>(R.id.btnSubirFoto)
         uploadButton.setOnClickListener{
             galleryLauncher.launch("image/*")
@@ -48,23 +56,45 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
         ticketRepository = TicketRepository(queue)
         ticketViewModel = TicketViewModel()
 
-        val btnFinish = findViewById<Button>(R.id.btnNoResuelto)
-        btnFinish.setOnClickListener {
 
-            // Obtén el texto de los EditText correctamente
-            val failedReason = findViewById<EditText>(R.id.edtMotivoNoResolucion).text.toString().trim()
+        val btnNoSolution = findViewById<Button>(R.id.btnNoResuelto)
+        btnNoSolution.setOnClickListener {
+            if (validateInput()) {
+                // Obtén el texto de los EditText correctamente
+                val failedReason =
+                    findViewById<EditText>(R.id.edtMotivoNoResolucion).text.toString().trim()
 
-            // Si ya tienes el dato de la imagen codificada
-            val imageData = encodedImageData.toString()
+                // Si ya tienes el dato de la imagen codificada
+                val imageData = encodedImageData.toString()
 
 
-            // Llama al método del ViewModel para enviar los datos
-            ticketViewModel.submitEvidenceNoSolution(
-                ticketId, failedReason, imageData, subdomain, ticketRepository, this
-            )
+                // Llama al método del ViewModel para enviar los datos
+                ticketViewModel.submitEvidenceNoSolution(
+                    ticketId, failedReason, imageData, subdomain, ticketRepository, this
+                )
 
-            // Navega a la siguiente actividad
-            val intent = Intent(this@TechnicianTicketNoSolution, TechnicianTicketsSummary::class.java)
+                // Navega a la siguiente actividad
+                val intent =
+                    Intent(this@TechnicianTicketNoSolution, TechnicianTicketsSummary::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            } else {
+                // Muestra un mensaje de error si la validación falla
+                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val btnReturn = findViewById<View>(R.id.btnRegresar)
+        btnReturn.setOnClickListener{
+            val intent = Intent(this@TechnicianTicketNoSolution, TechnicianTicketDetails::class.java)
+            intent.putExtra("ticketId", ticketId)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        val btnHome = findViewById<View>(R.id.btnHome)
+        btnHome.setOnClickListener{
+            val intent =
+                Intent(this@TechnicianTicketNoSolution, TechnicianTicketsSummary::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
@@ -109,15 +139,12 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
             }
         }
 
-    // Función que recibe un Bitmap y lo codifica en Base64
-    fun encodeImageToBase64(bitmap: Bitmap): String {
-        // Crea un flujo de salida de bytes para almacenar la imagen comprimida
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        // Comprime el Bitmap en formato JPEG con una calidad del 100%
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        // Convierte el flujo de bytes a un array de bytes
-        val byteArray = byteArrayOutputStream.toByteArray()
-        // Devuelve el array de bytes codificado en Base64
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    // Función para validar las entradas
+    private fun validateInput(): Boolean {
+        val failedReason = findViewById<EditText>(R.id.edtMotivoNoResolucion).text.toString().trim()
+
+        // Verificar que el campo no esté vacío y que la imagen esté codificada
+        return failedReason.isNotEmpty() && encodedImageData != null
     }
+
 }

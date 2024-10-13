@@ -6,11 +6,13 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -60,33 +62,48 @@ class TechnicianTicketSolution : AppCompatActivity() {
 
         val btnFinish = findViewById<Button>(R.id.btnFinalizarTicket)
         btnFinish.setOnClickListener {
-            // Obtén el texto de los EditText correctamente
-            val revisionProcess = findViewById<EditText>(R.id.edtProcesoRevision).text.toString().trim()
-            val diagnosis = findViewById<EditText>(R.id.edtDiagnostico).text.toString().trim()
-            val solutionProcess = findViewById<EditText>(R.id.edtProcesoResolucion).text.toString().trim()
+            if (validateInput()) {
+                // Obtén el texto de los EditText correctamente
+                val revisionProcess = findViewById<EditText>(R.id.edtProcesoRevision).text.toString().trim()
+                val diagnosis = findViewById<EditText>(R.id.edtDiagnostico).text.toString().trim()
+                val solutionProcess = findViewById<EditText>(R.id.edtProcesoResolucion).text.toString().trim()
 
-            // Si ya tienes el dato de la imagen codificada
-            val imageData = encodedImageData.toString()
 
-            val selectedComponent = spinner.selectedItem as Component
-            val components = listOf(selectedComponent) // Crear una lista con el componente seleccionado
+                // Si ya tienes el dato de la imagen codificada
+                val imageData = encodedImageData.toString()
 
-            // Llama al método del ViewModel para enviar los datos
-            ticketViewModel.submitEvidenceSolution(
-                ticketId, revisionProcess, diagnosis, solutionProcess, imageData, components, subdomain, ticketRepository, this
-            )
+                val selectedComponent = spinner.selectedItem as Component
+                val components = listOf(selectedComponent) // Crear una lista con el componente seleccionado
 
-            // Navega a la siguiente actividad
-            val intent = Intent(this@TechnicianTicketSolution, TechnicianTicketsSummary::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+                // Llama al método del ViewModel para enviar los datos
+                ticketViewModel.submitEvidenceSolution(
+                    ticketId, revisionProcess, diagnosis, solutionProcess, imageData, components, subdomain, ticketRepository, this
+                )
+
+                // Navega a la siguiente actividad
+                val intent = Intent(this@TechnicianTicketSolution, TechnicianTicketsSummary::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+            else {
+                // Muestra un mensaje de error si la validación falla
+                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
-        val btnGoBack = findViewById<ImageButton>(R.id.btnLogout)
-        btnGoBack.setOnClickListener{
-            val intent = Intent(this@TechnicianTicketSolution, TechnicianTicketsSummary::class.java)
+        val btnReturn = findViewById<View>(R.id.btnRegresar)
+        btnReturn.setOnClickListener{
+            val intent = Intent(this@TechnicianTicketSolution, TechnicianTicketDetails::class.java)
+            intent.putExtra("ticketId", ticketId)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        val btnHome = findViewById<View>(R.id.btnHome)
+        btnHome.setOnClickListener{
+            val intent =
+                Intent(this@TechnicianTicketSolution, TechnicianTicketsSummary::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
 
@@ -130,16 +147,14 @@ class TechnicianTicketSolution : AppCompatActivity() {
             }
         }
 
-    // Función que recibe un Bitmap y lo codifica en Base64
-    fun encodeImageToBase64(bitmap: Bitmap): String {
-        // Crea un flujo de salida de bytes para almacenar la imagen comprimida
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        // Comprime el Bitmap en formato JPEG con una calidad del 100%
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        // Convierte el flujo de bytes a un array de bytes
-        val byteArray = byteArrayOutputStream.toByteArray()
-        // Devuelve el array de bytes codificado en Base64
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+    private fun validateInput(): Boolean{
+        val revisionProcess = findViewById<EditText>(R.id.edtProcesoRevision).text.toString().trim()
+        val diagnosis = findViewById<EditText>(R.id.edtDiagnostico).text.toString().trim()
+        val solutionProcess = findViewById<EditText>(R.id.edtProcesoResolucion).text.toString().trim()
+
+        // Verificar que los campos no estén vacíos
+        return revisionProcess.isNotEmpty() && diagnosis.isNotEmpty() && solutionProcess.isNotEmpty() && encodedImageData != null
     }
 
 }
