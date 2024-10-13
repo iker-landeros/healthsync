@@ -73,7 +73,7 @@ class TechnicianTicketSolution : AppCompatActivity() {
 
             // Llama al método del ViewModel para enviar los datos
             ticketViewModel.submitEvidenceSolution(
-                ticketId, revisionProcess, diagnosis, solutionProcess, imageData, components, subdomain, ticketRepository
+                ticketId, revisionProcess, diagnosis, solutionProcess, imageData, components, subdomain, ticketRepository, this
             )
 
             // Navega a la siguiente actividad

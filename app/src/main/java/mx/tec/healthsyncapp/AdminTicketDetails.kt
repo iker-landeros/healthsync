@@ -36,7 +36,7 @@ class AdminTicketDetails : AppCompatActivity() {
         //Observamos los cambios del modelo y si son nulos hacemos petición al servidor
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
         if (ticketViewModel.ticket.value == null) {
-            ticketViewModel.fetchTicket(ticketId, urlTicket, queue)
+            ticketViewModel.fetchTicket(ticketId, urlTicket, queue, this)
         }
 
         ticketViewModel.ticket.observe(this) { ticket ->

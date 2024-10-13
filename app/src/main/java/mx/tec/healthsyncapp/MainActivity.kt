@@ -63,10 +63,13 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Result", result.toString())
 
                 //Obtenemos los datos de la respuesta y los guardamos en la sesión
+                val token = result.getString("token")
                 val idUser = result.getString("idUser")
                 val userType = result.getString("userType")
                 val name = result.getString("name")
+
                 with(sharedpref.edit()){
+                    putString("token", token)
                     putString("name", name)
                     putString("userType", userType)
                     putString("idUser", idUser)

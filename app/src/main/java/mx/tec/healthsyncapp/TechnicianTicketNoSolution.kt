@@ -60,7 +60,7 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
 
             // Llama al método del ViewModel para enviar los datos
             ticketViewModel.submitEvidenceNoSolution(
-                ticketId, failedReason, imageData, subdomain, ticketRepository
+                ticketId, failedReason, imageData, subdomain, ticketRepository, this
             )
 
             // Navega a la siguiente actividad

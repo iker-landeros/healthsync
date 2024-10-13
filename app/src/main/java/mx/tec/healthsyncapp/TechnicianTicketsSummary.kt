@@ -21,20 +21,28 @@ import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.adapter.TicketSummaryAdapter
 import mx.tec.healthsyncapp.databinding.ActivityTechnicianTicketsSummaryBinding
 import mx.tec.healthsyncapp.model.TicketSummary
+import mx.tec.healthsyncapp.utils.SesionUtil
 import org.json.JSONArray
+import org.json.JSONObject
 
 
 class TechnicianTicketsSummary : AppCompatActivity() {
     private lateinit var binding: ActivityTechnicianTicketsSummaryBinding
+    private lateinit var sesionUtil: SesionUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTechnicianTicketsSummaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sesionUtil = SesionUtil()
+
         //Obtenemos la id y nombre del usuario que ha iniciado sesion
         val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
         val idUser = sharedpref.getString("idUser", "#")
         val name = sharedpref.getString("name", "#")
+        val token = sharedpref.getString("token", "#")
+
 
         //Mostramos su nombre en pantalla
         binding.txtNombre.text = name
@@ -94,13 +102,39 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         }
 
         val errorMyTickets = Response.ErrorListener { error ->
-            Log.e("Error from My Tickets", error.message.toString())
-            Toast.makeText(this, "Error al obtener los tickets propios", Toast.LENGTH_SHORT).show()
+            val networkResponse = error.networkResponse
+            if (networkResponse != null) {
+                when (networkResponse.statusCode) {
+                    401 -> {
+                        Toast.makeText(this, "Error al obtener datos", Toast.LENGTH_SHORT).show()
+                        Log.e("Error 401", "Error al obtener datos")
+                    }
+                    403 -> {
+                        Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show()
+                        Log.e("Error 403", "Token no válido")
+                        sesionUtil.logout(this)
+                    }
+                    else -> {
+                        Toast.makeText(this, "Error desconocido", Toast.LENGTH_SHORT).show()
+                        Log.e("Error general", error.message.toString())
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Error de red desconocido", Toast.LENGTH_SHORT).show()
+                Log.e("Error desconocido", error.message.toString())
+            }
         }
 
-        val userValidationMyTickets = JsonArrayRequest(
+        val userValidationMyTickets = object : JsonArrayRequest(
             Request.Method.GET, urlMyTickets,
-            null, listenerMyTickets, errorMyTickets)
+            null, listenerMyTickets, errorMyTickets
+        ) {
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token en el header
+                return headers
+            }
+        }
 
         queue.add(userValidationMyTickets)
 
@@ -120,13 +154,39 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         }
 
         val errorOtherTickets = Response.ErrorListener { error ->
-            Log.e("Error from Other Tickets", error.message.toString())
-            Toast.makeText(this, "Error al obtener ticket de otros técnicos", Toast.LENGTH_SHORT).show()
+            val networkResponse = error.networkResponse
+            if (networkResponse != null) {
+                when (networkResponse.statusCode) {
+                    401 -> {
+                        Toast.makeText(this, "Error al obtener datos", Toast.LENGTH_SHORT).show()
+                        Log.e("Error 401", "Error al obtener datos")
+                    }
+                    403 -> {
+                        Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show()
+                        Log.e("Error 403", "Token no válido")
+                        sesionUtil.logout(this)
+                    }
+                    else -> {
+                        Toast.makeText(this, "Error desconocido", Toast.LENGTH_SHORT).show()
+                        Log.e("Error general", error.message.toString())
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Error de red desconocido", Toast.LENGTH_SHORT).show()
+                Log.e("Error desconocido", error.message.toString())
+            }
         }
 
-        val userValidationOtherTickets = JsonArrayRequest(
+        val userValidationOtherTickets = object : JsonArrayRequest(
             Request.Method.GET, urlOtherTickets,
-            null, listenerOtherTickets, errorOtherTickets)
+            null, listenerOtherTickets, errorOtherTickets
+        ) {
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token en el header
+                return headers
+            }
+        }
 
         queue.add(userValidationOtherTickets)
 
@@ -134,14 +194,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences
         binding.btnLogout.setOnClickListener{
-            val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
-            val editor = sharedpref.edit()
-            editor.clear()
-            editor.apply()
-            //Después de limpiar los datos, enviamos al usuario a la pantalla de inicio de sesión
-            val intent = Intent(this@TechnicianTicketsSummary, MainActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            sesionUtil.logout(this)
         }
     }
 }
