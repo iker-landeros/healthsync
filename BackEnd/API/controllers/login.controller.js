@@ -22,7 +22,8 @@ const doLogin = (req, res) => {
         if (results[0].cantidad == 1) {
 
             // Token almacena la información del usuario y su tipo para permitir que solo ciertas funciones sean accesibles a ciertos tipos de usuario
-            token = jwt.sign({ username: username, userType: results[0].userType }, process.env.KEYPHRASE);
+            // Token también tiene un tiempo de expiración de 60 minutos
+            token = jwt.sign({ username: username, userType: results[0].userType }, process.env.KEYPHRASE, { expiresIn: '60m' });
             
             result = { token: token, message: 'ok',
                        idUser: results[0].idUser,
