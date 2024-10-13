@@ -49,7 +49,7 @@ class EditTechnicianInfo : AppCompatActivity() {
             if (newName != originalName || newUsername != originalUsername || newPassword.isNotEmpty()) {
                 updateTechnician(newName, newUsername, newPassword)
             } else {
-                Toast.makeText(this, "No se Detectaron Cambios", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No se detectaron cambios", Toast.LENGTH_SHORT).show()
             }
         }
     }

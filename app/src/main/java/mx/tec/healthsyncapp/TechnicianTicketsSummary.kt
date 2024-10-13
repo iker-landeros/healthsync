@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,8 +40,9 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         binding.txtNombre.text = name
 
         //Variables para la petición al endpoint del servidor de acuerdo a la id del usuario
-        val urlMyTickets  = "http://10.0.2.2:3001/tickets/$idUser/my-tickets/summary"
-        val urlOtherTickets = "http://10.0.2.2:3001/tickets/$idUser/not-my-tickets/summary"
+        val subdomain = getString(R.string.subdomain)
+        val urlMyTickets  = "$subdomain/tickets/$idUser/my-tickets/summary"
+        val urlOtherTickets = "$subdomain/tickets/$idUser/not-my-tickets/summary"
 
         val queue = Volley.newRequestQueue(this)
 
@@ -55,6 +57,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         //Adaptamos cada uno de los tickets PROPIOS
         val adapterMyTickets= TicketSummaryAdapter(myTicketList) { ticket ->
+            //Navegación a pantalla con detalles de ese ticket
             val intent = Intent(this, TechnicianTicketDetails::class.java)
             intent.putExtra("ticketId", ticket.id)
             startActivity(intent)
@@ -65,6 +68,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         //Adaptamos cada uno de los tickets AJENOS
         val adapterOtherTickets= TicketSummaryAdapter(otherTicketList) { ticket ->
+            //Navegación a pantalla con detalles de ese ticket
             val intent = Intent(this, TechnicianTicketDetails::class.java)
             intent.putExtra("ticketId", ticket.id)
             startActivity(intent)
@@ -91,6 +95,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         val errorMyTickets = Response.ErrorListener { error ->
             Log.e("Error from My Tickets", error.message.toString())
+            Toast.makeText(this, "Error al obtener los tickets propios", Toast.LENGTH_SHORT).show()
         }
 
         val userValidationMyTickets = JsonArrayRequest(
@@ -116,6 +121,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
 
         val errorOtherTickets = Response.ErrorListener { error ->
             Log.e("Error from Other Tickets", error.message.toString())
+            Toast.makeText(this, "Error al obtener ticket de otros técnicos", Toast.LENGTH_SHORT).show()
         }
 
         val userValidationOtherTickets = JsonArrayRequest(

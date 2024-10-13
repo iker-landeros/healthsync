@@ -48,7 +48,7 @@ class TechnicianTicketSolution : AppCompatActivity() {
         }
 
         val ticketId = intent.getStringExtra("ticketId") ?: return
-        val subdomain = getString(R.string.subdomain2)
+        val subdomain = getString(R.string.subdomain)
         val queue = Volley.newRequestQueue(this)
         ticketRepository = TicketRepository(queue)
         ticketViewModel = TicketViewModel()

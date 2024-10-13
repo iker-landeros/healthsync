@@ -27,8 +27,7 @@ class AdminTicketDetails : AppCompatActivity() {
         //Variables para petición al servidor
         val ticketId = intent.getStringExtra("ticketId") ?: return
         val subdomain = getString(R.string.subdomain)
-        val subdomain2 = getString(R.string.subdomain2)
-        val urlTicket =  "http://$subdomain/tickets/$ticketId"
+        val urlTicket =  "$subdomain/tickets/$ticketId"
         val queue = Volley.newRequestQueue(this)
 
         ticketRepository = TicketRepository(queue)
