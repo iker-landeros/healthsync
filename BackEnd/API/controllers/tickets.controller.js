@@ -154,8 +154,8 @@ WHERE (t.idTechnician != ? OR t.idTechnician IS NULL)
 	AND (t.status = 'Sin empezar' OR t.status = 'En progreso')
 ORDER BY 
 	CASE
-		WHEN t.status = 'Not started' THEN 1 
-		WHEN t.status = 'In progress' THEN 2 
+		WHEN t.status = 'Sin empezar' THEN 1 
+		WHEN t.status = 'En progreso' THEN 2 
 	END,
 t.dateOpened ASC`; 
     
