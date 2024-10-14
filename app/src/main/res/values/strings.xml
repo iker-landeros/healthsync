@@ -60,4 +60,8 @@
     <string name="creacion_de_perfil_de_tecnico">Creación de perfil de técnico</string>
     <string name="regresar">Regresar</string>
     <string name="historico_de_tickets">Histórico de tickets</string>
+    <string name="inicio_de_sesion">Inicio de sesión</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="contrasena_lower_case">Contraseña</string>
+    <string name="nombre">Nombre</string>
 </resources>
