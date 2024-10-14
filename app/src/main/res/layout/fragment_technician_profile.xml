@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
-                android:text="Nombre completo"
+                android:text="@string/nombre_completo"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -48,7 +48,7 @@
                 android:height="40dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center_vertical"
-                android:text="Eduardo"
+                android:text="@string/ejemplo_de_nombre"
                 android:textColor="#000000"
                 android:textSize="12sp" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Nombre de usuario"
+                android:text="@string/nombre_de_usuario"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -70,7 +70,7 @@
                 android:height="40dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center_vertical"
-                android:text="Edu_Morales"
+                android:text="@string/ejemplo_de_nombre"
                 android:textColor="#000000"
                 android:textSize="12sp" />
         </LinearLayout>

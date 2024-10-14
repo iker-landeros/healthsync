@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/technician_main_header"
+            layout="@layout/technician_secondary_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -33,7 +33,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
                 android:background="@drawable/linear_layout_borde"
                 android:elevation="10dp"
                 android:orientation="vertical"

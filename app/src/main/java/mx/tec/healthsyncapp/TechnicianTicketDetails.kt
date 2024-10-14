@@ -20,6 +20,8 @@ import mx.tec.healthsyncapp.viewmodel.TicketViewModel
 import org.json.JSONArray
 import android.widget.Button
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.android.volley.toolbox.JsonObjectRequest
 import mx.tec.healthsyncapp.repository.TicketRepository
 import org.json.JSONObject
@@ -53,7 +55,7 @@ class TechnicianTicketDetails : AppCompatActivity() {
         //Observamos los cambios del modelo y si son nulos hacemos petición al servidor
         ticketViewModel = ViewModelProvider(this).get(TicketViewModel::class.java)
         if (ticketViewModel.ticket.value == null) {
-            ticketViewModel.fetchTicket(ticketId, urlTicket, queue)
+            ticketViewModel.fetchTicket(ticketId, urlTicket, queue, this)
         }
 
         //Instanciamos el manejador de fragmentos
@@ -62,85 +64,39 @@ class TechnicianTicketDetails : AppCompatActivity() {
 
         //Observamos los cambios y modificamos los elementos de acuerdo al estado del ticket
         ticketViewModel.ticket.observe(this) { ticket ->
-            if (ticket.status == "Sin empezar") {
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id)
-                if (technicianFragment != null) {
-                    fragmentTransaction.hide(technicianFragment)
-                }
-                val btnFinish = findViewById<View>(R.id.btnFinish)
-                btnFinish.visibility = View.GONE
-                val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
-                btnNoSolution.visibility = View.GONE
-                val btnRemove = findViewById<View>(R.id.btnRemove)
-                btnRemove.setOnClickListener{
-                    ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain, ticketRepository)
-                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                }
+            val technicianFragment = supportFragmentManager.findFragmentById(binding.fragContainerTC.id)
+            manageFragments(ticket.technicianName, name, ticket.status, fragmentTransaction, technicianFragment)
 
-                val btnClaim = findViewById<View>(R.id.btnClaim)
-                btnClaim.setOnClickListener{
-                    ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain, ticketRepository)
-                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                }
-
-            } else if (ticket.status == "En progreso" && ticket.technicianName == name) {
-                fragmentTransaction.replace(binding.fragContainerTC.id, TechnicianInCharge())
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val btnClaim = findViewById<View>(R.id.btnClaim)
-                btnClaim.visibility = View.GONE
-
-                val btnRemove = findViewById<View>(R.id.btnRemove)
-                btnRemove.setOnClickListener{
-                    ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain, ticketRepository)
-                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                }
-                val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
-                btnNoSolution.setOnClickListener{
-                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketNoSolution::class.java)
-                    intent.putExtra("ticketId", ticketId)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                }
-
-                val btnFinish = findViewById<View>(R.id.btnFinish)
-                btnFinish.setOnClickListener{
-                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
-                    intent.putExtra("ticketId", ticketId)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                }
-
-            } else if (ticket.status == "En progreso" && ticket.technicianName != name) {
-                fragmentTransaction.replace(binding.fragContainerTC.id, TechnicianInCharge())
-                fragmentTransaction.replace(binding.fragContainerDetails.id, TicketDetails())
-                val btnFinish = findViewById<View>(R.id.btnFinish)
-                btnFinish.visibility = View.GONE
-                val btnRemove = findViewById<View>(R.id.btnRemove)
-                btnRemove.visibility = View.GONE
-                val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
-                btnNoSolution.visibility = View.GONE
-                val btnClaim = findViewById<View>(R.id.btnClaim)
-                btnClaim.setOnClickListener{
-                    ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain, ticketRepository)
-                    val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                }
-
-            } else {
-                Log.e("Resultado", "No cumple con las condiciones")
+            val btnClaim = findViewById<View>(R.id.btnReclamarTicket)
+            btnClaim.setOnClickListener{
+                ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain, ticketRepository, this)
+                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
-
+            val btnRemove = findViewById<View>(R.id.btnEliminarTicket)
+            btnRemove.setOnClickListener{
+                ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain, ticketRepository, this)
+                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
+            btnNoSolution.setOnClickListener{
+                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketNoSolution::class.java)
+                intent.putExtra("ticketId", ticketId)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            val btnFinish = findViewById<View>(R.id.btnFinalizarTicket)
+            btnFinish.setOnClickListener{
+                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
+                intent.putExtra("ticketId", ticketId)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
             fragmentTransaction.commit()
         }
-
 
         val btnGoBack = findViewById<ImageButton>(R.id.btnLogout)
         btnGoBack.setOnClickListener{
@@ -151,4 +107,39 @@ class TechnicianTicketDetails : AppCompatActivity() {
 
     }
 
+    private fun manageFragments(
+        technicianName: String?,
+        TCName: String?,
+        status: String,
+        fragmentTransaction: FragmentTransaction,
+        technicianFragment: Fragment?,
+
+    ) {
+        when (status) {
+            "Sin empezar" -> {
+                technicianFragment?.let { fragmentTransaction.hide(it) }
+                val btnFinish = findViewById<View>(R.id.btnFinish)
+                btnFinish.visibility = View.GONE
+                val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
+                btnNoSolution.visibility = View.GONE
+            }
+            "En progreso" -> {
+                if(technicianName == TCName){
+                    val btnClaim = findViewById<View>(R.id.btnClaim)
+                    btnClaim.visibility = View.GONE
+                } else {
+                    val btnFinish = findViewById<View>(R.id.btnFinish)
+                    btnFinish.visibility = View.GONE
+                    val btnRemove = findViewById<View>(R.id.btnRemove)
+                    btnRemove.visibility = View.GONE
+                    val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
+                    btnNoSolution.visibility = View.GONE
+                }
+            }
+            else -> {
+                Log.e("Resultado", "No cumple con las condiciones")
+            }
+        }
+
+    }
 }

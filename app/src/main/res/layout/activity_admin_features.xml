@@ -7,62 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".AdminFeatures">
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/btnHome"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home" />
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/inter_semibold"
+        android:gravity="center"
+        android:text="@string/administrador"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnHome"
-            android:layout_width="0dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            app:srcCompat="@drawable/home" />
-
-        <TextView
-            android:id="@+id/txtNombre"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/inter_semibold"
-            android:text="Administrador"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <ImageButton
-            android:id="@+id/btnFiltro"
-            android:layout_width="0dp"
-            android:layout_height="22dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            app:srcCompat="@drawable/filtro" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="@+id/btnHome" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="1"
         android:background="#7DAED3"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/btnHome">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -87,7 +69,7 @@
                 android:drawableTint="#000000"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center|center_vertical"
-                android:text="Estado"
+                android:text="@string/estado"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
@@ -112,7 +94,7 @@
                 android:layout_marginTop="1dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center|center_vertical"
-                android:text="Fecha"
+                android:text="@string/fecha"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
@@ -137,7 +119,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center|center_vertical"
-                android:text="Tipo"
+                android:text="@string/tipo"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
@@ -163,12 +145,13 @@
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center|center_vertical"
-                android:text="Más info"
+                android:text="@string/mas_info"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -185,7 +168,7 @@
             android:background="#D3E3F2"
             android:fontFamily="@font/inter"
             android:padding="8dp"
-            android:text="Histórico de tickets"
+            android:text="@string/historico_de_tickets"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 

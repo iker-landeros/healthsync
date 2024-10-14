@@ -38,17 +38,18 @@
             android:layout_gravity="center"
             android:layout_marginBottom="25dp"
             android:fontFamily="@font/inter_semibold"
-            android:text="Inicio de sesión"
+            android:text="@string/inicio_de_sesion"
             android:textColor="#000000"
             android:textSize="24sp" />
 
         <EditText
             android:id="@+id/edtUsuario"
             android:layout_width="245dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:autofillHints="username"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Nombre"
+            android:hint="@string/nombre"
             android:inputType="text"
             android:padding="10dp"
             android:textSize="16sp" />
@@ -56,24 +57,25 @@
         <EditText
             android:id="@+id/edtContrasena"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:autofillHints="password"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/contrasena_lower_case"
             android:inputType="textPassword"
             android:padding="10dp"
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnIniciarSesion"
-            android:layout_width="156dp"
+            android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:backgroundTint="#B687B8"
             android:fontFamily="@font/inter_bold"
-            android:text="Iniciar sesión"
+            android:text="@string/iniciar_sesion"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:cornerRadius="8dp" />

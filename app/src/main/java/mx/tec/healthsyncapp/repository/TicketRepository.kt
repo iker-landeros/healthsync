@@ -36,8 +36,12 @@ class TicketRepository(private val queue: RequestQueue) {
         status: String,
         subdomain: String,
         callback: (JSONObject?) -> Unit,
-        errorCallback: (VolleyError) -> Unit
+        errorCallback: (VolleyError) -> Unit,
+        context: Context
     ) {
+        val sharedPref = context.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
+
         val urlUpdate = "$subdomain/tickets/$ticketId"
         val body = JSONObject().apply {
             put("idTechnician", idTechnician)
@@ -52,7 +56,20 @@ class TicketRepository(private val queue: RequestQueue) {
             errorCallback(error)
         }
 
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.PUT, urlUpdate, body, listener, errorListener)
+        val jsonObjectRequest = object: JsonObjectRequest(
+            Request.Method.PUT,
+            urlUpdate,
+            body,
+            listener,
+            errorListener
+        ){
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token al encabezado
+                return headers
+            }
+        }
+
         queue.add(jsonObjectRequest)
     }
 
@@ -66,8 +83,11 @@ class TicketRepository(private val queue: RequestQueue) {
         components: List<Component>, // Aquí ya tienes una lista de objetos Component
         subdomain: String,
         callback: (JSONObject?) -> Unit,
-        errorCallback: (VolleyError) -> Unit
+        errorCallback: (VolleyError) -> Unit,
+        context: Context
     ) {
+        val sharedPref = context.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
 
         val urlEvidenceSolution = "$subdomain/tickets/$ticketId/solved"
 
@@ -103,13 +123,19 @@ class TicketRepository(private val queue: RequestQueue) {
         }
 
         // Crear la solicitud JSON
-        val jsonObjectRequest = JsonObjectRequest(
+        val jsonObjectRequest = object: JsonObjectRequest(
             Request.Method.POST,
             urlEvidenceSolution,
             requestBody,
             listener,
             errorListener
-        )
+        ){
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token al encabezado
+                return headers
+            }
+        }
 
         // Añadir la solicitud a la cola de peticiones
         queue.add(jsonObjectRequest)
@@ -122,8 +148,11 @@ class TicketRepository(private val queue: RequestQueue) {
         imageData: String,
         subdomain: String,
         callback: (JSONObject?) -> Unit,
-        errorCallback: (VolleyError) -> Unit
+        errorCallback: (VolleyError) -> Unit,
+        context: Context
     ) {
+        val sharedPref = context.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
 
         val urlEvidenceNoSolution = "$subdomain/tickets/$ticketId/not-solved"
 
@@ -140,13 +169,19 @@ class TicketRepository(private val queue: RequestQueue) {
             errorCallback(error)
         }
 
-        val jsonObjectRequest = JsonObjectRequest(
+        val jsonObjectRequest = object: JsonObjectRequest(
             Request.Method.POST,
             urlEvidenceNoSolution,
             requestBody,
             listener,
             errorListener
-        )
+        ){
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token al encabezado
+                return headers
+            }
+        }
 
         queue.add(jsonObjectRequest)
     }
@@ -168,8 +203,12 @@ class TicketRepository(private val queue: RequestQueue) {
         spinner: Spinner,
         subdomain: String,
         successCallback: (JSONArray?) -> Unit,
-        errorCallback: (VolleyError) -> Unit
+        errorCallback: (VolleyError) -> Unit,
     ) {
+
+        val sharedPref = context.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
+
         val url = "$subdomain/tickets/components"
 
         val responseListener = Response.Listener<JSONArray> { response ->
@@ -197,13 +236,19 @@ class TicketRepository(private val queue: RequestQueue) {
         }
 
         // Crear la petición de datos usando JsonArrayRequest
-        val componentsRequest = JsonArrayRequest(
+        val componentsRequest = object: JsonArrayRequest(
             Request.Method.GET,
             url,
             null,
             responseListener,
             errorListener
-        )
+        ) {
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token al encabezado
+                return headers
+            }
+        }
 
         // Añadir la solicitud a la cola
         queue.add(componentsRequest)

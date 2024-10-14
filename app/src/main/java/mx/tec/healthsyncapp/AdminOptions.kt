@@ -26,6 +26,7 @@ class AdminOptions : AppCompatActivity() {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
         binding.btnEstadisticas.setOnClickListener{
             val intent = Intent(this@AdminOptions, PrimaryStats::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

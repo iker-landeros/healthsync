@@ -1,5 +1,6 @@
 package mx.tec.healthsyncapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import mx.tec.healthsyncapp.databinding.ActivityEditTechnicianInfoBinding
+import mx.tec.healthsyncapp.utils.SesionUtil
 import org.json.JSONObject
 
 class EditTechnicianInfo : AppCompatActivity() {
@@ -21,6 +23,8 @@ class EditTechnicianInfo : AppCompatActivity() {
     private lateinit var originalName: String
     private lateinit var originalUsername: String
     private lateinit var technicianId: String
+    private lateinit var sesionUtil: SesionUtil
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +59,12 @@ class EditTechnicianInfo : AppCompatActivity() {
     }
 
     private fun updateTechnician(newName: String, newUsername: String, newPassword: String) {
-        val url = "http://10.0.2.2:3001/technicians/$technicianId"
+        val subdomain = getString(R.string.subdomain)
+        val url = "$subdomain/technicians/$technicianId"
+
+        sesionUtil = SesionUtil()
+        val sharedPref = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
 
         val jsonBody = JSONObject()
         jsonBody.put("name", newName)
@@ -64,7 +73,7 @@ class EditTechnicianInfo : AppCompatActivity() {
             jsonBody.put("password", newPassword)
         }
 
-        val putRequest = JsonObjectRequest(
+        val putRequest = object: JsonObjectRequest(
             Request.Method.PUT, url, jsonBody,
             { response ->
                 Toast.makeText(this, "Datos Actualizados de Manera Exitosa", Toast.LENGTH_SHORT).show()
@@ -80,7 +89,14 @@ class EditTechnicianInfo : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        )
+        ){
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token en el header
+                return headers
+            }
+        }
+
         requestQueue.add(putRequest)
     }
 }

@@ -44,7 +44,12 @@ class TicketViewModel: ViewModel() {
 
 
 
-    fun fetchTicket(ticketId: String, urlTicket: String, queue: RequestQueue) {
+    fun fetchTicket(ticketId: String, urlTicket: String, queue: RequestQueue, context: Context) {
+
+        val sharedPref = context.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
+
+
         val listenerTicket = Response.Listener<JSONArray> { result ->
             Log.e("Result my tickets", result.toString())
             if (result.length() > 0) {
@@ -91,10 +96,16 @@ class TicketViewModel: ViewModel() {
             _error.value = error.message // Actualiza el LiveData con el error
         }
 
-        val ticketsDetails = JsonArrayRequest(
+        val ticketsDetails = object: JsonArrayRequest(
             Request.Method.GET, urlTicket,
             null, listenerTicket, errorListener
-        )
+        ){
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token al encabezado
+                return headers
+            }
+        }
 
         queue.add(ticketsDetails)
     }
@@ -103,13 +114,21 @@ class TicketViewModel: ViewModel() {
         ticketId: String,
         idTechnician: String,
         status: String, subdomain: String,
-        ticketRepository: TicketRepository
+        ticketRepository: TicketRepository,
+        context: Context
     ) {
-        ticketRepository.update(ticketId, idTechnician, status, subdomain, { response ->
+        ticketRepository.update(
+            ticketId,
+            idTechnician,
+            status,
+            subdomain,
+            { response ->
             _response.postValue(response)
-        }, { error ->
-            _error.postValue(error.message)
-        })
+            }, { error ->
+                _error.postValue(error.message)
+            },
+            context
+        )
     }
 
     fun submitEvidenceSolution(
@@ -120,7 +139,8 @@ class TicketViewModel: ViewModel() {
         imageData: String,
         components: List<Component>,
         subdomain: String,
-        ticketRepository: TicketRepository
+        ticketRepository: TicketRepository,
+        context: Context
     ) {
         ticketRepository.postEvidenceSolution(
             ticketId,
@@ -135,7 +155,8 @@ class TicketViewModel: ViewModel() {
             },
             { error ->
                 _error.postValue(error.message)
-            }
+            },
+            context
         )
     }
 
@@ -144,7 +165,8 @@ class TicketViewModel: ViewModel() {
         failedReason: String,
         imageData: String,
         subdomain: String,
-        ticketRepository: TicketRepository
+        ticketRepository: TicketRepository,
+        context: Context
     ) {
         ticketRepository.postEvidenceNoSolution(
             ticketId,
@@ -156,7 +178,8 @@ class TicketViewModel: ViewModel() {
             },
             { error ->
                 _error.postValue(error.message)
-            }
+            },
+            context
         )
     }
 

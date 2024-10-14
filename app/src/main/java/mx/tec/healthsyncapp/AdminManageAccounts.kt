@@ -1,8 +1,10 @@
 package mx.tec.healthsyncapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,18 +17,25 @@ import mx.tec.healthsyncapp.adapter.TechnicianStatsAdapter
 import mx.tec.healthsyncapp.databinding.ActivityAdminManageAccountsBinding
 import mx.tec.healthsyncapp.model.TechnicianInfo
 import mx.tec.healthsyncapp.model.TechnicianStats
+import mx.tec.healthsyncapp.utils.SesionUtil
 import org.json.JSONArray
 
 class AdminManageAccounts : AppCompatActivity() {
     private lateinit var binding: ActivityAdminManageAccountsBinding
+    private lateinit var sesionUtil: SesionUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminManageAccountsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val urlMyTickets  = "http://10.0.2.2:3001/technicians"
+        val subdomain = getString(R.string.subdomain)
+        val urlManageAccounts  = "$subdomain/technicians"
         val queue = Volley.newRequestQueue(this)
+
+        sesionUtil = SesionUtil()
+        val sharedPref = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null) ?: return
 
         val recyclerViewTechnicians: RecyclerView = binding.rvTechnicians
         val technicians = mutableListOf<TechnicianInfo>()
@@ -46,12 +55,39 @@ class AdminManageAccounts : AppCompatActivity() {
         }
 
         val errorMyTickets = Response.ErrorListener { error ->
-            Log.e("Error", error.message.toString())
+            val networkResponse = error.networkResponse
+            if (networkResponse != null) {
+                when (networkResponse.statusCode) {
+                    401 -> {
+                        Toast.makeText(this, "Error al obtener datos", Toast.LENGTH_SHORT).show()
+                        Log.e("Error 401", "Error al obtener datos")
+                    }
+                    403 -> {
+                        Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show()
+                        Log.e("Error 403", "Token no válido")
+                        sesionUtil.logout(this)
+                    }
+                    else -> {
+                        Toast.makeText(this, "Error desconocido", Toast.LENGTH_SHORT).show()
+                        Log.e("Error general", error.message.toString())
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Error de red desconocido", Toast.LENGTH_SHORT).show()
+                Log.e("Error desconocido", error.message.toString())
+            }
         }
 
-        val userValidationMyTickets = JsonArrayRequest(
-            Request.Method.GET, urlMyTickets,
-            null, listenerTechnicians, errorMyTickets)
+        val userValidationMyTickets = object: JsonArrayRequest(
+            Request.Method.GET, urlManageAccounts,
+            null, listenerTechnicians, errorMyTickets
+        ){
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $token" // Añadir el token en el header
+                return headers
+            }
+        }
 
         queue.add(userValidationMyTickets)
 
