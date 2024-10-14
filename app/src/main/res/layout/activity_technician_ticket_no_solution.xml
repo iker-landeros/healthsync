@@ -50,7 +50,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/inter"
-                        android:text="¿Deseas marcar este ticket como &quot;No resuelto&quot;? "
+                        android:text="@string/deseas_marcar_este_ticket_como_no_resuelto"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp" />
@@ -67,7 +67,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
-                            android:text="MOTIVO DE NO RESOLUCIÓN"
+                            android:text="@string/motivo_de_no_resolucion"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
@@ -79,7 +79,7 @@
                             android:background="@drawable/edittext_background"
                             android:ems="10"
                             android:fontFamily="@font/inter_semibold"
-                            android:hint="Descripción de la causa de la no solución de la falla técnica"
+                            android:hint="@string/descripcion_de_la_causa_de_la_no_resolucion"
                             android:inputType="text"
                             android:minHeight="48dip"
                             android:padding="5dp"
@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="ADJUNTAR EVIDENCIA DE NO RESOLUCIÓN"
+                            android:text="@string/adjuntar_evidencia_de_no_resolucion"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 

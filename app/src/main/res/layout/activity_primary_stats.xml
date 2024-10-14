@@ -9,8 +9,8 @@
 
     <ImageButton
         android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#00FFFFFF"
@@ -25,7 +25,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/inter_semibold"
         android:gravity="center"
-        android:text="Administrador"
+        android:text="@string/administrador"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnLogout"
@@ -48,13 +48,13 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:fontFamily="@font/inter"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Estadísticas"
+            android:text="@string/estadisticas"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
     </LinearLayout>
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
-                        android:text="Tickets totales"
+                        android:text="@string/tickets_totales"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
@@ -109,7 +109,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="65"
+                        android:text="@string/_65"
                         android:textColor="#FFFFFF"
                         android:textSize="40sp" />
                 </LinearLayout>
@@ -136,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
-                        android:text="Tickets en progreso"
+                        android:text="@string/tickets_en_progreso"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
@@ -147,7 +147,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="7"
+                        android:text="@string/_7"
                         android:textColor="#FFFFFF"
                         android:textSize="38sp" />
                 </LinearLayout>
@@ -174,7 +174,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
-                        android:text="Tickets resueltos"
+                        android:text="@string/tickets_resueltos"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
@@ -185,7 +185,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="7"
+                        android:text="@string/_7"
                         android:textColor="#FFFFFF"
                         android:textSize="38sp" />
                 </LinearLayout>
@@ -220,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
-                        android:text="Tickets no empezados"
+                        android:text="@string/tickets_no_empezados"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
@@ -231,7 +231,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="38"
+                        android:text="@string/_38"
                         android:textColor="#FFFFFF"
                         android:textSize="38sp" />
 
@@ -259,7 +259,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
-                        android:text="Tickets no resueltos"
+                        android:text="@string/tickets_no_resueltos"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
@@ -270,7 +270,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="23"
+                        android:text="@string/_23"
                         android:textColor="#FFFFFF"
                         android:textSize="38sp" />
                 </LinearLayout>
@@ -297,7 +297,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
-                        android:text="Tickets eliminados"
+                        android:text="@string/tickets_eliminados"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
@@ -308,7 +308,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
-                        android:text="23"
+                        android:text="@string/_23"
                         android:textColor="#FFFFFF"
                         android:textSize="38sp" />
                 </LinearLayout>
@@ -327,7 +327,7 @@
         android:backgroundTint="#7DAED3"
         android:gravity="center"
         android:iconTint="@android:color/white"
-        android:text="Ver Más"
+        android:text="@string/ver_mas"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="12sp"
