@@ -22,6 +22,8 @@ import mx.tec.healthsyncapp.model.TechnicianStats
 import mx.tec.healthsyncapp.model.TicketSummary
 import mx.tec.healthsyncapp.utils.SesionUtil
 import org.json.JSONArray
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class SecondaryStats : AppCompatActivity() {
     private lateinit var binding: ActivitySecondaryStatsBinding
@@ -65,7 +67,8 @@ class SecondaryStats : AppCompatActivity() {
                 val name = (result.getJSONObject(i).getString("name"))
                 val resolvedTickets = (result.getJSONObject(i).getString("resolvedTicketsCount"))
                 val avgResolutionTime = (result.getJSONObject(i).getString("avgResolutionTimeHours"))
-                technicians.add(TechnicianStats(name, resolvedTickets, avgResolutionTime))
+                val avgResolutionTimeFormated = formatToTwoDecimals(avgResolutionTime)
+                technicians.add(TechnicianStats(name, resolvedTickets, avgResolutionTimeFormated))
             }
             adapterTechnician.notifyDataSetChanged()
         }
@@ -113,6 +116,16 @@ class SecondaryStats : AppCompatActivity() {
             val intent = Intent(this@SecondaryStats, AdminOptions::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        }
+    }
+
+    private fun formatToTwoDecimals(value: String): String {
+        return try {
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.HALF_UP
+            df.format(value.toDouble())
+        } catch (e: NumberFormatException) {
+            value // Si no es un número válido, retorna el valor original
         }
     }
 }
