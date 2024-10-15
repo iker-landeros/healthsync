@@ -77,7 +77,8 @@ const getTechniciansStats = (req, res) => {
             LEFT JOIN tickets t ON u.idUser = t.idTechnician
             WHERE u.userType = 'technician' 
                 AND t.status = 'Resuelto'
-            GROUP BY u.idUser, u.name;`;
+            GROUP BY u.idUser, u.name
+            ORDER BY resolvedTicketsCount DESC;`;
 
     pool.query(sql, (err, results) => {
         if (err) {
