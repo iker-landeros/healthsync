@@ -46,7 +46,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="NOMBRE DE QUIEN REPORTA"
                 android:textColor="#000000"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textNombreCliente"
@@ -63,7 +63,7 @@
                 android:minHeight="40dp"
                 android:text="Eduardo Dario Morales Zamora"
                 android:textColor="#000000"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +85,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="FECHA"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textFechaCliente"
@@ -102,7 +102,7 @@
                     android:minHeight="40dp"
                     android:text="03/09/2024"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/textAreaSubtitulo"
@@ -112,7 +112,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="ÁREA"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textAreaCliente"
@@ -129,7 +129,7 @@
                     android:minHeight="40dp"
                     android:text="Vigilancia"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/textTipoSubtitulo"
@@ -139,7 +139,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="TIPO DE EQUIPO"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textTipoCliente"
@@ -156,7 +156,7 @@
                     android:minHeight="40dp"
                     android:text="PC"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -173,7 +173,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="HORA"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textHoraCliente"
@@ -190,7 +190,7 @@
                     android:minHeight="40dp"
                     android:text="11:20pm"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/textExtensionSubtitulo"
@@ -200,7 +200,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="NO. EXTENSIÓN"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textExtensionCliente"
@@ -217,7 +217,7 @@
                     android:minHeight="40dp"
                     android:text="002"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/textCategoriaSubtitulo"
@@ -227,7 +227,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="CATEGORIA DE FALLA"
                     android:textColor="#000000"
-                    android:textSize="9sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textCategoriaCliente"
@@ -244,7 +244,7 @@
                     android:minHeight="40dp"
                     android:text="Falla de red"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -264,7 +264,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="MOTIVO DEL REPORTE"
                 android:textColor="#000000"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textMotivoCliente"
@@ -281,7 +281,7 @@
                 android:paddingTop="6dp"
                 android:text="Descripción del problema que presenta el usuario"
                 android:textColor="#000000"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
 
         </LinearLayout>
 

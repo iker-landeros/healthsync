@@ -12,7 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="1"
         android:background="#7DAED3"
         android:orientation="vertical"
@@ -52,7 +52,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:fontFamily="@font/inter"
+            android:fontFamily="@font/inter_semibold"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/estadisticas"
             android:textColor="#FFFFFF"
@@ -82,9 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:backgroundTint="#B687B8"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                android:foreground="@drawable/cardview_border_purple"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,7 +98,7 @@
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
                         android:text="@string/tickets_totales"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="18sp" />
 
                     <TextView
@@ -110,7 +109,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:text="@string/_65"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="40sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -120,9 +119,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:backgroundTint="#7DAED3"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                android:foreground="@drawable/cardview_border_blue"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -137,7 +135,7 @@
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
                         android:text="@string/tickets_en_progreso"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="18sp" />
 
                     <TextView
@@ -148,7 +146,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:text="@string/_7"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="38sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -158,9 +156,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:backgroundTint="#E67E3C"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                android:foreground="@drawable/cardview_border_green"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -175,7 +172,7 @@
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
                         android:text="@string/tickets_resueltos"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="18sp" />
 
                     <TextView
@@ -186,7 +183,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:text="@string/_7"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="38sp" />
                 </LinearLayout>
 
@@ -204,9 +201,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:backgroundTint="#F7A800"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                android:foreground="@drawable/cardview_border_yellow"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -221,7 +217,7 @@
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
                         android:text="@string/tickets_no_empezados"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="18sp" />
 
                     <TextView
@@ -232,7 +228,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:text="@string/_38"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="38sp" />
 
                 </LinearLayout>
@@ -243,9 +239,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:backgroundTint="#B687B8"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                android:foreground="@drawable/cardview_border_purple"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -260,7 +255,7 @@
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
                         android:text="@string/tickets_no_resueltos"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="18sp" />
 
                     <TextView
@@ -271,7 +266,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:text="@string/_23"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="38sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -281,9 +276,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:backgroundTint="#AAAD00"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                android:foreground="@drawable/cardview_border_orange"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -298,7 +292,7 @@
                         android:fontFamily="@font/inter_semibold"
                         android:gravity="center"
                         android:text="@string/tickets_eliminados"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="18sp" />
 
                     <TextView
@@ -309,7 +303,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:text="@string/_23"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3C3C3C"
                         android:textSize="38sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/textview_background"
         android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="6dp"
             android:layout_weight="1"
             android:fontFamily="@font/inter_semibold"
             android:text="Hugo Alejandres"
@@ -42,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="6dp"
             android:layout_weight="1"
             android:fontFamily="@font/inter_semibold"
             android:text="1.8"

@@ -64,4 +64,10 @@
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="contrasena_lower_case">Contraseña</string>
     <string name="nombre">Nombre</string>
+    <string name="falla_de_red">Falla de red</string>
+    <string name="seleccionar_imagen">Seleccionar Imagen</string>
+    <string name="no_resuelto">No Resuelto</string>
+    <string name="resolver">Resolver</string>
+    <string name="si">SÍ</string>
+    <string name="no">NO</string>
 </resources>

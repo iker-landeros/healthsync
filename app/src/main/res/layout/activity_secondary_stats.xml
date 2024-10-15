@@ -38,7 +38,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:background="#7DAED3"
         android:orientation="horizontal"
@@ -79,7 +79,7 @@
             android:drawableTint="#000000"
             android:fontFamily="@font/inter_semibold"
             android:gravity="center|center_vertical"
-            android:text="@string/tickets_totales"
+            android:text="@string/tickets_resueltos"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

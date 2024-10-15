@@ -34,13 +34,13 @@ class TicketSummaryAdapter(val data: List<TicketSummary>, private val onItemClic
             val color = StatusColorUtil.getColorForStatus(holder.binding.root.context, element.status)
             val drawable = txtEstado.background as GradientDrawable
             drawable.setColor(color)
-            btnInfo.setOnClickListener{
+            /*btnInfo.setOnClickListener{
                 onItemClicked(element)
-            }
+            }*/
 
-        }
+}
 
 
-    }
+}
 }
 
