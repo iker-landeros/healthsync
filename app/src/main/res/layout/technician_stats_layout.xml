@@ -48,6 +48,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/inter_semibold"
             android:text="1.8"
+            android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="12sp" />
 

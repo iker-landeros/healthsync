@@ -134,7 +134,7 @@ const FormComponent = () => {
             className="sm:absolute left-0 h-28 w-28 object-contain"
           />
           <h1 className="text-2xl text-center font-bold">
-            Formulario Para Reporte de Fallas
+            Formulario para reporte de fallas
           </h1>
         </div>
 
@@ -149,7 +149,7 @@ const FormComponent = () => {
                 htmlFor="senderName"
                 className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                <span>Nombre</span>
+                <span>Nombre *</span>
                 <div className="relative inline-block group">
                   <GoQuestion className="text-custom-green size-5" />
                   <Tooltip message="Ingrese su nombre." />
@@ -171,7 +171,7 @@ const FormComponent = () => {
                 htmlFor="idArea"
                 className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                Area
+                Área *
               </label>
               <select
                 id="idArea"
@@ -181,7 +181,7 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Seleccionar Área</option>
+                <option value="">Seleccionar área</option>
                 {areas.map((area) => (
                   <option key={area.idArea} value={area.idArea}>
                     {area.areaName}
@@ -194,7 +194,7 @@ const FormComponent = () => {
                 htmlFor="idExtension"
                 className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                Extensión
+                Extensión *
                 {selectedArea
                   ? ""
                   : " (Es necesario seleccionar un área primero)"}
@@ -208,7 +208,7 @@ const FormComponent = () => {
                 disabled={!selectedArea}
                 required
               >
-                <option value="">Seleccionar Extensión</option>
+                <option value="">Seleccionar extensión</option>
                 {filteredExtensions.map((extension) => (
                   <option
                     key={extension.idExtension}
@@ -225,7 +225,7 @@ const FormComponent = () => {
                 htmlFor="description"
                 className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                Descripción
+                Descripción *
                 <div className="relative inline-block group">
                   <GoQuestion className="text-custom-green size-5" />
                   <Tooltip message="Explique la razón del ticket." />
@@ -246,7 +246,7 @@ const FormComponent = () => {
                 htmlFor="idProblemType"
                 className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                Tipo de Problema
+                Tipo de problema *
               </label>
               <select
                 id="idProblemType"
@@ -256,7 +256,7 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Seleccionar Tipo de Problema</option>
+                <option value="">Seleccionar tipo de problema</option>
                 {problemTypes.map((problemType) => (
                   <option
                     key={problemType.idProblemType}
@@ -273,7 +273,7 @@ const FormComponent = () => {
                 htmlFor="idDeviceType"
                 className="text-sm font-medium text-gray-700 flex justify-between items-center"
               >
-                Tipo de Dispositivo
+                Tipo de dispositivo *
               </label>
               <select
                 id="idDeviceType"
@@ -283,7 +283,7 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Seleccionar Tipo de Dispositivo</option>
+                <option value="">Seleccionar tipo de dispositivo</option>
                 {deviceTypes.map((deviceType) => (
                   <option
                     key={deviceType.idDeviceType}
@@ -301,7 +301,7 @@ const FormComponent = () => {
               type="submit"
               className="w-full py-2 px-4 bg-custom-purple text-white font-semibold rounded-md shadow-md hover:bg-custom-purple-600"
             >
-              Enviar
+              Enviar *
             </button>
           </div>
         </form>
