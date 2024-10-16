@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -29,6 +30,8 @@ import org.json.JSONObject
 class TechnicianTicketsSummary : AppCompatActivity() {
     private lateinit var binding: ActivityTechnicianTicketsSummaryBinding
     private lateinit var sesionUtil: SesionUtil
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -195,6 +198,15 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences
         binding.btnLogout.setOnClickListener{
             sesionUtil.logout(this)
+        }
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+
+        // Set up the swipe refresh layout
+        swipeRefreshLayout.setOnRefreshListener {
+            // Call recreate to reload the activity
+            swipeRefreshLayout.isRefreshing = false
+            recreate()
         }
     }
 }

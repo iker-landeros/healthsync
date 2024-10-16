@@ -81,10 +81,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,49 +92,61 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/txtMisTickets"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#D3E3F2"
-                android:fontFamily="@font/inter"
-                android:padding="8dp"
-                android:text="@string/mis_tickets"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMisTickets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txtMisTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D3E3F2"
+                    android:fontFamily="@font/inter"
+                    android:padding="8dp"
+                    android:text="@string/mis_tickets"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMisTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtTodosTickets"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#D3E3F2"
-                android:fontFamily="@font/inter"
-                android:padding="8dp"
-                android:text="@string/todos_los_tickets"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTodosTickets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/txtTodosTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D3E3F2"
+                    android:fontFamily="@font/inter"
+                    android:padding="8dp"
+                    android:text="@string/todos_los_tickets"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTodosTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
