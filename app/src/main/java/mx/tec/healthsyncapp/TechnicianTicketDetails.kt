@@ -1,9 +1,13 @@
 package mx.tec.healthsyncapp
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -76,10 +80,11 @@ class TechnicianTicketDetails : AppCompatActivity() {
             }
             val btnRemove = findViewById<View>(R.id.btnEliminarTicket)
             btnRemove.setOnClickListener{
-                ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain, ticketRepository, this)
-                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                showConfirmRevomeTkt(ticketId,
+                    idTechnician,
+                    subdomain,
+                    ticketRepository,
+                    this)
             }
             val btnNoSolution = findViewById<View>(R.id.btnNoResuelto)
             btnNoSolution.setOnClickListener{
@@ -89,8 +94,7 @@ class TechnicianTicketDetails : AppCompatActivity() {
                 startActivity(intent)
             }
             val btnFinish = findViewById<View>(R.id.btnFinalizarTicket)
-            btnFinish.setOnClickListener{
-                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
+            btnFinish.setOnClickListener{ val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
                 intent.putExtra("ticketId", ticketId)
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -141,5 +145,36 @@ class TechnicianTicketDetails : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun showConfirmRevomeTkt(
+        ticketId: String,
+        idTechnician: String,
+        subdomain: String,
+        ticketRepository: TicketRepository,
+        context: Context
+    ){
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // Eliminar el título del diálogo
+
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.confirm_remove_tkt, null)
+        dialog.setContentView(dialogView) // Establecer el contenido del diálogo
+
+        val btnNo = dialog.findViewById<Button>(R.id.btnNo)
+        btnNo.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        val btnSi = dialog.findViewById<Button>(R.id.btnSi)
+        btnSi.setOnClickListener{
+            ticketViewModel.updateTicket(ticketId, idTechnician, "Eliminado", subdomain, ticketRepository, context)
+            val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            dialog.dismiss()
+        }
+
+
+        dialog.show()
     }
 }
