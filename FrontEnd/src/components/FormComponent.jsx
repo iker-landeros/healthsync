@@ -181,7 +181,7 @@ const FormComponent = () => {
                 className="mt-1 w-full border border-gray-300 rounded-md shadow-md focus:border-indigo-500 p-3 text-lg"
                 required
               >
-                <option value="">Seleccionar Área</option>
+                <option value="">Seleccionar área</option>
                 {areas.map((area) => (
                   <option key={area.idArea} value={area.idArea}>
                     {area.areaName}
@@ -208,7 +208,7 @@ const FormComponent = () => {
                 disabled={!selectedArea}
                 required
               >
-                <option value="">Seleccionar Extensión</option>
+                <option value="">Seleccionar extensión</option>
                 {filteredExtensions.map((extension) => (
                   <option
                     key={extension.idExtension}
