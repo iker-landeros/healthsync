@@ -73,10 +73,11 @@ class TechnicianTicketDetails : AppCompatActivity() {
 
             val btnClaim = findViewById<View>(R.id.btnReclamarTicket)
             btnClaim.setOnClickListener{
-                ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain, ticketRepository, this)
-                val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                showConfirmClaimTkt(ticketId,
+                    idTechnician,
+                    subdomain,
+                    ticketRepository,
+                    this)
             }
             val btnRemove = findViewById<View>(R.id.btnEliminarTicket)
             btnRemove.setOnClickListener{
@@ -174,6 +175,35 @@ class TechnicianTicketDetails : AppCompatActivity() {
             dialog.dismiss()
         }
 
+        dialog.show()
+    }
+
+    private fun showConfirmClaimTkt(
+        ticketId: String,
+        idTechnician: String,
+        subdomain: String,
+        ticketRepository: TicketRepository,
+        context: Context
+    ){
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // Eliminar el título del diálogo
+
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.confirm_claim_tkt, null)
+        dialog.setContentView(dialogView) // Establecer el contenido del diálogo
+
+        val btnNo = dialog.findViewById<Button>(R.id.btnNo)
+        btnNo.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        val btnSi = dialog.findViewById<Button>(R.id.btnSi)
+        btnSi.setOnClickListener{
+            ticketViewModel.updateTicket(ticketId, idTechnician, "En progreso", subdomain, ticketRepository, context)
+            val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            dialog.dismiss()
+        }
 
         dialog.show()
     }
