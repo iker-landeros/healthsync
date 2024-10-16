@@ -73,6 +73,8 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
                     ticketId, failedReason, imageData, subdomain, ticketRepository, this
                 )
 
+                Thread.sleep(1000)
+
                 // Navega a la siguiente actividad
                 val intent =
                     Intent(this@TechnicianTicketNoSolution, TechnicianTicketsSummary::class.java)
