@@ -70,4 +70,5 @@
     <string name="resolver">Resolver</string>
     <string name="si">SÍ</string>
     <string name="no">NO</string>
+    <string name="deseas_reclamar_este_ticket">¿Deseas reclamar este ticket?</string>
 </resources>
