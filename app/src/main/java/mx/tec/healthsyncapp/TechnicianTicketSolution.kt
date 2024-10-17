@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +44,10 @@ class TechnicianTicketSolution : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTechnicianTicketSolutionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sharedpref = getSharedPreferences("sesion", MODE_PRIVATE)
+        val name = sharedpref.getString("name", "#")
+        findViewById<TextView>(R.id.txtNombre).text = name
 
         val uploadButton = findViewById<Button>(R.id.btnSubirFoto)
         uploadButton.setOnClickListener{
@@ -79,6 +84,9 @@ class TechnicianTicketSolution : AppCompatActivity() {
                 ticketViewModel.submitEvidenceSolution(
                     ticketId, revisionProcess, diagnosis, solutionProcess, imageData, components, subdomain, ticketRepository, this
                 )
+
+                Thread.sleep(1000)
+
 
                 // Navega a la siguiente actividad
                 val intent = Intent(this@TechnicianTicketSolution, TechnicianTicketsSummary::class.java)

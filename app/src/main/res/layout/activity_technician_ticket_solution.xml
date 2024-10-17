@@ -42,20 +42,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/txtEstado"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/estado_se_background"
-                    android:fontFamily="@font/inter_semibold"
-                    android:gravity="center"
-                    android:paddingHorizontal="14dp"
-                    android:paddingVertical="2dp"
-                    android:text="@string/estado"
-                    android:textColor="#FFFFFF"
-                    android:textSize="11sp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
