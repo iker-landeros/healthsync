@@ -91,13 +91,13 @@ class TechnicianTicketDetails : AppCompatActivity() {
             btnNoSolution.setOnClickListener{
                 val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketNoSolution::class.java)
                 intent.putExtra("ticketId", ticketId)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
-            val btnFinish = findViewById<View>(R.id.btnFinalizarTicket)
+            val btnFinish = findViewById<Button>(R.id.btnFinalizarTicket)
             btnFinish.setOnClickListener{ val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketSolution::class.java)
                 intent.putExtra("ticketId", ticketId)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
             fragmentTransaction.commit()

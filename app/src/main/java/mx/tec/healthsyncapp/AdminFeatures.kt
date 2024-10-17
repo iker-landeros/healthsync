@@ -49,6 +49,7 @@ class AdminFeatures : AppCompatActivity() {
 
         val adapterAllTickets= TicketSummaryAdapter(allTicketList) {ticket ->
             val intent = Intent(this, AdminTicketDetails::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("ticketId", ticket.id)
             startActivity(intent)
         }

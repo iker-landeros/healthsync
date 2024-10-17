@@ -70,6 +70,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         val adapterMyTickets= TicketSummaryAdapter(myTicketList) { ticket ->
             //Navegación a pantalla con detalles de ese ticket
             val intent = Intent(this, TechnicianTicketDetails::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("ticketId", ticket.id)
             startActivity(intent)
         }
@@ -81,6 +82,7 @@ class TechnicianTicketsSummary : AppCompatActivity() {
         val adapterOtherTickets= TicketSummaryAdapter(otherTicketList) { ticket ->
             //Navegación a pantalla con detalles de ese ticket
             val intent = Intent(this, TechnicianTicketDetails::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("ticketId", ticket.id)
             startActivity(intent)
         }

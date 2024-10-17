@@ -3,6 +3,6 @@
     <!-- Permitir tráfico HTTP para 10.0.2.2, siendo la direccion de nuestro equipo
     para el emulador ed Android Studio. Esto mientras el API corra en local-->
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">10.49.176.126</domain>
+        <domain includeSubdomains="true">192.168.1.68</domain>
     </domain-config>
 </network-security-config>

@@ -91,7 +91,7 @@ class PrimaryStats : AppCompatActivity() {
 
         binding.btnMasStats.setOnClickListener{
             val intent = Intent(this@PrimaryStats, SecondaryStats::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
 

@@ -93,10 +93,11 @@ class TechnicianTicketNoSolution : AppCompatActivity() {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-        val btnHome = findViewById<View>(R.id.btnHome)
+        val btnHome = findViewById<View>(R.id.btnBack)
         btnHome.setOnClickListener{
             val intent =
-                Intent(this@TechnicianTicketNoSolution, TechnicianTicketsSummary::class.java)
+                Intent(this@TechnicianTicketNoSolution, TechnicianTicketDetails::class.java)
+            intent.putExtra("ticketId", ticketId)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
