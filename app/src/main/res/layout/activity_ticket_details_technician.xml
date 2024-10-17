@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteY="10dp">
 
         <include
-            layout="@layout/technician_main_header"
+            layout="@layout/name_home_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

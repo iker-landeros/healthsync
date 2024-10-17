@@ -55,7 +55,7 @@ class AdminTicketDetails : AppCompatActivity() {
 
 
 
-        val btnReturn = findViewById<ImageButton>(R.id.btnHome)
+        val btnReturn = findViewById<ImageButton>(R.id.btnBack)
         btnReturn.setOnClickListener{
             val intent = Intent(this@AdminTicketDetails, AdminFeatures::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

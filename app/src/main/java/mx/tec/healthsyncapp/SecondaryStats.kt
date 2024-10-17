@@ -112,7 +112,7 @@ class SecondaryStats : AppCompatActivity() {
 
 
         // Función del botón de cerrar sesión, limpiando todos los datos de Shared Preferences
-        binding.btnHome.setOnClickListener{
+        binding.btnBack.setOnClickListener{
             val intent = Intent(this@SecondaryStats, AdminOptions::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)

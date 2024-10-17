@@ -26,7 +26,6 @@
         app:cornerRadius="150dp"
         app:icon="@drawable/nores"
         app:iconGravity="textTop"
-        app:iconSize="22dp"
         app:iconTint="#B586BA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

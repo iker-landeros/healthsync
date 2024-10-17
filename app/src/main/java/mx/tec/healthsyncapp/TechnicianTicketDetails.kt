@@ -103,7 +103,7 @@ class TechnicianTicketDetails : AppCompatActivity() {
             fragmentTransaction.commit()
         }
 
-        val btnGoBack = findViewById<ImageButton>(R.id.btnLogout)
+        val btnGoBack = findViewById<ImageButton>(R.id.btnHome)
         btnGoBack.setOnClickListener{
             val intent = Intent(this@TechnicianTicketDetails, TechnicianTicketsSummary::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
